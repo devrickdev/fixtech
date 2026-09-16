@@ -8,6 +8,10 @@ package com.mycompany.fixtech.model;
  *
  * @author henry
  */
-public class Atendente {
+public class Atendente extends Usuario {
+
+    public Atendente() {
+        super();
+    }
     
 }

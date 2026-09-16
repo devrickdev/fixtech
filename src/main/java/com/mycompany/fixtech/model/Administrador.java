@@ -8,6 +8,10 @@ package com.mycompany.fixtech.model;
  *
  * @author henry
  */
-public class Administrador {
+public class Administrador extends Usuario{
+
+    public Administrador() {
+        super();
+    }
     
 }
