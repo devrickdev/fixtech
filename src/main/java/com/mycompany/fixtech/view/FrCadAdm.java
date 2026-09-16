@@ -8,14 +8,14 @@ package com.mycompany.fixtech.view;
  *
  * @author henry
  */
-public class FrPainelMod extends javax.swing.JFrame {
+public class FrCadAdm extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrPainelMod.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrCadAdm.class.getName());
 
     /**
-     * Creates new form FrPainelMod
+     * Creates new form FrCadMod
      */
-    public FrPainelMod() {
+    public FrCadAdm() {
         initComponents();
     }
 
@@ -34,11 +34,11 @@ public class FrPainelMod extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 680, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 500, Short.MAX_VALUE)
         );
 
         pack();
@@ -66,7 +66,7 @@ public class FrPainelMod extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FrPainelMod().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FrCadAdm().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

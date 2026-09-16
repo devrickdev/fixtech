@@ -8,6 +8,6 @@ package com.mycompany.fixtech.model;
  *
  * @author henry
  */
-public class Moderador {
+public class Permissao {
     
 }
