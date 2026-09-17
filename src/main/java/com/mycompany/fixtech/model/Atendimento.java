@@ -13,6 +13,7 @@ public class Atendimento {
    public String status;
    public  Cliente cliente;
    public  Atendente atendente;
+   public  Dispositivo dispositivo;
 
     public Atendimento() {
     }

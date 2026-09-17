@@ -11,7 +11,14 @@ package com.mycompany.fixtech.model;
 public class Atendente extends Usuario {
 
     public Atendente() {
-        super();
+        
     }
     
+    public void registrarAtendimento(){
+    
+    }
+    
+    public void consultarHistorico(){
+    
+    }
 }

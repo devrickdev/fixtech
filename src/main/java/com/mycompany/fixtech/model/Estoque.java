@@ -38,5 +38,15 @@ public class Estoque {
         return "Estoque{" + "idEstoque=" + idEstoque + ", estoquepeca=" + estoquepeca + '}';
     }
     
+    public void darEntrada(){
     
+    }
+    
+    public void darSaida(){
+    
+    }
+    
+    public void consularSaldo(){
+    
+    }
 }

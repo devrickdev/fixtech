@@ -54,5 +54,7 @@ public abstract class Usuario {
         return "Usuario{" + "idUsuario=" + idUsuario + ", nome=" + nome + ", login=" + login + ", senha=" + senha + '}';
     }
     
+    public void autenticar(){
     
+    }
 }
