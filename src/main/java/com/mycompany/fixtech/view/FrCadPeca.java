@@ -75,6 +75,7 @@ public class FrCadPeca extends javax.swing.JFrame {
 
         jLabel4.setText("Quantidade");
 
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Cadastrar Peça");
 
         jButton1.setText("Novo");

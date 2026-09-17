@@ -11,9 +11,18 @@ package com.mycompany.fixtech.model;
 public class Atendimento {
    public int idAtendimento;
    public String status;
+   public String descricao;
    public  Cliente cliente;
    public  Atendente atendente;
-   public  Dispositivo dispositivo;
+   public  String dispositivo;
+
+    public String getDispositivo() {
+        return dispositivo;
+    }
+
+    public void setDispositivo(String dispositivo) {
+        this.dispositivo = dispositivo;
+    }
 
     public Atendimento() {
     }
