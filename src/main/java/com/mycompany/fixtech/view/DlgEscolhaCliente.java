@@ -83,6 +83,7 @@ public class DlgEscolhaCliente extends javax.swing.JDialog {
         ));
         jScrollPane3.setViewportView(jTable2);
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/confirma.png"))); // NOI18N
         jButton2.setText("Confirmar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

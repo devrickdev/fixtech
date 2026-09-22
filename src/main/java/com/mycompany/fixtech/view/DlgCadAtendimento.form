@@ -164,7 +164,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/icons/save.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Fechar Atendimento"/>
+        <Property name="text" type="java.lang.String" value="Salvar"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton5">

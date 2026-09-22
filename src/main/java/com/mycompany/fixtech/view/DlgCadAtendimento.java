@@ -99,7 +99,7 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
         );
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save.png"))); // NOI18N
-        jButton4.setText("Fechar Atendimento");
+        jButton4.setText("Salvar");
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cancelar.png"))); // NOI18N
         jButton5.setText("Cancelar");
