@@ -63,15 +63,15 @@ public class FrCadAdm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/new.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/novo.png"))); // NOI18N
         jButton1.setText("Novo");
         jPanel1.add(jButton1);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/edit.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/editar.png"))); // NOI18N
         jButton3.setText("Editar");
         jPanel1.add(jButton3);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/excluir.png"))); // NOI18N
         jButton2.setText("Excluir");
         jPanel1.add(jButton2);
 
@@ -79,7 +79,7 @@ public class FrCadAdm extends javax.swing.JFrame {
         jButton4.setText("Salvar");
         jPanel1.add(jButton4);
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cancel.png"))); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cancelar.png"))); // NOI18N
         jButton5.setText("Cancelar");
         jPanel1.add(jButton5);
 
