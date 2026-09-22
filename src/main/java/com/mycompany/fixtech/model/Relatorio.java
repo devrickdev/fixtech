@@ -29,5 +29,7 @@ public class Relatorio {
         return "Relatorio{" + "dataGeracao=" + dataGeracao + '}';
     }
     
+    public void gerar(){
     
+    }
 }

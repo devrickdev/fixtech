@@ -11,7 +11,14 @@ package com.mycompany.fixtech.model;
 public class Administrador extends Usuario{
 
     public Administrador() {
-        super();
+        
     }
     
+    public void gerenciarPermissoes(){
+    
+    }
+    
+    public void gerarRelatorio(){
+    
+    }
 }

@@ -14,7 +14,7 @@ public class Feedback {
     public int idFeedback;
     public Cliente cliente;
     public int nota;
-    public String comentário;
+    public String comentario;
     public Date dataFeedback;
 
     public Feedback() {
@@ -44,12 +44,12 @@ public class Feedback {
         this.nota = nota;
     }
 
-    public String getComentário() {
-        return comentário;
+    public String getComentario() {
+        return comentario;
     }
 
-    public void setComentário(String comentário) {
-        this.comentário = comentário;
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
     }
 
     public Date getDataFeedback() {
@@ -62,7 +62,7 @@ public class Feedback {
 
     @Override
     public String toString() {
-        return "Feedback{" + "idFeedback=" + idFeedback + ", cliente=" + cliente + ", nota=" + nota + ", coment\u00e1rio=" + comentário + ", dataFeedback=" + dataFeedback + '}';
+        return "Feedback{" + "idFeedback=" + idFeedback + ", cliente=" + cliente + ", nota=" + nota + ", comentario=" + comentario + ", dataFeedback=" + dataFeedback + '}';
     }
     
     
