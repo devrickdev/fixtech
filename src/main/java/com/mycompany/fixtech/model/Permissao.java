@@ -19,9 +19,8 @@ public class Permissao {
         
     @Override
     public String toString() {
-        String txt = "Nome: " + this.nome +"\n"
-        +"Login: "+ this.login + "\n"
-        +"Senha: "+ this.senha+"\n";
+        String txt = "IdPermissao: " + this.IdPermissao +"\n"
+        +"Descricao: "+ this.descricao + "\n";
         return txt;
     }   
     

@@ -4,7 +4,7 @@
  */
 package com.mycompany.fixtech.view;
 
-import com.mycompany.fixtech.model.Administrador;
+import com.mycompany.fixtech.model.Dispositivo;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -12,15 +12,15 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author henry
  */
-public class TMCadAdm extends AbstractTableModel {
-    private List<Administrador> lst;
+public class TMCadDispositivo extends AbstractTableModel {
+    private List<Dispositivo> lst;
     
     private final int COL_ID = 0;
-    private final int COL_NOME = 1;
-    private final int COL_LOGIN = 2;
-    private final int COL_SENHA = 3;
+    private final int COL_TIPO = 1;
+    private final int COL_MARCA = 2;
+    private final int COL_MODELO = 3;
   
-    public TMCadAdm(List<Administrador> lista) {
+    public TMCadDispositivo(List<Dispositivo> lista) {
         this.lst = lista;
     }
     
@@ -34,37 +34,34 @@ public class TMCadAdm extends AbstractTableModel {
         return 5;
     }
     
-    public Administrador getObjetoAdm(int row){
+    public Dispositivo getObjetoDispositivo(int row){
        return this.lst.get(row);
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-
-        Administrador a = this.lst.get(rowIndex);
+        Dispositivo a = this.lst.get(rowIndex);
          if(columnIndex == COL_ID){
-            return a.getIdAdm();
-        }else if(columnIndex == COL_NOME){
-            return a.getNome();
-        }else if(columnIndex == COL_LOGIN){
-            return a.getLogin();
-        }else if(columnIndex == COL_SENHA){
-            return a.getSenha();
+            return a.getIdDispositivo();
+        }else if(columnIndex == COL_TIPO){
+            return a.getTipo();
+        }else if(columnIndex == COL_MARCA){
+            return a.getMarca();
+        }else if(columnIndex == COL_MODELO){
+            return a.getModelo();
         }
         return "-";
     }
     
-    
-    @Override
     public String getColumnName(int columnIndex) {
          if(columnIndex == COL_ID){
             return "Id";
-        }else if(columnIndex == COL_NOME){
-            return "Nome";
-        }else if(columnIndex == COL_LOGIN){
-            return "Login";
-        }else if(columnIndex == COL_SENHA){
-            return "Senha";
+        }else if(columnIndex == COL_TIPO){
+            return "Tipo";
+        }else if(columnIndex == COL_MARCA){
+            return "Marca";
+        }else if(columnIndex == COL_MODELO){
+            return "Modelo";
         }
         return "";
     }

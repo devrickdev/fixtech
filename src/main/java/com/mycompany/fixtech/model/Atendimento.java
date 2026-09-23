@@ -10,37 +10,29 @@ package com.mycompany.fixtech.model;
  */
 public class Atendimento {
    public int idAtendimento;
-   public  Cliente cliente;
-   public  Atendente atendente;
+   public Cliente cliente;
+   public Atendente atendente;
+   public Dispositivo dispositivo;
    public String status;
    public String descricao;
-   public  String dispositivo;
 
     public Atendimento() {
         this.idAtendimento = 0;
         this.cliente = new Cliente();
         this.atendente = new Atendente();
+        this.dispositivo = new Dispositivo();
         this.status = "";
-        this.dispositivo = "";
     }
     
     @Override
     public String toString(){
         String txt = "---- Dados do Atendimento ----\n"
         +"idAtendimento: " + this.idAtendimento + "\n"
-        +"Status: "+ this.status + "\n"
-        +"Dispositvo: " + this.dispositivo;        
+        +"Status: "+ this.status + "\n";        
         txt += cliente.toString();
-        txt += atendente.toString();       
+        txt += atendente.toString();
+        txt += dispositivo.toString();
         return txt;
-    }
-    
-    public String getDispositivo() {
-        return dispositivo;
-    }
-
-    public void setDispositivo(String dispositivo) {
-        this.dispositivo = dispositivo;
     }
 
     public int getIdAtendimento() {
@@ -49,14 +41,6 @@ public class Atendimento {
 
     public void setIdAtendimento(int idAtendimento) {
         this.idAtendimento = idAtendimento;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public Cliente getCliente() {
@@ -75,4 +59,28 @@ public class Atendimento {
         this.atendente = atendente;
     }
 
+    public Dispositivo getDispositivo() {
+        return dispositivo;
+    }
+
+    public void setDispositivo(Dispositivo dispositivo) {
+        this.dispositivo = dispositivo;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+    
 }

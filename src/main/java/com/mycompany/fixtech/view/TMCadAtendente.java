@@ -34,7 +34,7 @@ public class TMCadAtendente extends AbstractTableModel {
         return 5;
     }
     
-    public Atendente getObjetoAdm(int row){
+    public Atendente getObjetoAtendente(int row){
        return this.lst.get(row);
     }
 
