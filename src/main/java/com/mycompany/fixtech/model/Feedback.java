@@ -4,7 +4,6 @@
  */
 package com.mycompany.fixtech.model;
 
-import java.util.Date;
 
 /**
  *
@@ -12,28 +11,33 @@ import java.util.Date;
  */
 public class Feedback {
     public int idFeedback;
-    public Cliente cliente;
+    public Atendimento atendimento;
     public int nota;
     public String comentario;
-    public Date dataFeedback;
 
     public Feedback() {
+        this.idFeedback = 0;
+        this.atendimento = new Atendimento();
+        this.nota = 0;
+        this.comentario = "";
     }
-
+    
+    @Override
+    public String toString(){
+        String txt = "---- Dados do Feedback ----\n"
+        +"idFeedback: " + this.idFeedback + "\n"
+        +"Nota: "+ this.nota + "\n"
+        +"Comentario: " + this.comentario;
+        txt += atendimento.toString();      
+        return txt;
+    }
+    
     public int getIdFeedback() {
         return idFeedback;
     }
 
     public void setIdFeedback(int idFeedback) {
         this.idFeedback = idFeedback;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
     }
 
     public int getNota() {
@@ -52,18 +56,4 @@ public class Feedback {
         this.comentario = comentario;
     }
 
-    public Date getDataFeedback() {
-        return dataFeedback;
-    }
-
-    public void setDataFeedback(Date dataFeedback) {
-        this.dataFeedback = dataFeedback;
-    }
-
-    @Override
-    public String toString() {
-        return "Feedback{" + "idFeedback=" + idFeedback + ", cliente=" + cliente + ", nota=" + nota + ", comentario=" + comentario + ", dataFeedback=" + dataFeedback + '}';
-    }
-    
-    
 }

@@ -9,22 +9,26 @@ package com.mycompany.fixtech.model;
  * @author henry
  */
 public abstract class Usuario {
-    public int idUsuario;
     public String nome;
     public String login;
     public String senha;
 
     public Usuario() {
+        this.nome ="";
+        this.login="";
+        this.senha = "";
     }
+    
+    public void autenticar(){}
 
-    public int getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
+    @Override
+    public String toString() {
+        String txt = "Nome: " + this.nome +"\n"
+        +"Login: "+ this.login + "\n"
+        +"Senha: "+ this.senha+"\n";
+        return txt;
+    }   
+    
     public String getNome() {
         return nome;
     }
@@ -49,12 +53,4 @@ public abstract class Usuario {
         this.senha = senha;
     }
 
-    @Override
-    public String toString() {
-        return "Usuario{" + "idUsuario=" + idUsuario + ", nome=" + nome + ", login=" + login + ", senha=" + senha + '}';
-    }
-    
-    public void autenticar(){
-    
-    }
 }

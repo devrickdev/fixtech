@@ -10,21 +10,37 @@ package com.mycompany.fixtech.model;
  */
 public class Atendimento {
    public int idAtendimento;
-   public String status;
-   public String descricao;
    public  Cliente cliente;
    public  Atendente atendente;
+   public String status;
+   public String descricao;
    public  String dispositivo;
 
+    public Atendimento() {
+        this.idAtendimento = 0;
+        this.cliente = new Cliente();
+        this.atendente = new Atendente();
+        this.status = "";
+        this.dispositivo = "";
+    }
+    
+    @Override
+    public String toString(){
+        String txt = "---- Dados do Atendimento ----\n"
+        +"idAtendimento: " + this.idAtendimento + "\n"
+        +"Status: "+ this.status + "\n"
+        +"Dispositvo: " + this.dispositivo;        
+        txt += cliente.toString();
+        txt += atendente.toString();       
+        return txt;
+    }
+    
     public String getDispositivo() {
         return dispositivo;
     }
 
     public void setDispositivo(String dispositivo) {
         this.dispositivo = dispositivo;
-    }
-
-    public Atendimento() {
     }
 
     public int getIdAtendimento() {
@@ -59,10 +75,4 @@ public class Atendimento {
         this.atendente = atendente;
     }
 
-    @Override
-    public String toString() {
-        return "Atendimento{" + "idAtendimento=" + idAtendimento + ", status=" + status + ", cliente=" + cliente + ", atendente=" + atendente + '}';
-    }
-   
-   
 }

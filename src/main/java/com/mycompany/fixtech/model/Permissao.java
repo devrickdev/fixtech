@@ -13,8 +13,18 @@ public class Permissao {
     public String descricao;
 
     public Permissao() {
+        this.IdPermissao = 0;
+        this.descricao = "";
     }
-
+        
+    @Override
+    public String toString() {
+        String txt = "Nome: " + this.nome +"\n"
+        +"Login: "+ this.login + "\n"
+        +"Senha: "+ this.senha+"\n";
+        return txt;
+    }   
+    
     public int getIdPermissao() {
         return IdPermissao;
     }
@@ -30,11 +40,5 @@ public class Permissao {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-
-    @Override
-    public String toString() {
-        return "Permissao{" + "IdPermissao=" + IdPermissao + ", descricao=" + descricao + '}';
-    }
-    
     
 }

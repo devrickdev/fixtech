@@ -9,16 +9,33 @@ package com.mycompany.fixtech.model;
  * @author henry
  */
 public class Atendente extends Usuario {
-
+    public int idAtendente;
+    
     public Atendente() {
-        
+        super();
+        this.idAtendente = 0;
     }
     
-    public void registrarAtendimento(){
+    public void registrarAtendimento(){}
     
+    public void consultarHistorico(){}
+    
+    @Override
+    public String toString() {
+        String txt
+                = "---------- Atendente -----------\n";
+        txt += super.toString();
+        txt += "idAtendente: " + this.idAtendente + "\n"
+                + "-------------------------------------\n";
+        return txt;
     }
     
-    public void consultarHistorico(){
-    
+    public int getIdAtendente() {
+        return idAtendente;
     }
+
+    public void setIdAtendente(int idAtendente) {
+        this.idAtendente = idAtendente;
+    }
+    
 }

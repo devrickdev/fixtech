@@ -12,10 +12,26 @@ public class Peca {
     public int idPeca;
     public String nome;
     public int quantidade;
-    public int valorUnidade;
+    public double valorUnidade;
+    public Atendimento atendimento;
 
     public Peca() {
+        this.idPeca = 0;
+        this.nome = "";
+        this.quantidade = 0;
+        this.valorUnidade = 0.0;
+        this.atendimento = new Atendimento();
     }
+
+    @Override
+    public String toString() {
+        String txt = "idPeca: " + this.idPeca +"\n"
+        +"Nome: "+ this.nome + "\n"
+        +"Quantidade: "+ this.quantidade +"\n"
+        +"ValorUnidade: "+ this.valorUnidade +"\n";
+        txt += atendimento.toString();
+        return txt;
+    }   
 
     public int getIdPeca() {
         return idPeca;
@@ -41,18 +57,13 @@ public class Peca {
         this.quantidade = quantidade;
     }
 
-    public int getValorUnidade() {
+    public double getValorUnidade() {
         return valorUnidade;
     }
 
-    public void setValorUnidade(int valorUnidade) {
+    public void setValorUnidade(double valorUnidade) {
         this.valorUnidade = valorUnidade;
     }
 
-    @Override
-    public String toString() {
-        return "Peca{" + "idPeca=" + idPeca + ", nome=" + nome + ", quantidade=" + quantidade + ", valorUnidade=" + valorUnidade + '}';
-    }
-    
     
 }
