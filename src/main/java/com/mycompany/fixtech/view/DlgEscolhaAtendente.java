@@ -44,6 +44,7 @@ public class DlgEscolhaAtendente extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/atd.png"))); // NOI18N
         jLabel1.setText("ESCOLHA UM ATENDENTE");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
