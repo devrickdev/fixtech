@@ -34,6 +34,7 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -74,6 +75,11 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/atdm.png"))); // NOI18N
         jButton3.setText("Adicionar Atendente");
         jPanel1.add(jButton3);
+
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/device-small.png"))); // NOI18N
+        jButton6.setText("Adicionar Dispositivo");
+        jButton6.addActionListener(this::jButton6ActionPerformed);
+        jPanel1.add(jButton6);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/excluir.png"))); // NOI18N
         jButton2.setText("Excluir");
@@ -161,6 +167,10 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -204,6 +214,7 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
     private javax.swing.JLabel jLabel1;

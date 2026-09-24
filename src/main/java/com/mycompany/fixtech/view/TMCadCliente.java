@@ -19,6 +19,8 @@ public class TMCadCliente extends AbstractTableModel{
     private final int COL_NOME = 1;
     private final int COL_LOGIN = 2;
     private final int COL_SENHA = 3;
+    private final int COL_TELEFONE = 4;
+    private final int COL_ENDERECO = 5;
   
     public TMCadCliente(List<Cliente> lista) {
         this.lst = lista;
@@ -31,7 +33,7 @@ public class TMCadCliente extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 5;
+        return 6;
     }
     
     public Cliente getObjetoCliente(int row){
@@ -50,6 +52,10 @@ public class TMCadCliente extends AbstractTableModel{
             return a.getLogin();
         }else if(columnIndex == COL_SENHA){
             return a.getSenha();
+        }else if(columnIndex == COL_TELEFONE){
+            return a.getSenha();
+        }else if(columnIndex == COL_ENDERECO){
+            return a.getSenha();
         }
         return "-";
     }
@@ -64,6 +70,10 @@ public class TMCadCliente extends AbstractTableModel{
         }else if(columnIndex == COL_LOGIN){
             return "Login";
         }else if(columnIndex == COL_SENHA){
+            return "Senha";
+        }else if(columnIndex == COL_TELEFONE){
+            return "Senha";
+        }else if(columnIndex == COL_ENDERECO){
             return "Senha";
         }
         return "";
