@@ -31,6 +31,14 @@ public class Feedback {
         txt += atendimento.toString();      
         return txt;
     }
+
+    public Atendimento getAtendimento() {
+        return atendimento;
+    }
+
+    public void setAtendimento(Atendimento atendimento) {
+        this.atendimento = atendimento;
+    }
     
     public int getIdFeedback() {
         return idFeedback;

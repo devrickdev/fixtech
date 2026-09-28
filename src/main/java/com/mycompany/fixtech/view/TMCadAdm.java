@@ -19,11 +19,11 @@ public class TMCadAdm extends AbstractTableModel {
     private final int COL_NOME = 1;
     private final int COL_LOGIN = 2;
     private final int COL_SENHA = 3;
-  
-    public TMCadAdm(List<Administrador> lista) {
-        this.lst = lista;
+
+    public TMCadAdm(List<Administrador> lst) {
+        this.lst = lst;
     }
-    
+
     @Override
     public int getRowCount() {
         return this.lst.size();

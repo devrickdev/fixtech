@@ -12,11 +12,13 @@ public abstract class Usuario {
     public String nome;
     public String login;
     public String senha;
+    public int permission;
 
     public Usuario() {
         this.nome ="";
         this.login="";
         this.senha = "";
+        this.permission = 0;
     }
     
     public void autenticar(){}
@@ -25,9 +27,18 @@ public abstract class Usuario {
     public String toString() {
         String txt = "Nome: " + this.nome +"\n"
         +"Login: "+ this.login + "\n"
-        +"Senha: "+ this.senha+"\n";
+        +"Senha: "+ this.senha +"\n"
+        +"Permission: "+ this.permission +"\n";
         return txt;
     }   
+
+    public int getPermission() {
+        return permission;
+    }
+
+    public void setPermission(int permission) {
+        this.permission = permission;
+    }
     
     public String getNome() {
         return nome;
