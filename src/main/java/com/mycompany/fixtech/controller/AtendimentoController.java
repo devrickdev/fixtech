@@ -11,7 +11,7 @@ import com.mycompany.fixtech.model.Dispositivo;
 import com.mycompany.fixtech.model.dao.AtendimentoDAO;
 import com.mycompany.fixtech.model.exceptions.AtendimentoException;
 import com.mycompany.fixtech.model.valid.ValidateAtendimento;
-import com.mycompany.fixtech.view.TMCadAtendimento;
+import com.mycompany.fixtech.view.tablemodels.TMCadAtendimento;
 import java.util.List;
 import javax.swing.JTable;
 

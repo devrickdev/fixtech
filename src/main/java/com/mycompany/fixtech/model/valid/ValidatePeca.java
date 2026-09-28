@@ -4,6 +4,7 @@
  */
 package com.mycompany.fixtech.model.valid;
 
+import com.mycompany.fixtech.model.Atendimento;
 import com.mycompany.fixtech.model.Peca;
 import com.mycompany.fixtech.model.exceptions.PecaException;
 
@@ -12,7 +13,7 @@ import com.mycompany.fixtech.model.exceptions.PecaException;
  * @author henry
  */
 public class ValidatePeca {
-    public Peca validaCamposEntrada(int idPeca, String nome, int quantidade, double valorUnidade){
+    public Peca validaCamposEntrada(int idPeca, String nome, int quantidade, double valorUnidade, Atendimento atendimento){
         Peca peca = new Peca();
         if (nome.isEmpty())
             throw new PecaException("Error - Campo vazio: 'nome'.");

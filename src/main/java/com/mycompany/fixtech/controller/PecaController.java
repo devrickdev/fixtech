@@ -4,11 +4,12 @@
  */
 package com.mycompany.fixtech.controller;
 
+import com.mycompany.fixtech.model.Atendimento;
 import com.mycompany.fixtech.model.Peca;
 import com.mycompany.fixtech.model.dao.PecaDAO;
 import com.mycompany.fixtech.model.exceptions.PecaException;
 import com.mycompany.fixtech.model.valid.ValidatePeca;
-import com.mycompany.fixtech.view.TMCadPeca;
+import com.mycompany.fixtech.view.tablemodels.TMCadPeca;
 import java.util.List;
 import javax.swing.JTable;
 
@@ -23,9 +24,9 @@ public class PecaController {
         repositorio = new PecaDAO();
     }
 
-    public void cadastrarPeca(int idPeca, String nome, String login, String senha, int permission) {
+    public void cadastrarPeca(int idPeca, String nome, int quantidade, double valorUnidade, Atendimento atendimento) {
         ValidatePeca valid = new ValidatePeca();
-        Peca novoPeca = valid.validaCamposEntrada(idPeca, nome, login, senha, permission);
+        Peca novoPeca = valid.validaCamposEntrada(idPeca, nome, quantidade, valorUnidade, atendimento);
 
         if (repositorio.findById(idPeca) == null) {
             repositorio.save(novoPeca);
@@ -34,9 +35,9 @@ public class PecaController {
         }
     }
 
-    public void atualizarPeca(int idPeca,String nome, String login, String senha, int permission) {
+    public void atualizarPeca(int idPeca, String nome, int quantidade, double valorUnidade, Atendimento atendimento) {
         ValidatePeca valid = new ValidatePeca();
-        Peca novoPeca = valid.validaCamposEntrada(idPeca, nome, login, senha, permission);
+        Peca novoPeca = valid.validaCamposEntrada(idPeca, nome, quantidade, valorUnidade, atendimento);
         novoPeca.setIdPeca(idPeca);
         
         repositorio.update(novoPeca);
@@ -50,10 +51,10 @@ public class PecaController {
         List<Object> lst = repositorio.findAll();
         
         TMCadPeca tmPeca = new TMCadPeca(lst);
-        grd.setModel(tmAdm);        
+        grd.setModel(tmPeca);        
     }
 
-    public void excluirAdm(Peca peca) {
+    public void excluirPeca(Peca peca) {
         if (peca != null) {
             repositorio.delete(peca);
         } else {

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.fixtech.view;
+package com.mycompany.fixtech.view.tablemodels;
 
 import com.mycompany.fixtech.model.Feedback;
 import java.util.List;
@@ -13,14 +13,14 @@ import javax.swing.table.AbstractTableModel;
  * @author henry
  */
 public class TMCadFeedback extends AbstractTableModel {
-    private List<Feedback> lst;
+    private List<Object> lst;
     
     private final int COL_ID = 0;
     private final int COL_ATENDIMENTO = 1;
     private final int COL_NOTA = 2;
     private final int COL_COMENTARIO = 3;
   
-    public TMCadFeedback(List<Feedback> lista) {
+    public TMCadFeedback(List<Object> lista) {
         this.lst = lista;
     }
     
@@ -35,12 +35,12 @@ public class TMCadFeedback extends AbstractTableModel {
     }
     
     public Feedback getObjetoFeedback(int row){
-       return this.lst.get(row);
+       return (Feedback) this.lst.get(row);
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Feedback a = this.lst.get(rowIndex);
+        Feedback a = (Feedback) this.lst.get(rowIndex);
          if(columnIndex == COL_ID){
             return a.getIdFeedback();
         }else if(columnIndex == COL_ATENDIMENTO){

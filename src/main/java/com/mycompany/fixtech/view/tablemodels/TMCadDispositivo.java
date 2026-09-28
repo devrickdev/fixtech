@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.fixtech.view;
+package com.mycompany.fixtech.view.tablemodels;
 
 import com.mycompany.fixtech.model.Dispositivo;
 import java.util.List;
@@ -13,14 +13,14 @@ import javax.swing.table.AbstractTableModel;
  * @author henry
  */
 public class TMCadDispositivo extends AbstractTableModel {
-    private List<Dispositivo> lst;
+    private List<Object> lst;
     
     private final int COL_ID = 0;
     private final int COL_TIPO = 1;
     private final int COL_MARCA = 2;
     private final int COL_MODELO = 3;
   
-    public TMCadDispositivo(List<Dispositivo> lista) {
+    public TMCadDispositivo(List<Object> lista) {
         this.lst = lista;
     }
     
@@ -35,12 +35,12 @@ public class TMCadDispositivo extends AbstractTableModel {
     }
     
     public Dispositivo getObjetoDispositivo(int row){
-       return this.lst.get(row);
+       return (Dispositivo) this.lst.get(row);
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Dispositivo a = this.lst.get(rowIndex);
+        Dispositivo a = (Dispositivo) this.lst.get(rowIndex);
          if(columnIndex == COL_ID){
             return a.getIdDispositivo();
         }else if(columnIndex == COL_TIPO){

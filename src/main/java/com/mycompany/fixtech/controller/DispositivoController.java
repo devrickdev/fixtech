@@ -8,7 +8,7 @@ import com.mycompany.fixtech.model.Dispositivo;
 import com.mycompany.fixtech.model.dao.DispositivoDAO;
 import com.mycompany.fixtech.model.exceptions.DispositivoException;
 import com.mycompany.fixtech.model.valid.ValidateDispositivo;
-import com.mycompany.fixtech.view.TMCadDispositivo;
+import com.mycompany.fixtech.view.tablemodels.TMCadDispositivo;
 import java.util.List;
 import javax.swing.JTable;
 

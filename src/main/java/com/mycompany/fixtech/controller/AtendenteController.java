@@ -8,7 +8,7 @@ import com.mycompany.fixtech.model.Atendente;
 import com.mycompany.fixtech.model.dao.AtendenteDAO;
 import com.mycompany.fixtech.model.exceptions.AtendenteException;
 import com.mycompany.fixtech.model.valid.ValidateAtendente;
-import com.mycompany.fixtech.view.TMCadAtendente;
+import com.mycompany.fixtech.view.tablemodels.TMCadAtendente;
 import java.util.List;
 import javax.swing.JTable;
 

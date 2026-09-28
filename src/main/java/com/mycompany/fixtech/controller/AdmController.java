@@ -8,7 +8,7 @@ import com.mycompany.fixtech.model.Administrador;
 import com.mycompany.fixtech.model.dao.AdmDAO;
 import com.mycompany.fixtech.model.exceptions.AdmException;
 import com.mycompany.fixtech.model.valid.ValidateAdm;
-import com.mycompany.fixtech.view.TMCadAdm;
+import com.mycompany.fixtech.view.tablemodels.TMCadAdm;
 import java.util.List;
 import javax.swing.JTable;
 

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.fixtech.view;
+package com.mycompany.fixtech.view.tablemodels;
 
 import com.mycompany.fixtech.model.Cliente;
 import java.util.List;
@@ -13,7 +13,7 @@ import javax.swing.table.AbstractTableModel;
  * @author henry
  */
 public class TMCadCliente extends AbstractTableModel{
-    private List<Cliente> lst;
+    private List<Object> lst;
     
     private final int COL_ID = 0;
     private final int COL_NOME = 1;
@@ -22,7 +22,7 @@ public class TMCadCliente extends AbstractTableModel{
     private final int COL_TELEFONE = 4;
     private final int COL_ENDERECO = 5;
   
-    public TMCadCliente(List<Cliente> lista) {
+    public TMCadCliente(List<Object> lista) {
         this.lst = lista;
     }
     
@@ -37,13 +37,13 @@ public class TMCadCliente extends AbstractTableModel{
     }
     
     public Cliente getObjetoCliente(int row){
-       return this.lst.get(row);
+       return (Cliente) this.lst.get(row);
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
 
-        Cliente a = this.lst.get(rowIndex);
+        Cliente a = (Cliente) this.lst.get(rowIndex);
          if(columnIndex == COL_ID){
             return a.getIdCliente();
         }else if(columnIndex == COL_NOME){

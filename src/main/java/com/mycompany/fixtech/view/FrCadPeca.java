@@ -38,12 +38,12 @@ public class FrCadPeca extends javax.swing.JFrame {
         panPrincipal = new javax.swing.JPanel();
         lblNome = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
-        edtPreco = new javax.swing.JTextField();
+        edtValorUnidade = new javax.swing.JTextField();
         edtNome = new javax.swing.JTextField();
         edtId = new javax.swing.JTextField();
         edtQuantidade = new javax.swing.JTextField();
         lblQuantidade = new javax.swing.JLabel();
-        lblPreco = new javax.swing.JLabel();
+        lblValorUnidade = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         grdPecas = new javax.swing.JTable();
         lblPecas = new javax.swing.JLabel();
@@ -92,7 +92,7 @@ public class FrCadPeca extends javax.swing.JFrame {
 
         lblId.setText("ID");
 
-        edtPreco.setText("Preço");
+        edtValorUnidade.setText("ValorUnidade");
 
         edtNome.setText("Nome");
 
@@ -102,7 +102,7 @@ public class FrCadPeca extends javax.swing.JFrame {
 
         lblQuantidade.setText("Quantidade");
 
-        lblPreco.setText("Preço");
+        lblValorUnidade.setText("ValorUnidade");
 
         grdPecas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -125,27 +125,29 @@ public class FrCadPeca extends javax.swing.JFrame {
             panPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1)
-                    .addGroup(panPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panPrincipalLayout.createSequentialGroup()
-                            .addGroup(panPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblNome)
-                                .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(panPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(edtId, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblId)))
-                        .addComponent(lblPecas)
-                        .addGroup(panPrincipalLayout.createSequentialGroup()
-                            .addGroup(panPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(edtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblQuantidade))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(panPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblPreco)
-                                .addComponent(edtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(panPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panPrincipalLayout.createSequentialGroup()
+                        .addGroup(panPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panPrincipalLayout.createSequentialGroup()
+                                .addGroup(panPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblNome)
+                                    .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(edtId, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblId)))
+                            .addComponent(lblPecas)
+                            .addGroup(panPrincipalLayout.createSequentialGroup()
+                                .addGroup(panPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(edtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblQuantidade))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(panPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblValorUnidade)
+                                    .addComponent(edtValorUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
         panPrincipalLayout.setVerticalGroup(
             panPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,12 +162,12 @@ public class FrCadPeca extends javax.swing.JFrame {
                     .addComponent(edtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblPreco)
+                    .addComponent(lblValorUnidade)
                     .addComponent(lblQuantidade))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(edtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(edtValorUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(lblPecas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -273,8 +275,8 @@ public class FrCadPeca extends javax.swing.JFrame {
     private javax.swing.JButton btnSalvar;
     private javax.swing.JTextField edtId;
     private javax.swing.JTextField edtNome;
-    private javax.swing.JTextField edtPreco;
     private javax.swing.JTextField edtQuantidade;
+    private javax.swing.JTextField edtValorUnidade;
     private javax.swing.JTable grdPecas;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JPanel jPanel4;
@@ -282,9 +284,9 @@ public class FrCadPeca extends javax.swing.JFrame {
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblPecas;
-    private javax.swing.JLabel lblPreco;
     private javax.swing.JLabel lblQuantidade;
     private javax.swing.JLabel lblTitle;
+    private javax.swing.JLabel lblValorUnidade;
     private javax.swing.JPanel panBotoes;
     private javax.swing.JPanel panPrincipal;
     // End of variables declaration//GEN-END:variables

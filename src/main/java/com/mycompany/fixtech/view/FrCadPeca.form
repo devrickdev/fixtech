@@ -135,35 +135,38 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="jScrollPane1" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblNome" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="edtNome" alignment="0" min="-2" pref="800" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lblNome" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="edtNome" alignment="0" min="-2" pref="800" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="edtId" min="-2" pref="150" max="-2" attributes="0"/>
+                                      <Component id="lblId" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="edtId" min="-2" pref="150" max="-2" attributes="0"/>
-                                  <Component id="lblId" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblPecas" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="edtQuantidade" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                      <Component id="lblQuantidade" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lblValorUnidade" min="-2" max="-2" attributes="0"/>
+                                      <Component id="edtValorUnidade" min="-2" pref="200" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
-                          <Component id="lblPecas" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="edtQuantidade" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                  <Component id="lblQuantidade" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblPreco" min="-2" max="-2" attributes="0"/>
-                                  <Component id="edtPreco" min="-2" pref="200" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
+                      <Component id="jScrollPane1" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -182,13 +185,13 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblPreco" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblValorUnidade" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="lblQuantidade" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="edtQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="edtPreco" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="edtValorUnidade" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="lblPecas" min="-2" max="-2" attributes="0"/>
@@ -210,9 +213,9 @@
             <Property name="text" type="java.lang.String" value="ID"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="edtPreco">
+        <Component class="javax.swing.JTextField" name="edtValorUnidade">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Pre&#xe7;o"/>
+            <Property name="text" type="java.lang.String" value="ValorUnidade"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="edtNome">
@@ -235,9 +238,9 @@
             <Property name="text" type="java.lang.String" value="Quantidade"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblPreco">
+        <Component class="javax.swing.JLabel" name="lblValorUnidade">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Pre&#xe7;o"/>
+            <Property name="text" type="java.lang.String" value="ValorUnidade"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">

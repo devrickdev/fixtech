@@ -9,7 +9,7 @@ import com.mycompany.fixtech.model.Feedback;
 import com.mycompany.fixtech.model.dao.FeedbackDAO;
 import com.mycompany.fixtech.model.exceptions.FeedbackException;
 import com.mycompany.fixtech.model.valid.ValidateFeedback;
-import com.mycompany.fixtech.view.TMCadFeedback;
+import com.mycompany.fixtech.view.tablemodels.TMCadFeedback;
 import java.util.List;
 import javax.swing.JTable;
 
