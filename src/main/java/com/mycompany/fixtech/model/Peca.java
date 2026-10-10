@@ -9,18 +9,16 @@ package com.mycompany.fixtech.model;
  * @author henry
  */
 public class Peca {
-    public int idPeca;
-    public String nome;
-    public int quantidade;
-    public double valorUnidade;
-    public Atendimento atendimento;
+    private int idPeca;
+    private String nome;
+    private int quantidade;
+    private double valorUnidade;
 
     public Peca() {
         this.idPeca = 0;
         this.nome = "";
         this.quantidade = 0;
         this.valorUnidade = 0.0;
-        this.atendimento = new Atendimento();
     }
 
     @Override
@@ -29,7 +27,6 @@ public class Peca {
         +"Nome: "+ this.nome + "\n"
         +"Quantidade: "+ this.quantidade +"\n"
         +"ValorUnidade: "+ this.valorUnidade +"\n";
-        txt += atendimento.toString();
         return txt;
     }   
 
@@ -64,6 +61,5 @@ public class Peca {
     public void setValorUnidade(double valorUnidade) {
         this.valorUnidade = valorUnidade;
     }
-
     
 }

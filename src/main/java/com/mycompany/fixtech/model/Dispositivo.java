@@ -9,19 +9,37 @@ package com.mycompany.fixtech.model;
  * @author henry
  */
 public class Dispositivo {
-    public int idDispositivo;
-    public String tipo;
-    public String marca;
-    public String modelo;
+    private int idDispositivo;
+    private String nome;
+    private String tipo;
+    private String marca;
+    private String modelo;
+
+    public Dispositivo() {
+        this.idDispositivo = 0;
+        this.nome = "";
+        this.tipo = "";
+        this.marca = "";
+        this.modelo = "";
+    }
     
     @Override
     public String toString() {
         String txt = "IdDispositivo: " + this.idDispositivo +"\n"
+        +"Nome: "+ this.nome + "\n"
         +"Tipo: "+ this.tipo + "\n"
         +"Marca: "+ this.marca + "\n"
         +"Modelo: "+ this.modelo + "\n";
         return txt;
     }   
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
     
     public int getIdDispositivo() {
         return idDispositivo;

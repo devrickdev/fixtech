@@ -44,7 +44,7 @@ public class TMCadFeedback extends AbstractTableModel {
          if(columnIndex == COL_ID){
             return a.getIdFeedback();
         }else if(columnIndex == COL_ATENDIMENTO){
-            return a.getAtendimento();
+            return a.getAtendimentoId();
         }else if(columnIndex == COL_NOTA){
             return a.getNota();
         }else if(columnIndex == COL_COMENTARIO){

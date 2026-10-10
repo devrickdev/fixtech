@@ -9,19 +9,26 @@ package com.mycompany.fixtech.model;
  * @author henry
  */
 public class Atendimento {
-   public int idAtendimento;
-   public Cliente cliente;
-   public Atendente atendente;
-   public Dispositivo dispositivo;
-   public String status;
-   public String descricao;
-
+   private int idAtendimento;
+   private Cliente cliente;
+   private Atendente atendente;
+   private Dispositivo dispositivo;
+   private String status;
+   private String descricao;
+   
+    public Atendimento(int idAtendimento, Cliente cliente, Atendente atendente, Dispositivo dispositivo, String status, String descricao) {
+        this.idAtendimento = idAtendimento;
+        this.cliente = cliente;       
+        this.atendente = atendente;   
+        this.dispositivo = dispositivo;
+        this.status = status;
+        this.descricao = descricao;
+    }
+    
     public Atendimento() {
         this.idAtendimento = 0;
-        this.cliente = new Cliente();
-        this.atendente = new Atendente();
-        this.dispositivo = new Dispositivo();
-        this.status = "";
+        this.status = "Pendente";
+        this.descricao = "";
     }
     
     @Override
@@ -34,7 +41,19 @@ public class Atendimento {
         txt += dispositivo.toString();
         return txt;
     }
-
+    
+    public String getClienteNome() {
+        return cliente.getNome();
+    }
+    
+    public String getAtendenteNome() {
+        return atendente.getNome();
+    }
+    
+    public String getDispositivoNome() {
+        return dispositivo.getNome();
+    }
+    
     public int getIdAtendimento() {
         return idAtendimento;
     }
@@ -42,7 +61,7 @@ public class Atendimento {
     public void setIdAtendimento(int idAtendimento) {
         this.idAtendimento = idAtendimento;
     }
-
+    
     public Cliente getCliente() {
         return cliente;
     }
@@ -50,11 +69,11 @@ public class Atendimento {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-
+    
     public Atendente getAtendente() {
         return atendente;
     }
-
+    
     public void setAtendente(Atendente atendente) {
         this.atendente = atendente;
     }

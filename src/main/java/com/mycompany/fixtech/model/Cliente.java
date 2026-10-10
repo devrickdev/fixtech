@@ -9,9 +9,9 @@ package com.mycompany.fixtech.model;
  * @author henry
  */
 public class Cliente extends Usuario{
-    public int idCliente;
-    public String telefone;
-    public String endereco;
+    private int idCliente;
+    private String telefone;
+    private String endereco;
 
     public Cliente() {
         super();

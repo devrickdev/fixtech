@@ -4,20 +4,28 @@
  */
 package com.mycompany.fixtech.view.dialogues;
 
+import com.mycompany.fixtech.controller.DispositivoController;
+import com.mycompany.fixtech.model.Atendimento;
+import com.mycompany.fixtech.model.Dispositivo;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author henry
  */
 public class DlgEscolhaDispositivo extends javax.swing.JDialog {
+    private Atendimento atendimento;
+    public Dispositivo dispositivoEscolhido;
+    private DispositivoController dispositivoController;
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DlgEscolhaDispositivo.class.getName());
-
-    /**
-     * Creates new form DlgEscolhaDispositivo
-     */
-    public DlgEscolhaDispositivo(java.awt.Frame parent, boolean modal) {
+    public DlgEscolhaDispositivo(java.awt.Frame parent, boolean modal, Atendimento atendimento) {
         super(parent, modal);
         initComponents();
+        this.dispositivoEscolhido = new Dispositivo();
+        this.atendimento = atendimento;
+        this.dispositivoController = new DispositivoController();
+        this.dispositivoController.buscarDispositivo(dispositivoEscolhido.getIdDispositivo());
+        dispositivoController.atualizarTabela(grdListagem);
     }
 
     /**
@@ -31,15 +39,14 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
 
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        edtId = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        grdListagem = new javax.swing.JTable();
+        lblBusca = new javax.swing.JLabel();
+        btnConfirrmar = new javax.swing.JButton();
+        edtDispositivoEscolhido = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -50,7 +57,11 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
 
         jLabel3.setText("Selecionado");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa.png"))); // NOI18N
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(this::btnBuscarActionPerformed);
+
+        grdListagem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -61,28 +72,13 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
 
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane1.setViewportView(grdListagem);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa.png"))); // NOI18N
-        jButton1.setText("Buscar");
+        lblBusca.setText("ID");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jLabel2.setText("Busca:");
-
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/confirma.png"))); // NOI18N
-        jButton2.setText("Confirmar");
+        btnConfirrmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/confirma.png"))); // NOI18N
+        btnConfirrmar.setText("Confirmar");
+        btnConfirrmar.addActionListener(this::btnConfirrmarActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -92,20 +88,21 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(lblBusca)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1)
+                        .addComponent(edtId)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
+                        .addComponent(btnBuscar))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnConfirrmar, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(edtDispositivoEscolhido)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,16 +111,16 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(edtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblBusca))
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.TRAILING))
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(edtDispositivoEscolhido)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2))
+                        .addComponent(btnConfirrmar))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -151,54 +148,46 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        int idEscolhido = Integer.parseInt(edtId.getText());
+        if (idEscolhido != 0) {
+            dispositivoEscolhido = this.dispositivoController.buscarDispositivo(idEscolhido);
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                DlgEscolhaDispositivo dialog = new DlgEscolhaDispositivo(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+            if (dispositivoEscolhido == null) {
+                JOptionPane.showMessageDialog(this, "Não existe este Id.");
+                edtDispositivoEscolhido.setText("");
+            } else {
+                edtDispositivoEscolhido.setText(dispositivoEscolhido.toString());
             }
-        });
-    }
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnConfirrmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirrmarActionPerformed
+        if (dispositivoEscolhido == null) {
+            int response = JOptionPane.showConfirmDialog(null,
+                    "Nenhum dispositivo foi escolhido. Deseja continuar?",
+                    "Confirm",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.OK_OPTION) {
+                dispose();
+            }
+        } else {
+            this.atendimento.setDispositivo(dispositivoEscolhido);
+            dispose();
+        }
+    }//GEN-LAST:event_btnConfirrmarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnConfirrmar;
+    private javax.swing.JTextField edtDispositivoEscolhido;
+    private javax.swing.JTextField edtId;
+    private javax.swing.JTable grdListagem;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblBusca;
     // End of variables declaration//GEN-END:variables
 }

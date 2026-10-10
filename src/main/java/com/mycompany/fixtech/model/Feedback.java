@@ -10,14 +10,20 @@ package com.mycompany.fixtech.model;
  * @author henry
  */
 public class Feedback {
-    public int idFeedback;
-    public Atendimento atendimento;
-    public int nota;
-    public String comentario;
+    private int idFeedback;
+    private Atendimento atendimento;
+    private int nota;
+    private String comentario;
 
+    public Feedback(int idFeedback, Atendimento atendimento, int nota, String comentario) {
+        this.idFeedback = idFeedback;
+        this.atendimento = atendimento;
+        this.nota = nota;
+        this.comentario = comentario;
+    }
+    
     public Feedback() {
         this.idFeedback = 0;
-        this.atendimento = new Atendimento();
         this.nota = 0;
         this.comentario = "";
     }
@@ -30,6 +36,10 @@ public class Feedback {
         +"Comentario: " + this.comentario;
         txt += atendimento.toString();      
         return txt;
+    }
+    
+    public int getAtendimentoId() {
+        return atendimento.getIdAtendimento();
     }
 
     public Atendimento getAtendimento() {

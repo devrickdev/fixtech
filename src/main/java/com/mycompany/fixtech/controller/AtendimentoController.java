@@ -26,9 +26,9 @@ public class AtendimentoController {
         repositorio = new AtendimentoDAO();
     }
 
-    public void cadastrarAtendimento(int idAtendimento, Cliente cliente, Atendente atendente, Dispositivo dispositivo, String status, String descricao) {
+    public void cadastrarAtendimento(int idAtendimento, String nomeCliente, String nomeAtendente, String nomeDispositivo, String status, String descricao) {
         ValidateAtendimento valid = new ValidateAtendimento();
-        Atendimento novoAtendimento = valid.validaCamposEntrada(idAtendimento, cliente, atendente, dispositivo, status, descricao);
+        Atendimento novoAtendimento = valid.validaCamposEntrada(idAtendimento, nomeCliente, nomeAtendente, nomeDispositivo, status, descricao);
 
         if (repositorio.findById(idAtendimento) == null) {
             repositorio.save(novoAtendimento);
@@ -37,9 +37,9 @@ public class AtendimentoController {
         }
     }
 
-    public void atualizarAtendimento(int idAtendimento, Cliente cliente, Atendente atendente, Dispositivo dispositivo, String status,String descricao) {
+    public void atualizarAtendimento(int idAtendimento, String nomeCliente, String nomeAtendente, String nomeDispositivo, String status, String descricao) {
         ValidateAtendimento valid = new ValidateAtendimento();
-        Atendimento novoAtendimento = valid.validaCamposEntrada(idAtendimento, cliente, atendente, dispositivo, status, descricao);
+        Atendimento novoAtendimento = valid.validaCamposEntrada(idAtendimento, nomeCliente, nomeAtendente, nomeDispositivo, status, descricao);
         novoAtendimento.setIdAtendimento(idAtendimento);
         
         repositorio.update(novoAtendimento);

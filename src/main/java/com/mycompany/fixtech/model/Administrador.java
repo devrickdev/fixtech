@@ -9,7 +9,7 @@ package com.mycompany.fixtech.model;
  * @author henry
  */
 public class Administrador extends Usuario{
-    public int idAdm;
+    private int idAdm;
     
     public Administrador() {
         super();

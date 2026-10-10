@@ -9,7 +9,7 @@ package com.mycompany.fixtech.model;
  * @author henry
  */
 public class Atendente extends Usuario {
-    public int idAtendente;
+    private int idAtendente;
     
     public Atendente() {
         super();

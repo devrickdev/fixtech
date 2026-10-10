@@ -9,10 +9,10 @@ package com.mycompany.fixtech.model;
  * @author henry
  */
 public abstract class Usuario {
-    public String nome;
-    public String login;
-    public String senha;
-    public int permission;
+    private String nome;
+    private String login;
+    private String senha;
+    private int permission;
 
     public Usuario() {
         this.nome ="";

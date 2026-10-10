@@ -46,11 +46,11 @@ public class TMCadAtendimento extends AbstractTableModel {
          if(columnIndex == COL_ID){
             return a.getIdAtendimento();
         }else if(columnIndex == COL_CLIENTE){
-            return a.getCliente();
+            return a.getClienteNome();
         }else if(columnIndex == COL_ATENDENTE){
-            return a.getAtendente();
+            return a.getAtendenteNome();
         }else if(columnIndex == COL_DISPOSITIVO){
-            return a.getDispositivo();
+            return a.getDispositivoNome();
         }else if(columnIndex == COL_STATUS){
             return a.getStatus();
         }else if(columnIndex == COL_DESCRICAO){

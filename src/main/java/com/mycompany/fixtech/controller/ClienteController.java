@@ -53,7 +53,7 @@ public class ClienteController {
         grd.setModel(tmCliente);        
     }
 
-    public void excluirAtendente(Cliente cliente) {
+    public void excluirCliente(Cliente cliente) {
         if (cliente != null) {
             repositorio.delete(cliente);
         } else {
