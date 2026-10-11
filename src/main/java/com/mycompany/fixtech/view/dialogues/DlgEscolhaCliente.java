@@ -4,6 +4,9 @@
  */
 package com.mycompany.fixtech.view.dialogues;
 
+import com.mycompany.fixtech.controller.ClienteController;
+import com.mycompany.fixtech.model.Atendimento;
+import com.mycompany.fixtech.model.Cliente;
 import javax.swing.JOptionPane;
 
 /**
@@ -11,20 +14,18 @@ import javax.swing.JOptionPane;
  * @author henry
  */
 public class DlgEscolhaCliente extends javax.swing.JDialog {
-    private Pedido pedido;
-    public Pessoa pessoaEscolhida;
-    private GerenciadorPessoa gerentePessoas;
+    private Atendimento atendimento;
+    public Cliente clienteEscolhido;
+    private ClienteController clienteController;
     
-    public DlgEscolhaCliente(java.awt.Frame parent, boolean modal) {
+    public DlgEscolhaCliente(java.awt.Frame parent, boolean modal, Atendimento atendimento) {
         super(parent, modal);
         initComponents();
-        this.pessoaEscolhida = new Pessoa();
-        this.pedido = pedido;
-
-        this.gerentePessoas = new GerenciadorPessoa();
-        this.gerentePessoas.carregarDoArquivo("ListagemPessoas.csv");
-        String listagem = this.gerentePessoas.toString();
-        edtListagem.setText(listagem)
+        this.clienteEscolhido = new Cliente();
+        this.atendimento = atendimento;
+        this.clienteController = new ClienteController();
+        this.clienteController.buscarCliente(clienteEscolhido.getIdCliente());
+        clienteController.atualizarTabela(grdListagem);
     }
 
     /**
@@ -42,9 +43,9 @@ public class DlgEscolhaCliente extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        grdListagem = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        grdClienteEscolhido = new javax.swing.JTable();
         lblBusca = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btnConfirmar = new javax.swing.JButton();
@@ -63,7 +64,7 @@ public class DlgEscolhaCliente extends javax.swing.JDialog {
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(this::btnBuscarActionPerformed);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        grdListagem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -74,9 +75,9 @@ public class DlgEscolhaCliente extends javax.swing.JDialog {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(grdListagem);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        grdClienteEscolhido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -87,7 +88,7 @@ public class DlgEscolhaCliente extends javax.swing.JDialog {
 
             }
         ));
-        jScrollPane3.setViewportView(jTable2);
+        jScrollPane3.setViewportView(grdClienteEscolhido);
 
         lblBusca.setText("Busca:");
 
@@ -164,21 +165,21 @@ public class DlgEscolhaCliente extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        String cpfEscolhido = edtCpf.getText();
-        if (!cpfEscolhido.isEmpty()) {
-            pessoaEscolhida = this.gerentePessoas.buscarPessoa(cpfEscolhido);
+        int idEscolhido = Integer.parseInt(edtId.getText());
+        if (idEscolhido != 0) {
+            clienteEscolhido = this.clienteController.buscarCliente(idEscolhido);
 
-            if (pessoaEscolhida == null) {
-                JOptionPane.showMessageDialog(this, "Não existe este CPF.");
-                lblPessoaEscolhida.setText("");
+            if (clienteEscolhido == null) {
+                JOptionPane.showMessageDialog(this, "Não existe este Id.");
+                edtClienteEscolhido.setText("");
             } else {
-                lblPessoaEscolhida.setText(pessoaEscolhida.toString());
+                edtClienteEscolhido.setText(clienteEscolhido.toString());
             }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        if (pessoaEscolhida == null) {
+        if (clienteEscolhido == null) {
             int response = JOptionPane.showConfirmDialog(null,
                     "Nenhum cliente foi escolhido. Deseja continuar?",
                     "Confirm",
@@ -188,52 +189,17 @@ public class DlgEscolhaCliente extends javax.swing.JDialog {
                 dispose();
             }
         } else {
-            this.pedido.setCliente(pessoaEscolhida);
+            this.atendimento.setCliente(clienteEscolhido);
             dispose();
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                DlgEscolhaCliente dialog = new DlgEscolhaCliente(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JTextField edtBusca;
+    private javax.swing.JTable grdClienteEscolhido;
+    private javax.swing.JTable grdListagem;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
@@ -241,8 +207,6 @@ public class DlgEscolhaCliente extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JLabel lblBusca;
     // End of variables declaration//GEN-END:variables
 }

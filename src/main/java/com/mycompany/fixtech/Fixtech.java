@@ -4,13 +4,15 @@
 
 package com.mycompany.fixtech;
 
+import com.mycompany.fixtech.view.FrLogin;
+
 /**
  *
  * @author henry
  */
 public class Fixtech {
-
     public static void main(String[] args) {
-        System.out.println("Fsociety!");
+        FrLogin telaLogin = new FrLogin();
+        telaLogin.setVisible(true);  
     }
 }

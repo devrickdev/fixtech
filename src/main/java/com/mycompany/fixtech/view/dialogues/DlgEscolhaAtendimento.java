@@ -4,6 +4,9 @@
  */
 package com.mycompany.fixtech.view.dialogues;
 
+import com.mycompany.fixtech.controller.AtendimentoController;
+import com.mycompany.fixtech.model.Atendimento;
+import com.mycompany.fixtech.model.Feedback;
 import javax.swing.JOptionPane;
 
 /**
@@ -11,22 +14,20 @@ import javax.swing.JOptionPane;
  * @author henry
  */
 public class DlgEscolhaAtendimento extends javax.swing.JDialog {
-    private Pedido pedido;
-    public Pessoa pessoaEscolhida;
-    private GerenciadorPessoa gerentePessoas;
+    private Feedback feedback;
+    public Atendimento atendimentoEscolhido;
+    private AtendimentoController atendimentoController;
     
-    public DlgEscolhaAtendimento(java.awt.Frame parent, boolean modal) {
+    public DlgEscolhaAtendimento(java.awt.Frame parent, boolean modal, Atendimento atendimento) {
         super(parent, modal);
         initComponents();
-        this.pessoaEscolhida = new Pessoa();
-        this.pedido = pedido;
-
-        this.gerentePessoas = new GerenciadorPessoa();
-        this.gerentePessoas.carregarDoArquivo("ListagemPessoas.csv");
-        String listagem = this.gerentePessoas.toString();
-        edtListagem.setText(listagem)
+        this.atendimentoEscolhido = new Atendimento();
+        this.feedback = feedback;
+        this.atendimentoController = new AtendimentoController();
+        this.atendimentoController.buscarAtendimento(atendimentoEscolhido.getIdAtendimento());
+        atendimentoController.atualizarTabela(grdListagem);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,10 +39,10 @@ public class DlgEscolhaAtendimento extends javax.swing.JDialog {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        grdListagem = new javax.swing.JTable();
         btnConfirmar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        grdAtendimentoEscolhido = new javax.swing.JTable();
         edtBusca = new javax.swing.JTextField();
         lblBusca = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
@@ -54,7 +55,7 @@ public class DlgEscolhaAtendimento extends javax.swing.JDialog {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/atd.png"))); // NOI18N
         jLabel1.setText("ESCOLHA UM ATENDIMENTO");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        grdListagem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -65,13 +66,13 @@ public class DlgEscolhaAtendimento extends javax.swing.JDialog {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(grdListagem);
 
         btnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/confirma.png"))); // NOI18N
         btnConfirmar.setText("Confirmar");
         btnConfirmar.addActionListener(this::btnConfirmarActionPerformed);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        grdAtendimentoEscolhido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -82,7 +83,7 @@ public class DlgEscolhaAtendimento extends javax.swing.JDialog {
 
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(grdAtendimentoEscolhido);
 
         lblBusca.setText("Busca:");
 
@@ -144,23 +145,23 @@ public class DlgEscolhaAtendimento extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        String cpfEscolhido = edtCpf.getText();
-        if (!cpfEscolhido.isEmpty()) {
-            pessoaEscolhida = this.gerentePessoas.buscarPessoa(cpfEscolhido);
+        int idEscolhido = Integer.parseInt(edtId.getText());
+        if (idEscolhido != 0) {
+            atendimentoEscolhido = this.atendimentoController.buscarAtendimento(idEscolhido);
 
-            if (pessoaEscolhida == null) {
-                JOptionPane.showMessageDialog(this, "Não existe este CPF.");
-                lblPessoaEscolhida.setText("");
+            if (atendimentoEscolhido == null) {
+                JOptionPane.showMessageDialog(this, "Não existe este Id.");
+                grdAtendimentoEscolhido.setText("");
             } else {
-                lblPessoaEscolhida.setText(pessoaEscolhida.toString());
+                grdAtendimentoEscolhido.setText(atendimentoEscolhido.toString());
             }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-       if (pessoaEscolhida == null) {
+       if (atendimentoEscolhido == null) {
             int response = JOptionPane.showConfirmDialog(null,
-                    "Nenhum cliente foi escolhido. Deseja continuar?",
+                    "Nenhum atendimento foi escolhido. Deseja continuar?",
                     "Confirm",
                     JOptionPane.OK_CANCEL_OPTION,
                     JOptionPane.QUESTION_MESSAGE);
@@ -168,58 +169,21 @@ public class DlgEscolhaAtendimento extends javax.swing.JDialog {
                 dispose();
             }
         } else {
-            this.pedido.setCliente(pessoaEscolhida);
+            this.feedback.setAtendimento(atendimentoEscolhido);
             dispose();
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                DlgEscolhaAtendimento dialog = new DlgEscolhaAtendimento(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JTextField edtBusca;
+    private javax.swing.JTable grdAtendimentoEscolhido;
+    private javax.swing.JTable grdListagem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JLabel lblBusca;
     // End of variables declaration//GEN-END:variables
 }

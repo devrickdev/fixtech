@@ -9,15 +9,16 @@ import java.util.List;
 /**
  *
  * @author henry
+ * @param <T>
  */
-public interface IDao {
-    public void save(Object obj);
+public interface IDao<T> {
+    public void save(T obj);
     
-    public void update(Object obj);
+    public void update(T obj);
     
-    public boolean delete(Object obj);
+    public boolean delete(T obj);
             
-    public Object find(Object obj);
+    public T find(T obj);
         
-    public List<Object> findAll();
+    public List<T> findAll();
 }

@@ -46,7 +46,8 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
         grdListagem = new javax.swing.JTable();
         lblBusca = new javax.swing.JLabel();
         btnConfirrmar = new javax.swing.JButton();
-        edtDispositivoEscolhido = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        grdDispositivoEscolhido = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -80,6 +81,19 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
         btnConfirrmar.setText("Confirmar");
         btnConfirrmar.addActionListener(this::btnConfirrmarActionPerformed);
 
+        grdDispositivoEscolhido.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(grdDispositivoEscolhido);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -97,12 +111,13 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnConfirrmar, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(edtDispositivoEscolhido)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnConfirrmar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,11 +133,12 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(edtDispositivoEscolhido)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnConfirrmar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addComponent(btnConfirrmar))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -155,9 +171,9 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
 
             if (dispositivoEscolhido == null) {
                 JOptionPane.showMessageDialog(this, "Não existe este Id.");
-                edtDispositivoEscolhido.setText("");
+                grdDispositivoEscolhido.setText("");
             } else {
-                edtDispositivoEscolhido.setText(dispositivoEscolhido.toString());
+                grdDispositivoEscolhido.setText(dispositivoEscolhido.toString());
             }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
@@ -181,13 +197,14 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnConfirrmar;
-    private javax.swing.JTextField edtDispositivoEscolhido;
     private javax.swing.JTextField edtId;
+    private javax.swing.JTable grdDispositivoEscolhido;
     private javax.swing.JTable grdListagem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblBusca;
     // End of variables declaration//GEN-END:variables
 }
