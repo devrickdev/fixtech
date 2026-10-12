@@ -23,7 +23,7 @@ public class DispositivoController {
         repositorio = new DispositivoDAO();
     }
 
-    public void cadastrarDispositivo(int idDispositivo, String nome, String tipo, String marca, String modelo) {
+    public void cadastrarDispositivo(Long idDispositivo, String nome, String tipo, String marca, String modelo) {
         ValidateDispositivo valid = new ValidateDispositivo();
         Dispositivo novoDispositivo = valid.validaCamposEntrada(idDispositivo, nome, tipo, marca, modelo);
 
@@ -34,7 +34,7 @@ public class DispositivoController {
         }
     }
 
-    public void atualizarDispositivo(int idDispositivo,String nome, String tipo, String marca, String modelo) {
+    public void atualizarDispositivo(Long idDispositivo,String nome, String tipo, String marca, String modelo) {
         ValidateDispositivo valid = new ValidateDispositivo();
         Dispositivo novoDispositivo = valid.validaCamposEntrada(idDispositivo, nome, tipo, marca, modelo);
         novoDispositivo.setIdDispositivo(idDispositivo);
@@ -42,12 +42,12 @@ public class DispositivoController {
         repositorio.update(novoDispositivo);
     }
 
-    public Dispositivo buscarDispositivo(int idDispositivo) {
+    public Dispositivo buscarDispositivo(Long idDispositivo) {
         return (Dispositivo) this.repositorio.findById(idDispositivo);
     }
 
     public void atualizarTabela(JTable grd) {
-        List<Object> lst = repositorio.findAll();
+        List<Dispositivo> lst = repositorio.findAll();
         
         TMCadDispositivo tmDispositivo = new TMCadDispositivo(lst);
         grd.setModel(tmDispositivo);        

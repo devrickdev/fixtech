@@ -6,7 +6,6 @@ package com.mycompany.fixtech.model.dao;
 
 import com.mycompany.fixtech.factory.DatabaseJPA;
 import com.mycompany.fixtech.model.Feedback;
-import com.mycompany.fixtech.model.Feedback;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import java.util.List;
@@ -15,7 +14,7 @@ import java.util.List;
  *
  * @author henry
  */
-public class FeedbackDAO implements IDao {
+public class FeedbackDAO implements IDao<Feedback> {
 
     private EntityManager entityManager;
     
@@ -27,7 +26,7 @@ public class FeedbackDAO implements IDao {
     }
 
     @Override
-    public void save(Object obj) {
+    public void save(Feedback obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
  
         this.entityManager.getTransaction().begin();       
@@ -37,7 +36,8 @@ public class FeedbackDAO implements IDao {
         this.entityManager.close();
     }
     
-    public void update(Object obj) {
+    @Override
+    public void update(Feedback obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         
         this.entityManager.getTransaction().begin();       
@@ -48,12 +48,13 @@ public class FeedbackDAO implements IDao {
     }
     
 
-    public boolean delete(Object obj) {
+    @Override
+    public boolean delete(Feedback obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        Feedback feedback = (Feedback) obj;
+        Feedback feedback = obj;
         this.entityManager.getTransaction().begin();
-        qry = this.entityManager.createQuery("DELETE FROM Feedback WHERE id=:id ");
-        qry.setParameter("id", feedback.getIdFeedback());
+        qry = this.entityManager.createQuery("DELETE FROM Feedback WHERE idFeedback=:idFeedback ");
+        qry.setParameter("idFeedback", feedback.getIdFeedback());
         qry.executeUpdate(); 
         this.entityManager.getTransaction().commit();
         
@@ -62,15 +63,16 @@ public class FeedbackDAO implements IDao {
     }
 
     @Override
-    public Object find(Object obj) {
+    public Feedback find(Feedback obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        Feedback feedback = (Feedback) obj;
+        Feedback feedback = obj;
         Feedback f = this.entityManager.find(Feedback.class, feedback.getIdFeedback());
         this.entityManager.close();
         return f;
     }
 
-    public List<Object> findAll() {
+    @Override
+    public List<Feedback> findAll() {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         
         jpql = " SELECT f "
@@ -81,27 +83,27 @@ public class FeedbackDAO implements IDao {
         List lst = qry.getResultList();
         
         this.entityManager.close();
-        return (List<Object>) lst;
+        return (List<Feedback>) lst;
                 
     }
 
-    public Feedback findById(int id) { 
+    public Feedback findById(Long idFeedback) { 
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         
         jpql = " SELECT f "
              + " FROM Feedback f "
-             + " WHERE f.id like :id ";
+             + " WHERE f.idFeedback like :idFeedback ";
         qry = this.entityManager.createQuery(jpql);
-        qry.setParameter("id", id);
+        qry.setParameter("idFeedback", idFeedback);
         
-        List lst = qry.getResultList();
+        List<Feedback> lst = qry.getResultList();
 
         this.entityManager.close();
         
         if (lst.isEmpty()) {
             return null;
         } else {
-            return (Feedback) lst.get(0);
+            return lst.get(0);
         }                
     }    
     

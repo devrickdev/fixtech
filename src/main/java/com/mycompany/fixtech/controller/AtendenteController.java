@@ -23,31 +23,31 @@ public class AtendenteController {
         repositorio = new AtendenteDAO();
     }
 
-    public void cadastrarAtendente(int idAtendente, String nome, String login, String senha, int permission) {
+    public void cadastrarAtendente(Long idUsuario, String nome, String login, String senha, int permission) {
         ValidateAtendente valid = new ValidateAtendente();
-        Atendente novoAtendente = valid.validaCamposEntrada(idAtendente, nome, login, senha, permission);
+        Atendente novoAtendente = valid.validaCamposEntrada(idUsuario, nome, login, senha, permission);
 
-        if (repositorio.findById(idAtendente) == null) {
+        if (repositorio.findById(idUsuario) == null) {
             repositorio.save(novoAtendente);
         } else {
             throw new AtendenteException("Error - Já existe um atendente com este 'ID'.");
         }
     }
 
-    public void atualizarAtendente(int idAtendente,String nome, String login, String senha, int permission) {
+    public void atualizarAtendente(Long idUsuario,String nome, String login, String senha, int permission) {
         ValidateAtendente valid = new ValidateAtendente();
-        Atendente novoAtendente = valid.validaCamposEntrada(idAtendente, nome, login, senha, permission);
-        novoAtendente.setIdAtendente(idAtendente);
+        Atendente novoAtendente = valid.validaCamposEntrada(idUsuario, nome, login, senha, permission);
+        novoAtendente.setIdUsuario(idUsuario);
         
         repositorio.update(novoAtendente);
     }
 
-    public Atendente buscarAtendente(int idAtendente) {
-        return (Atendente) this.repositorio.findById(idAtendente);
+    public Atendente buscarAtendente(Long idUsuario) {
+        return (Atendente) this.repositorio.findById(idUsuario);
     }
 
     public void atualizarTabela(JTable grd) {
-        List<Object> lst = repositorio.findAll();
+        List<Atendente> lst = repositorio.findAll();
         
         TMCadAtendente tmAtendente = new TMCadAtendente(lst);
         grd.setModel(tmAtendente);        

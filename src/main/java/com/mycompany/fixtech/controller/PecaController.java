@@ -24,7 +24,7 @@ public class PecaController {
         repositorio = new PecaDAO();
     }
 
-    public void cadastrarPeca(int idPeca, String nome, int quantidade, double valorUnidade) {
+    public void cadastrarPeca(Long idPeca, String nome, int quantidade, double valorUnidade) {
         ValidatePeca valid = new ValidatePeca();
         Peca novoPeca = valid.validaCamposEntrada(idPeca, nome, quantidade, valorUnidade);
 
@@ -35,7 +35,7 @@ public class PecaController {
         }
     }
 
-    public void atualizarPeca(int idPeca, String nome, int quantidade, double valorUnidade) {
+    public void atualizarPeca(Long idPeca, String nome, int quantidade, double valorUnidade) {
         ValidatePeca valid = new ValidatePeca();
         Peca novoPeca = valid.validaCamposEntrada(idPeca, nome, quantidade, valorUnidade);
         novoPeca.setIdPeca(idPeca);
@@ -43,12 +43,12 @@ public class PecaController {
         repositorio.update(novoPeca);
     }
 
-    public Peca buscarPeca(int idPeca) {
+    public Peca buscarPeca(Long idPeca) {
         return (Peca) this.repositorio.findById(idPeca);
     }
 
     public void atualizarTabela(JTable grd) {
-        List<Object> lst = repositorio.findAll();
+        List<Peca> lst = repositorio.findAll();
         
         TMCadPeca tmPeca = new TMCadPeca(lst);
         grd.setModel(tmPeca);        

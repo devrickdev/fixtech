@@ -23,31 +23,31 @@ public class ClienteController {
         repositorio = new ClienteDAO();
     }
 
-    public void cadastrarCliente(int idCliente, String nome, String login, String senha, int permission) {
+    public void cadastrarCliente(Long idUsuario, String nome, String login, String senha, int permission) {
         ValidateCliente valid = new ValidateCliente();
-        Cliente novoCliente = valid.validaCamposEntrada(idCliente, nome, login, senha, permission);
+        Cliente novoCliente = valid.validaCamposEntrada(idUsuario, nome, login, senha, permission);
 
-        if (repositorio.findById(idCliente) == null) {
+        if (repositorio.findById(idUsuario) == null) {
             repositorio.save(novoCliente);
         } else {
             throw new ClienteException("Error - Já existe um cliente com este 'ID'.");
         }
     }
 
-    public void atualizarCliente(int idCliente,String nome, String login, String senha, int permission) {
+    public void atualizarCliente(Long idCliente,String nome, String login, String senha, int permission) {
         ValidateCliente valid = new ValidateCliente();
         Cliente novoCliente = valid.validaCamposEntrada(idCliente, nome, login, senha, permission);
-        novoCliente.setIdCliente(idCliente);
+        novoCliente.setIdUsuario(idCliente);
         
         repositorio.update(novoCliente);
     }
 
-    public Cliente buscarCliente(int idCliente) {
+    public Cliente buscarCliente(Long idCliente) {
         return (Cliente) this.repositorio.findById(idCliente);
     }
 
     public void atualizarTabela(JTable grd) {
-        List<Object> lst = repositorio.findAll();
+        List<Cliente> lst = repositorio.findAll();
         
         TMCadCliente tmCliente = new TMCadCliente(lst);
         grd.setModel(tmCliente);        

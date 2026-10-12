@@ -13,14 +13,14 @@ import javax.swing.table.AbstractTableModel;
  * @author henry
  */
 public class TMCadPeca extends AbstractTableModel {
-    private List<Object> lst;
+    private List<Peca> lst;
     
     private final int COL_ID = 0;
     private final int COL_NOME = 1;
     private final int COL_QUANTIDADE = 2;
     private final int COL_VALORUNIDADE = 3;
   
-    public TMCadPeca(List<Object> lista) {
+    public TMCadPeca(List<Peca> lista) {
         this.lst = lista;
     }
     
@@ -35,12 +35,12 @@ public class TMCadPeca extends AbstractTableModel {
     }
     
     public Peca getObjetoPeca(int row){
-       return (Peca) this.lst.get(row);
+       return this.lst.get(row);
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Peca a = (Peca)this.lst.get(rowIndex);
+        Peca a = this.lst.get(rowIndex);
          if(columnIndex == COL_ID){
             return a.getIdPeca();
         }else if(columnIndex == COL_NOME){

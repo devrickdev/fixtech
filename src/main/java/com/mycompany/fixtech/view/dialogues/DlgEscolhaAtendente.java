@@ -8,6 +8,7 @@ import com.mycompany.fixtech.controller.AtendenteController;
 import com.mycompany.fixtech.model.Atendente;
 import com.mycompany.fixtech.model.Atendimento;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,13 +22,12 @@ public class DlgEscolhaAtendente extends javax.swing.JDialog {
     public DlgEscolhaAtendente(java.awt.Frame parent, boolean modal, Atendimento atendimento) {
         super(parent, modal);
         initComponents();
-        this.atendenteEscolhido = new Atendente();
         this.atendimento = atendimento;
+        this.atendenteEscolhido = null;
         this.atendenteController = new AtendenteController();
-        this.atendenteController.buscarAtendente(atendenteEscolhido.getIdAtendente());
         atendenteController.atualizarTabela(grdListagem);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,7 +41,7 @@ public class DlgEscolhaAtendente extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         grdListagem = new javax.swing.JTable();
         lblBusca = new javax.swing.JLabel();
-        edtBusca = new javax.swing.JTextField();
+        edtId = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         grdAtendenteEscolhido = new javax.swing.JTable();
@@ -105,7 +105,7 @@ public class DlgEscolhaAtendente extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblBusca)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(edtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(edtId, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBuscar))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -126,7 +126,7 @@ public class DlgEscolhaAtendente extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(edtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(edtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnBuscar)
                         .addComponent(lblBusca))
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -144,16 +144,26 @@ public class DlgEscolhaAtendente extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        int idEscolhido = Integer.parseInt(edtId.getText());
-        if (idEscolhido != 0) {
+        try {
+            if (edtId.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Digite um ID para buscar.");
+                return;
+            }
+            
+            Long idEscolhido = Long.parseLong(edtId.getText());
             atendenteEscolhido = this.atendenteController.buscarAtendente(idEscolhido);
 
+            DefaultTableModel modeloSelecionado = (DefaultTableModel) grdAtendenteEscolhido.getModel();
+            modeloSelecionado.setRowCount(0); // Limpa a tabela de selecionado
+
             if (atendenteEscolhido == null) {
-                JOptionPane.showMessageDialog(this, "Não existe este Id.");
-                grdAtendenteEscolhido.setText("");
+                JOptionPane.showMessageDialog(this, "Não existe atendente com este ID.");
             } else {
-                grdAtendenteEscolhido.setText(atendenteEscolhido.toString());
+                // Adiciona os dados do atendente na tabela de selecionados
+                modeloSelecionado.addRow(new Object[]{atendenteEscolhido.getIdUsuario(), atendenteEscolhido.getNome()});
             }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "O ID deve ser um número válido.");
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -176,7 +186,7 @@ public class DlgEscolhaAtendente extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnConfirmar;
-    private javax.swing.JTextField edtBusca;
+    private javax.swing.JTextField edtId;
     private javax.swing.JTable grdAtendenteEscolhido;
     private javax.swing.JTable grdListagem;
     private javax.swing.JLabel jLabel1;

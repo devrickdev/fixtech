@@ -12,15 +12,15 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author henry
  */
-public class TMCadAdm extends AbstractTableModel {
-    private final List<Object> lst;
+public class TMCadAdministrador extends AbstractTableModel {
+    private final List<Administrador> lst;
     
     private static final int COL_ID = 0;
     private static final int COL_NOME = 1;
     private static final int COL_LOGIN = 2;
     private static final int COL_SENHA = 3;
 
-    public TMCadAdm(List<Object> lst) {
+    public TMCadAdministrador(List<Administrador> lst) {
         this.lst = lst;
     }
 
@@ -35,15 +35,15 @@ public class TMCadAdm extends AbstractTableModel {
     }
 
     public Administrador getObjetoAdm(int row) {
-        return (Administrador) this.lst.get(row);   // cast aqui
+        return this.lst.get(row);   
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Administrador a = (Administrador)this.lst.get(rowIndex);   // cast aqui
+        Administrador a = this.lst.get(rowIndex);
 
         if (columnIndex == COL_ID) {
-            return a.getIdAdm();
+            return a.getIdUsuario();
         } else if (columnIndex == COL_NOME) {
             return a.getNome();
         } else if (columnIndex == COL_LOGIN) {

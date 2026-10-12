@@ -6,7 +6,6 @@ package com.mycompany.fixtech.model.dao;
 
 import com.mycompany.fixtech.factory.DatabaseJPA;
 import com.mycompany.fixtech.model.Peca;
-import com.mycompany.fixtech.model.Peca;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import java.util.List;
@@ -15,7 +14,7 @@ import java.util.List;
  *
  * @author henry
  */
-public class PecaDAO implements IDao {
+public class PecaDAO implements IDao<Peca> {
 
    private EntityManager entityManager;
     
@@ -27,7 +26,7 @@ public class PecaDAO implements IDao {
     }
 
     @Override
-    public void save(Object obj) {
+    public void save(Peca obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
  
         this.entityManager.getTransaction().begin();       
@@ -37,7 +36,8 @@ public class PecaDAO implements IDao {
         this.entityManager.close();
     }
     
-    public void update(Object obj) {
+   @Override
+    public void update(Peca obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         
         this.entityManager.getTransaction().begin();       
@@ -48,12 +48,13 @@ public class PecaDAO implements IDao {
     }
     
 
-    public boolean delete(Object obj) {
+   @Override
+    public boolean delete(Peca obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        Peca peca = (Peca) obj;
+        Peca peca = obj;
         this.entityManager.getTransaction().begin();
-        qry = this.entityManager.createQuery("DELETE FROM Peca WHERE id=:id ");
-        qry.setParameter("id", peca.getIdPeca());
+        qry = this.entityManager.createQuery("DELETE FROM Peca WHERE idPeca=:idPeca ");
+        qry.setParameter("idPeca", peca.getIdPeca());
         qry.executeUpdate(); 
         this.entityManager.getTransaction().commit();
         
@@ -62,15 +63,16 @@ public class PecaDAO implements IDao {
     }
 
     @Override
-    public Object find(Object obj) {
+    public Peca find(Peca obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        Peca peca = (Peca) obj;
+        Peca peca = obj;
         Peca f = this.entityManager.find(Peca.class, peca.getIdPeca());
         this.entityManager.close();
         return f;
     }
 
-    public List<Object> findAll() {
+   @Override
+    public List<Peca> findAll() {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         
         jpql = " SELECT f "
@@ -81,27 +83,27 @@ public class PecaDAO implements IDao {
         List lst = qry.getResultList();
         
         this.entityManager.close();
-        return (List<Object>) lst;
+        return (List<Peca>) lst;
                 
     }
 
-    public Peca findById(int id) { 
+    public Peca findById(Long idPeca) { 
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         
         jpql = " SELECT f "
              + " FROM Peca f "
-             + " WHERE f.id like :id ";
+             + " WHERE f.idPeca like :idPeca ";
         qry = this.entityManager.createQuery(jpql);
-        qry.setParameter("id", id);
+        qry.setParameter("idPeca", idPeca);
         
-        List lst = qry.getResultList();
+        List<Peca> lst = qry.getResultList();
 
         this.entityManager.close();
         
         if (lst.isEmpty()) {
             return null;
         } else {
-            return (Peca) lst.get(0);
+            return lst.get(0);
         }                
     }    
 }

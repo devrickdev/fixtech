@@ -4,28 +4,35 @@
  */
 package com.mycompany.fixtech.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+
 
 /**
  *
  * @author henry
  */
+@Entity
 public class Feedback {
-    private int idFeedback;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idFeedback;
+    @ManyToOne(fetch = FetchType.LAZY)
     private Atendimento atendimento;
     private int nota;
     private String comentario;
-
-    public Feedback(int idFeedback, Atendimento atendimento, int nota, String comentario) {
+    
+    public Feedback() {}
+    
+    public Feedback(Long idFeedback, Atendimento atendimento, int nota, String comentario) {
         this.idFeedback = idFeedback;
         this.atendimento = atendimento;
         this.nota = nota;
         this.comentario = comentario;
-    }
-    
-    public Feedback() {
-        this.idFeedback = 0;
-        this.nota = 0;
-        this.comentario = "";
     }
     
     @Override
@@ -37,9 +44,17 @@ public class Feedback {
         txt += atendimento.toString();      
         return txt;
     }
+
+    public Long getAtendimentoId(){
+        return getAtendimento().getIdAtendimento();
+    }
     
-    public int getAtendimentoId() {
-        return atendimento.getIdAtendimento();
+    public Long getIdFeedback() {
+        return idFeedback;
+    }
+
+    public void setIdFeedback(Long idFeedback) {
+        this.idFeedback = idFeedback;
     }
 
     public Atendimento getAtendimento() {
@@ -48,14 +63,6 @@ public class Feedback {
 
     public void setAtendimento(Atendimento atendimento) {
         this.atendimento = atendimento;
-    }
-    
-    public int getIdFeedback() {
-        return idFeedback;
-    }
-
-    public void setIdFeedback(int idFeedback) {
-        this.idFeedback = idFeedback;
     }
 
     public int getNota() {
@@ -73,5 +80,5 @@ public class Feedback {
     public void setComentario(String comentario) {
         this.comentario = comentario;
     }
-
+    
 }

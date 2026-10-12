@@ -14,11 +14,11 @@ import javax.swing.JOptionPane;
  */
 public class FrCadPeca extends javax.swing.JFrame {
     PecaController pecaController;
-    int idPecaEditando;
+    Long idPecaEditando;
 
     public FrCadPeca() {
         pecaController = new PecaController();
-        idPecaEditando = -1;
+        idPecaEditando = -1L;
 
         initComponents();
         
@@ -290,10 +290,10 @@ public class FrCadPeca extends javax.swing.JFrame {
             if (idPecaEditando > 0) {
                 pecaController.atualizarPeca(idPecaEditando, edtNome.getText(), Integer.parseInt(edtQuantidade.getText()), Double.parseDouble(edtValorUnidade.getText()));
             } else {
-                pecaController.cadastrarPeca(Integer.parseInt(edtId.getText()), edtNome.getText(), Integer.parseInt(edtQuantidade.getText()), Double.parseDouble(edtValorUnidade.getText()));
+                pecaController.cadastrarPeca(Long.parseLong(edtId.getText()), edtNome.getText(), Integer.parseInt(edtQuantidade.getText()), Double.parseDouble(edtValorUnidade.getText()));
             }
             
-            this.idPecaEditando = -1;
+            this.idPecaEditando = -1L;
 
             pecaController.atualizarTabela(grdPecas);
 
@@ -306,7 +306,7 @@ public class FrCadPeca extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.idPecaEditando = -1;
+        this.idPecaEditando = -1L;
         this.limparCampos();
         this.habilitarCampos(false);
     }//GEN-LAST:event_btnCancelarActionPerformed

@@ -13,7 +13,7 @@ import javax.swing.table.AbstractTableModel;
  * @author henry
  */
 public class TMCadCliente extends AbstractTableModel{
-    private List<Object> lst;
+    private List<Cliente> lst;
     
     private final int COL_ID = 0;
     private final int COL_NOME = 1;
@@ -22,7 +22,7 @@ public class TMCadCliente extends AbstractTableModel{
     private final int COL_TELEFONE = 4;
     private final int COL_ENDERECO = 5;
   
-    public TMCadCliente(List<Object> lista) {
+    public TMCadCliente(List<Cliente> lista) {
         this.lst = lista;
     }
     
@@ -37,15 +37,15 @@ public class TMCadCliente extends AbstractTableModel{
     }
     
     public Cliente getObjetoCliente(int row){
-       return (Cliente) this.lst.get(row);
+       return this.lst.get(row);
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
 
-        Cliente a = (Cliente) this.lst.get(rowIndex);
+        Cliente a = this.lst.get(rowIndex);
          if(columnIndex == COL_ID){
-            return a.getIdCliente();
+            return a.getIdUsuario();
         }else if(columnIndex == COL_NOME){
             return a.getNome();
         }else if(columnIndex == COL_LOGIN){

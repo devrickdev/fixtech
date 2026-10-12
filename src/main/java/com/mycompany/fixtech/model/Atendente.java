@@ -4,38 +4,33 @@
  */
 package com.mycompany.fixtech.model;
 
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
 /**
  *
  * @author henry
  */
+@Entity
+@DiscriminatorValue("Atendente")
 public class Atendente extends Usuario {
-    private int idAtendente;
     
-    public Atendente() {
-        super();
-        this.idAtendente = 0;
+    public Atendente() {}
+
+    public Atendente(Long idUsuario, String nome, String login, String senha, int permission) {
+        super(idUsuario, nome, login, senha, permission);
     }
-    
-    public void registrarAtendimento(){}
-    
-    public void consultarHistorico(){}
     
     @Override
     public String toString() {
         String txt
                 = "---------- Atendente -----------\n";
-        txt += super.toString();
-        txt += "idAtendente: " + this.idAtendente + "\n"
+        txt += super.toString()
                 + "-------------------------------------\n";
         return txt;
     }
     
-    public int getIdAtendente() {
-        return idAtendente;
-    }
-
-    public void setIdAtendente(int idAtendente) {
-        this.idAtendente = idAtendente;
-    }
+    public void registrarAtendimento(){}
     
+    public void consultarHistorico(){}
 }

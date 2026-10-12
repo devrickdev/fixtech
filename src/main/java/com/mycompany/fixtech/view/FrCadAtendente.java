@@ -15,11 +15,11 @@ import javax.swing.JOptionPane;
  */
 public class FrCadAtendente extends javax.swing.JFrame {
     AtendenteController atendenteController;
-    int idAtendenteEditando;
+    Long idAtendenteEditando;
 
     public FrCadAtendente() {
         atendenteController = new AtendenteController();
-        idAtendenteEditando = -1;
+        idAtendenteEditando = -1L;
         initComponents();      
         this.habilitarCampos(false);
         this.limparCampos();
@@ -42,7 +42,7 @@ public class FrCadAtendente extends javax.swing.JFrame {
 
     public void preencherFormulario(Atendente a) {
         edtNome.setText(a.getNome());
-        edtId.setText(a.getIdAtendente() + "");
+        edtId.setText(a.getIdUsuario() + "");
         edtLogin.setText(a.getLogin());
         edtSenha.setText(a.getSenha());
         edtPermission.setText(a.getPermission() + "");
@@ -262,7 +262,7 @@ public class FrCadAtendente extends javax.swing.JFrame {
             this.limparCampos();
             this.habilitarCampos(true);
             this.preencherFormulario(atendenteEditando);
-            this.idAtendenteEditando = atendenteEditando.getIdAtendente();
+            this.idAtendenteEditando = atendenteEditando.getIdUsuario();
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -276,7 +276,7 @@ public class FrCadAtendente extends javax.swing.JFrame {
             int response = JOptionPane.showConfirmDialog(null,
                     "Deseja exlcuir o Atendente  \n("
                     + atendenteExcluido.getNome() + ", "
-                    + atendenteExcluido.getIdAtendente() + ") ?",
+                    + atendenteExcluido.getIdUsuario() + ") ?",
                     "Confirmar exclusão",
                     JOptionPane.OK_CANCEL_OPTION,
                     JOptionPane.QUESTION_MESSAGE);
@@ -299,10 +299,10 @@ public class FrCadAtendente extends javax.swing.JFrame {
             if (idAtendenteEditando > 0) {
                 atendenteController.atualizarAtendente(idAtendenteEditando, edtNome.getText(), edtLogin.getText(), edtSenha.getText(),Integer.parseInt(edtPermission.getText()));
             } else {
-                atendenteController.cadastrarAtendente(Integer.parseInt(edtId.getText()), edtNome.getText(), edtLogin.getText(), edtSenha.getText(),Integer.parseInt(edtPermission.getText()));
+                atendenteController.cadastrarAtendente(Long.parseLong(edtId.getText()), edtNome.getText(), edtLogin.getText(), edtSenha.getText(),Integer.parseInt(edtPermission.getText()));
             }
             
-            this.idAtendenteEditando = -1;
+            this.idAtendenteEditando = -1L;
 
             atendenteController.atualizarTabela(grdAtendentes);
 
@@ -315,7 +315,7 @@ public class FrCadAtendente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.idAtendenteEditando = -1;
+        this.idAtendenteEditando = -1L;
         this.limparCampos();
         this.habilitarCampos(false);
     }//GEN-LAST:event_btnCancelarActionPerformed

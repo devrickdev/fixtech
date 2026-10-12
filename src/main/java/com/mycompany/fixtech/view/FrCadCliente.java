@@ -15,11 +15,11 @@ import javax.swing.JOptionPane;
  */
 public class FrCadCliente extends javax.swing.JFrame {
     ClienteController clienteController;
-    int idClienteEditando;
+    Long idClienteEditando;
 
     public FrCadCliente() {
         clienteController = new ClienteController();
-        idClienteEditando = -1;
+        idClienteEditando = -1L;
 
         initComponents();
         
@@ -45,7 +45,7 @@ public class FrCadCliente extends javax.swing.JFrame {
 
     public void preencherFormulario(Cliente a) {
         edtNome.setText(a.getNome());
-        edtId.setText(a.getIdCliente() + "");
+        edtId.setText(a.getIdUsuario() + "");
         edtLogin.setText(a.getLogin());
         edtSenha.setText(a.getSenha());
         edtPermission.setText(a.getPermission() + "");
@@ -290,7 +290,7 @@ public class FrCadCliente extends javax.swing.JFrame {
             this.limparCampos();
             this.habilitarCampos(true);
             this.preencherFormulario(clienteEditando);
-            this.idClienteEditando = clienteEditando.getIdCliente();
+            this.idClienteEditando = clienteEditando.getIdUsuario();
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -304,7 +304,7 @@ public class FrCadCliente extends javax.swing.JFrame {
             int response = JOptionPane.showConfirmDialog(null,
                     "Deseja exlcuir o Cliente  \n("
                     + clienteExcluido.getNome() + ", "
-                    + clienteExcluido.getIdCliente() + ") ?",
+                    + clienteExcluido.getIdUsuario() + ") ?",
                     "Confirmar exclusão",
                     JOptionPane.OK_CANCEL_OPTION,
                     JOptionPane.QUESTION_MESSAGE);
@@ -327,10 +327,10 @@ public class FrCadCliente extends javax.swing.JFrame {
             if (idClienteEditando > 0) {
                 clienteController.atualizarCliente(idClienteEditando, edtNome.getText(), edtLogin.getText(), edtSenha.getText(), Integer.parseInt(edtPermission.getText()));
             } else {
-                clienteController.cadastrarCliente(Integer.parseInt(edtId.getText()), edtNome.getText(), edtLogin.getText(), edtSenha.getText(), Integer.parseInt(edtPermission.getText()));
+                clienteController.cadastrarCliente(Long.parseLong(edtId.getText()), edtNome.getText(), edtLogin.getText(), edtSenha.getText(), Integer.parseInt(edtPermission.getText()));
             }
             
-            this.idClienteEditando = -1;
+            this.idClienteEditando = -1L;
 
             clienteController.atualizarTabela(grdClientes);
 
@@ -343,7 +343,7 @@ public class FrCadCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.idClienteEditando = -1;
+        this.idClienteEditando = -1L;
         this.limparCampos();
         this.habilitarCampos(false);
     }//GEN-LAST:event_btnCancelarActionPerformed

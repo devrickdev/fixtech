@@ -11,7 +11,7 @@ import com.mycompany.fixtech.model.exceptions.AtendimentoException;
  * @author henry
  */
 public class ValidateAtendimento {
-    public Atendimento validaCamposEntrada(int idAtendimento, String cliente, String atendente, String dispositivo, String status, String descricao){
+    public Atendimento validaCamposEntrada(Long idAtendimento, String clienteNome, String atendenteNome, String dispositivoNome, String status, String descricao){
         Atendimento atendimento = new Atendimento();
         if (descricao.isEmpty())
             throw new AtendimentoException("Error - Campo vazio: 'descricao'.");

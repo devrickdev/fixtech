@@ -8,6 +8,7 @@ import com.mycompany.fixtech.controller.DispositivoController;
 import com.mycompany.fixtech.model.Atendimento;
 import com.mycompany.fixtech.model.Dispositivo;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,10 +22,9 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
     public DlgEscolhaDispositivo(java.awt.Frame parent, boolean modal, Atendimento atendimento) {
         super(parent, modal);
         initComponents();
-        this.dispositivoEscolhido = new Dispositivo();
         this.atendimento = atendimento;
+        this.dispositivoEscolhido = null;
         this.dispositivoController = new DispositivoController();
-        this.dispositivoController.buscarDispositivo(dispositivoEscolhido.getIdDispositivo());
         dispositivoController.atualizarTabela(grdListagem);
     }
 
@@ -165,16 +165,26 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        int idEscolhido = Integer.parseInt(edtId.getText());
-        if (idEscolhido != 0) {
+        try {
+            if (edtId.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Digite um ID para buscar.");
+                return;
+            }
+            
+            Long idEscolhido = Long.parseLong(edtId.getText());
             dispositivoEscolhido = this.dispositivoController.buscarDispositivo(idEscolhido);
 
+            DefaultTableModel modeloSelecionado = (DefaultTableModel) grdDispositivoEscolhido.getModel();
+            modeloSelecionado.setRowCount(0); // Limpa a tabela de selecionado
+
             if (dispositivoEscolhido == null) {
-                JOptionPane.showMessageDialog(this, "Não existe este Id.");
-                grdDispositivoEscolhido.setText("");
+                JOptionPane.showMessageDialog(this, "Não existe dispositivo com este ID.");
             } else {
-                grdDispositivoEscolhido.setText(dispositivoEscolhido.toString());
+                // Adiciona os dados do dispositivo na tabela de selecionados
+                modeloSelecionado.addRow(new Object[]{dispositivoEscolhido.getIdDispositivo(), dispositivoEscolhido.getNome()});
             }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "O ID deve ser um número válido.");
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 

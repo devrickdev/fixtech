@@ -14,95 +14,94 @@ import java.util.List;
  *
  * @author henry
  */
-public class AdmDAO implements IDao {
+public class AdministradorDAO implements IDao<Administrador> {
 
     private EntityManager entityManager;
-    
+
     private Query qry;
     private String jpql;
 
-    public AdmDAO() {
-        
+    public AdministradorDAO() {
+
     }
 
     @Override
-    public void save(Object obj) {
+    public void save(Administrador obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        
-        this.entityManager.getTransaction().begin();       
-        this.entityManager.persist(obj);                    
-        this.entityManager.getTransaction().commit();        
-        
-        this.entityManager.close();
-    }
-    
-    public void update(Object obj) {
-        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        
-        this.entityManager.getTransaction().begin();       
-        this.entityManager.merge(obj);                    
-        this.entityManager.getTransaction().commit();     
-        
-        this.entityManager.close();
-    }
-    
 
-    public boolean delete(Object obj) {
-        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        Administrador adm = (Administrador) obj;
         this.entityManager.getTransaction().begin();
-        qry = this.entityManager.createQuery("DELETE FROM Adm WHERE id=:id ");
-        qry.setParameter("id", adm.getIdAdm());
-        qry.executeUpdate(); 
+        this.entityManager.persist(obj);
         this.entityManager.getTransaction().commit();
-        
+
+        this.entityManager.close();
+    }
+
+    @Override
+    public void update(Administrador obj) {
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+
+        this.entityManager.getTransaction().begin();
+        this.entityManager.merge(obj);
+        this.entityManager.getTransaction().commit();
+
+        this.entityManager.close();
+    }
+
+    @Override
+    public boolean delete(Administrador obj) {
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        this.entityManager.getTransaction().begin();
+        qry = this.entityManager.createQuery("DELETE FROM Administrador WHERE idUsuario=:idUsuario ");
+        qry.setParameter("idUsuario", obj.getIdUsuario());
+        qry.executeUpdate();
+        this.entityManager.getTransaction().commit();
+
         this.entityManager.close();
         return true;
     }
 
     @Override
-    public Object find(Object obj) {
+    public Administrador find(Administrador obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        Administrador adm = (Administrador) obj;
-        Administrador f = this.entityManager.find(Administrador.class, adm.getIdAdm());
-      
+        Administrador f = this.entityManager.find(Administrador.class, obj.getIdUsuario());
+
         this.entityManager.close();
         return f;
     }
 
-    public List<Object> findAll() {
+    @Override
+    public List<Administrador> findAll() {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        
+
         jpql = " SELECT f "
-             + " FROM Adm f ";
+                + " FROM Administrador f ";
 
         qry = this.entityManager.createQuery(jpql);
-        
-        List lst = qry.getResultList();
-        
+
+        List<Administrador> lst = qry.getResultList();
+
         this.entityManager.close();
-        return (List<Object>) lst;
-                
+        return lst;
+
     }
 
-    public Administrador findById(int id) { 
+    public Administrador findById(Long idUsuario) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        
+
         jpql = " SELECT f "
-             + " FROM Adm f "
-             + " WHERE f.id like :id ";
+                + " FROM Administrador f "
+                + " WHERE f.idUsuario like :idUsuario ";
         qry = this.entityManager.createQuery(jpql);
-        qry.setParameter("id", id);
-        
-        List lst = qry.getResultList();
+        qry.setParameter("idUsuario", idUsuario);
+
+        List<Administrador> lst = qry.getResultList();
 
         this.entityManager.close();
-        
+
         if (lst.isEmpty()) {
             return null;
         } else {
-            return (Administrador) lst.get(0);
-        }                
-    }    
-        
+            return lst.get(0);
+        }
+    }
 }

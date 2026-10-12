@@ -23,7 +23,7 @@ public class FeedbackController {
         repositorio = new FeedbackDAO();
     }
 
-    public void cadastrarFeedback(int idFeedback, int atendimentoId, int nota, String comentario) {
+    public void cadastrarFeedback(Long idFeedback, Long atendimentoId, int nota, String comentario) {
         ValidateFeedback valid = new ValidateFeedback();
         Feedback novoFeedback = valid.validaCamposEntrada(idFeedback, atendimentoId, nota, comentario);
 
@@ -34,7 +34,7 @@ public class FeedbackController {
         }
     }
 
-    public void atualizarFeedback(int idFeedback, int atendimentoId, int nota, String comentario) {
+    public void atualizarFeedback(Long idFeedback, Long atendimentoId, int nota, String comentario) {
         ValidateFeedback valid = new ValidateFeedback();
         Feedback novoFeedback = valid.validaCamposEntrada(idFeedback,atendimentoId, nota, comentario);
         novoFeedback.setIdFeedback(idFeedback);
@@ -42,12 +42,12 @@ public class FeedbackController {
         repositorio.update(novoFeedback);
     }
 
-    public Feedback buscarFeedback(int idFeedback) {
+    public Feedback buscarFeedback(Long idFeedback) {
         return (Feedback) this.repositorio.findById(idFeedback);
     }
 
     public void atualizarTabela(JTable grd) {
-        List<Object> lst = repositorio.findAll();
+        List<Feedback> lst = repositorio.findAll();
         
         TMCadFeedback tmFeedback = new TMCadFeedback(lst);
         grd.setModel(tmFeedback);        

@@ -4,24 +4,26 @@
  */
 package com.mycompany.fixtech.model;
 
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
 /**
  *
  * @author henry
  */
+@Entity
+@DiscriminatorValue("Cliente")
 public class Cliente extends Usuario{
-    private int idCliente;
     private String telefone;
     private String endereco;
 
-    public Cliente() {
-        super();
-        this.telefone = "";
-        this.endereco = "";
+    public Cliente() {}
+
+    public Cliente(String telefone, String endereco, Long idUsuario, String nome, String login, String senha, int permission) {
+        super(idUsuario, nome, login, senha, permission);
+        this.telefone = telefone;
+        this.endereco = endereco;
     }
-    
-    public void registarFeedback(){}
-    
-    public void consultarHistorico(){}
 
     @Override
     public String toString() {
@@ -34,13 +36,9 @@ public class Cliente extends Usuario{
         return txt;
     }
     
-    public int getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
-    }
+    public void registarFeedback(){}
+    
+    public void consultarHistorico(){}
     
     public String getTelefone() {
         return telefone;

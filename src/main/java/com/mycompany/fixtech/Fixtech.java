@@ -4,15 +4,16 @@
 
 package com.mycompany.fixtech;
 
-import com.mycompany.fixtech.view.FrLogin;
 
+import com.mycompany.fixtech.view.FrCadAdministrador;
 /**
  *
  * @author henry
  */
 public class Fixtech {
     public static void main(String[] args) {
-        FrLogin telaLogin = new FrLogin();
-        telaLogin.setVisible(true);  
+       FrCadAdministrador cadAdministrador = new FrCadAdministrador();
+       cadAdministrador.setVisible(true);
     }
 }
+

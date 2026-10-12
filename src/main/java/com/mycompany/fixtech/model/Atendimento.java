@@ -4,31 +4,40 @@
  */
 package com.mycompany.fixtech.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+
 /**
  *
  * @author henry
  */
+@Entity
 public class Atendimento {
-   private int idAtendimento;
+   @Id
+   @GeneratedValue(strategy=GenerationType.IDENTITY)
+   private Long idAtendimento;
+   @ManyToOne(fetch = FetchType.LAZY)
    private Cliente cliente;
+   @ManyToOne(fetch = FetchType.LAZY)
    private Atendente atendente;
+   @ManyToOne(fetch = FetchType.LAZY)
    private Dispositivo dispositivo;
    private String status;
    private String descricao;
    
-    public Atendimento(int idAtendimento, Cliente cliente, Atendente atendente, Dispositivo dispositivo, String status, String descricao) {
+   public Atendimento() {}
+   
+   public Atendimento(Long idAtendimento, Cliente cliente, Atendente atendente, Dispositivo dispositivo, String status, String descricao) {
         this.idAtendimento = idAtendimento;
         this.cliente = cliente;       
         this.atendente = atendente;   
         this.dispositivo = dispositivo;
         this.status = status;
         this.descricao = descricao;
-    }
-    
-    public Atendimento() {
-        this.idAtendimento = 0;
-        this.status = "Pendente";
-        this.descricao = "";
     }
     
     @Override
@@ -42,26 +51,26 @@ public class Atendimento {
         return txt;
     }
     
-    public String getClienteNome() {
+    public String getClienteNome(){
         return cliente.getNome();
     }
     
-    public String getAtendenteNome() {
+    public String getAtendenteNome(){
         return atendente.getNome();
     }
     
-    public String getDispositivoNome() {
+    public String getDispositivoNome(){
         return dispositivo.getNome();
     }
     
-    public int getIdAtendimento() {
+    public Long getIdAtendimento() {
         return idAtendimento;
     }
 
-    public void setIdAtendimento(int idAtendimento) {
+    public void setIdAtendimento(Long idAtendimento) {
         this.idAtendimento = idAtendimento;
     }
-    
+
     public Cliente getCliente() {
         return cliente;
     }
@@ -69,11 +78,11 @@ public class Atendimento {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    
+
     public Atendente getAtendente() {
         return atendente;
     }
-    
+
     public void setAtendente(Atendente atendente) {
         this.atendente = atendente;
     }
@@ -101,5 +110,4 @@ public class Atendimento {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    
 }

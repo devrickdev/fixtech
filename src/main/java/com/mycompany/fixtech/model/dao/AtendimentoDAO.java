@@ -14,54 +14,55 @@ import java.util.List;
  *
  * @author henry
  */
-public class AtendimentoDAO implements IDao {
+public class AtendimentoDAO implements IDao<Atendimento> {
 
     private EntityManager entityManager;
-    
+
     private Query qry;
     private String jpql;
 
     public AtendimentoDAO() {
-        
+
     }
 
     @Override
-    public void save(Object obj) {
+    public void save(Atendimento obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        
-        this.entityManager.getTransaction().begin();       
-        this.entityManager.persist(obj);                    
-        this.entityManager.getTransaction().commit();        
-        
-        this.entityManager.close();
-    }
-    
-    public void update(Object obj) {
-        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        
-        this.entityManager.getTransaction().begin();       
-        this.entityManager.merge(obj);                    
-        this.entityManager.getTransaction().commit();     
-        
-        this.entityManager.close();
-    }
-    
 
-    public boolean delete(Object obj) {
+        this.entityManager.getTransaction().begin();
+        this.entityManager.persist(obj);
+        this.entityManager.getTransaction().commit();
+
+        this.entityManager.close();
+    }
+
+    @Override
+    public void update(Atendimento obj) {
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+
+        this.entityManager.getTransaction().begin();
+        this.entityManager.merge(obj);
+        this.entityManager.getTransaction().commit();
+
+        this.entityManager.close();
+    }
+
+    @Override
+    public boolean delete(Atendimento obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         Atendimento atendimento = (Atendimento) obj;
         this.entityManager.getTransaction().begin();
-        qry = this.entityManager.createQuery("DELETE FROM Atendimento WHERE id=:id ");
-        qry.setParameter("id", atendimento.getIdAtendimento());
+        qry = this.entityManager.createQuery("DELETE FROM Atendimento WHERE idAtendimento=:idAtendimento ");
+        qry.setParameter("idAtendimento", atendimento.getIdAtendimento());
         qry.executeUpdate();
         this.entityManager.getTransaction().commit();
-        
+
         this.entityManager.close();
         return true;
     }
 
     @Override
-    public Object find(Object obj) {
+    public Atendimento find(Atendimento obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         Atendimento atendimento = (Atendimento) obj;
         Atendimento f = this.entityManager.find(Atendimento.class, atendimento.getIdAtendimento());
@@ -69,39 +70,40 @@ public class AtendimentoDAO implements IDao {
         return f;
     }
 
-    public List<Object> findAll() {
+    @Override
+    public List<Atendimento> findAll() {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        
+
         jpql = " SELECT f "
-             + " FROM Atendimento f ";
+                + " FROM Atendimento f ";
 
         qry = this.entityManager.createQuery(jpql);
-        
+
         List lst = qry.getResultList();
-        
+
         this.entityManager.close();
-        return (List<Object>) lst;
-                
+        return (List<Atendimento>) lst;
+
     }
 
-    public Atendimento findById(int id) { 
+    public Atendimento findById(Long idAtendimento) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        
+
         jpql = " SELECT f "
-             + " FROM Atendimento f "
-             + " WHERE f.id like :id ";
+                + " FROM Atendimento f "
+                + " WHERE f.idAtendimento like :idAtendimento ";
         qry = this.entityManager.createQuery(jpql);
-        qry.setParameter("id", id);
-        
+        qry.setParameter("idAtendimento", idAtendimento);
+
         List lst = qry.getResultList();
 
         this.entityManager.close();
-        
+
         if (lst.isEmpty()) {
             return null;
         } else {
             return (Atendimento) lst.get(0);
-        }                
-    }    
-    
+        }
+    }
+
 }

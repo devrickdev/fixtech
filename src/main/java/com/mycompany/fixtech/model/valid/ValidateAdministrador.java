@@ -5,17 +5,17 @@
 package com.mycompany.fixtech.model.valid;
 
 import com.mycompany.fixtech.model.Administrador;
-import com.mycompany.fixtech.model.exceptions.AdmException;
+import com.mycompany.fixtech.model.exceptions.AdministradorException;
 
 /**
  *
  * @author henry
  */
-public class ValidateAdm {
-    public Administrador validaCamposEntrada(int idAdm, String nome, String login, String senha, int permission){
+public class ValidateAdministrador {
+    public Administrador validaCamposEntrada(Long idUsuario, String nome, String login, String senha, int permission){
         Administrador adm = new Administrador();
         if (nome.isEmpty())
-            throw new AdmException("Error - Campo vazio: 'nome'.");
+            throw new AdministradorException("Error - Campo vazio: 'nome'.");
         adm.setNome(nome);
                 
         return adm;

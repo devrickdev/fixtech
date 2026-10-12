@@ -15,11 +15,11 @@ import javax.swing.JOptionPane;
  */
 public class FrCadDispositivo extends javax.swing.JFrame {
     DispositivoController dispositivoController;
-    int idDispositivoEditando;
+    Long idDispositivoEditando;
 
     public FrCadDispositivo() {
         dispositivoController = new DispositivoController();
-        idDispositivoEditando = -1;
+        idDispositivoEditando = -1L;
 
         initComponents();
         
@@ -302,10 +302,10 @@ public class FrCadDispositivo extends javax.swing.JFrame {
             if (idDispositivoEditando > 0) {
                 dispositivoController.atualizarDispositivo(idDispositivoEditando, edtNome.getText(), edtTipo.getText(), edtMarca.getText(),edtModelo.getText());
             } else {
-                dispositivoController.cadastrarDispositivo(Integer.parseInt(edtId.getText()), edtNome.getText(), edtTipo.getText(), edtMarca.getText(), edtModelo.getText());
+                dispositivoController.cadastrarDispositivo(Long.parseLong(edtId.getText()), edtNome.getText(), edtTipo.getText(), edtMarca.getText(), edtModelo.getText());
             }
             
-            this.idDispositivoEditando = -1;
+            this.idDispositivoEditando = -1L;
 
             dispositivoController.atualizarTabela(grdDispositivos);
 
@@ -318,7 +318,7 @@ public class FrCadDispositivo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.idDispositivoEditando = -1;
+        this.idDispositivoEditando = -1L;
         this.limparCampos();
         this.habilitarCampos(false);
     }//GEN-LAST:event_btnCancelarActionPerformed

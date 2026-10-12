@@ -4,23 +4,33 @@
  */
 package com.mycompany.fixtech.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 /**
  *
  * @author henry
  */
+@Entity
 public class Dispositivo {
-    private int idDispositivo;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idDispositivo;
     private String nome;
     private String tipo;
     private String marca;
     private String modelo;
 
-    public Dispositivo() {
-        this.idDispositivo = 0;
-        this.nome = "";
-        this.tipo = "";
-        this.marca = "";
-        this.modelo = "";
+    public Dispositivo() {}
+
+    public Dispositivo(Long idDispositivo, String nome, String tipo, String marca, String modelo) {
+        this.idDispositivo = idDispositivo;
+        this.nome = nome;
+        this.tipo = tipo;
+        this.marca = marca;
+        this.modelo = modelo;
     }
     
     @Override
@@ -41,11 +51,11 @@ public class Dispositivo {
         this.nome = nome;
     }
     
-    public int getIdDispositivo() {
+    public Long getIdDispositivo() {
         return idDispositivo;
     }
 
-    public void setIdDispositivo(int idDispositivo) {
+    public void setIdDispositivo(Long idDispositivo) {
         this.idDispositivo = idDispositivo;
     }
 

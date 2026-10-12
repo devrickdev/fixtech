@@ -4,18 +4,32 @@
  */
 package com.mycompany.fixtech.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+
 /**
  *
  * @author henry
  */
+@Entity
 public class ItemAtendimento {
-    private int idItem;
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long idItem;
+    @ManyToOne(fetch = FetchType.LAZY)
     private Atendimento atendimento; 
+    @ManyToOne(fetch = FetchType.LAZY)
     private Peca peca;               
     private int quantidade;          
     private double precoMomento;
-
-    public ItemAtendimento(int idItem, Atendimento atendimento, Peca peca, int quantidade, double precoMomento) {
+    
+    public ItemAtendimento() {}
+    
+    public ItemAtendimento(Long idItem, Atendimento atendimento, Peca peca, int quantidade, double precoMomento) {
         this.idItem = idItem;
         this.atendimento = atendimento;
         this.peca = peca;
@@ -23,17 +37,11 @@ public class ItemAtendimento {
         this.precoMomento = precoMomento;
     }
 
-    public ItemAtendimento() {
-        this.idItem = 0;
-        this.quantidade = 0;
-        this.precoMomento = 0.0;
-    }
-
-    public int getIdItem() {
+    public Long getIdItem() {
         return idItem;
     }
 
-    public void setIdItem(int idItem) {
+    public void setIdItem(Long idItem) {
         this.idItem = idItem;
     }
 
@@ -67,7 +75,5 @@ public class ItemAtendimento {
 
     public void setPrecoMomento(double precoMomento) {
         this.precoMomento = precoMomento;
-    }
-    
-    
+    }    
 }

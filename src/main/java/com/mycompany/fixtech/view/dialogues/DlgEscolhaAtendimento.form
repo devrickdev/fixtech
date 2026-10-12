@@ -32,7 +32,7 @@
                           <Group type="102" attributes="0">
                               <Component id="lblBusca" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="edtBusca" min="-2" pref="370" max="-2" attributes="0"/>
+                              <Component id="edtId" min="-2" pref="370" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnBuscar" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -61,7 +61,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                      <Component id="edtBusca" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="edtId" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblBusca" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -149,7 +149,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JTextField" name="edtBusca">
+    <Component class="javax.swing.JTextField" name="edtId">
     </Component>
     <Component class="javax.swing.JLabel" name="lblBusca">
       <Properties>

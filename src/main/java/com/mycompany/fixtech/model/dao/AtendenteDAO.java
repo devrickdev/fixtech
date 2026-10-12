@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author henry
  */
-public class AtendenteDAO implements IDao {
+public class AtendenteDAO implements IDao<Atendente> {
 
     private EntityManager entityManager;
     
@@ -26,7 +26,7 @@ public class AtendenteDAO implements IDao {
     }
 
     @Override
-    public void save(Object obj) {
+    public void save(Atendente obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         
         this.entityManager.getTransaction().begin();       
@@ -36,7 +36,8 @@ public class AtendenteDAO implements IDao {
         this.entityManager.close();
     }
     
-    public void update(Object obj) {
+    @Override
+    public void update(Atendente obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         
         this.entityManager.getTransaction().begin();       
@@ -47,12 +48,13 @@ public class AtendenteDAO implements IDao {
     }
     
 
-    public boolean delete(Object obj) {
+    @Override
+    public boolean delete(Atendente obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        Atendente atendente = (Atendente) obj;
+        Atendente atendente = obj;
         this.entityManager.getTransaction().begin();
-        qry = this.entityManager.createQuery("DELETE FROM Atendente WHERE id=:id ");
-        qry.setParameter("id", atendente.getIdAtendente());
+        qry = this.entityManager.createQuery("DELETE FROM Atendente WHERE idUsuario=:idUsuario ");
+        qry.setParameter("idUsuario", atendente.getIdUsuario());
         qry.executeUpdate();
         this.entityManager.getTransaction().commit();
         
@@ -61,16 +63,17 @@ public class AtendenteDAO implements IDao {
     }
 
     @Override
-    public Object find(Object obj) {
+    public Atendente find(Atendente obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        Atendente atendente = (Atendente) obj;
-        Atendente f = this.entityManager.find(Atendente.class, atendente.getIdAtendente());
+        Atendente atendente = obj;
+        Atendente f = this.entityManager.find(Atendente.class, atendente.getIdUsuario());
         
         this.entityManager.close();
         return f;
     }
 
-    public List<Object> findAll() {
+    @Override
+    public List<Atendente> findAll() {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         
         jpql = " SELECT f "
@@ -81,27 +84,27 @@ public class AtendenteDAO implements IDao {
         List lst = qry.getResultList();
         
         this.entityManager.close();
-        return (List<Object>) lst;
+        return (List<Atendente>) lst;
                 
     }
 
-    public Atendente findById(int id) { 
+    public Atendente findById(Long idUsuario) { 
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         
         jpql = " SELECT f "
              + " FROM Atendente f "
-             + " WHERE f.id like :id ";
+             + " WHERE f.idUsuario like :idUsuario ";
         qry = this.entityManager.createQuery(jpql);
-        qry.setParameter("id", id);
+        qry.setParameter("idUsuario", idUsuario);
         
-        List lst = qry.getResultList();
+        List<Atendente> lst = qry.getResultList();
 
         this.entityManager.close();
         
         if (lst.isEmpty()) {
             return null;
         } else {
-            return (Atendente) lst.get(0);
+            return lst.get(0);
         }                
     }    
     

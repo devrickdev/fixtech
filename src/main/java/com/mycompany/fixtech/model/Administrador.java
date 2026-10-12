@@ -4,38 +4,32 @@
  */
 package com.mycompany.fixtech.model;
 
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
 /**
  *
  * @author henry
  */
+@Entity
+@DiscriminatorValue("Administrador")
 public class Administrador extends Usuario{
-    private int idAdm;
     
-    public Administrador() {
-        super();
-        this.idAdm = 0;
-    }
+    public Administrador() {}
 
+    public Administrador(Long idUsuario, String nome, String login, String senha, int permission) {
+        super(idUsuario, nome, login, senha, permission);
+    }
+    
     @Override
     public String toString() {
         String txt
                 = "---------- Administrador -----------\n";
-        txt += super.toString();
-        txt += "idAdm: " + this.idAdm + "\n"
+        txt += super.toString()
                 + "-------------------------------------\n";
         return txt;
     }
     
-    public void gerenciarPermissoes(){}
-    
     public void gerarRelatorio(){}
 
-    public int getIdAdm() {
-        return idAdm;
-    }
-
-    public void setIdAdm(int idAdm) {
-        this.idAdm = idAdm;
-    }
-    
 }

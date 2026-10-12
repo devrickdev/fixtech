@@ -4,28 +4,28 @@
  */
 package com.mycompany.fixtech.view;
 
-import com.mycompany.fixtech.controller.AdmController;
+import com.mycompany.fixtech.controller.AdministradorController;
 import com.mycompany.fixtech.model.Administrador;
-import com.mycompany.fixtech.model.exceptions.AdmException;
+import com.mycompany.fixtech.model.exceptions.AdministradorException;
 import javax.swing.JOptionPane;
 /**
  *
  * @author henry
  */
-public class FrCadAdm extends javax.swing.JFrame {
-    AdmController admController;
-    int idAdmEditando;
+public class FrCadAdministrador extends javax.swing.JFrame {
+    AdministradorController administradorController;
+    Long idAdministradorEditando;
 
-    public FrCadAdm() {
-        admController = new AdmController();
-        idAdmEditando = -1;
+    public FrCadAdministrador() {
+        administradorController = new AdministradorController();
+        idAdministradorEditando = -1L;
 
         initComponents();
         
         this.habilitarCampos(false);
         this.limparCampos();
 
-        admController.atualizarTabela(grdAdms);
+        administradorController.atualizarTabela(grdAdms);
     }
     
     public void habilitarCampos(boolean flag) {
@@ -44,7 +44,7 @@ public class FrCadAdm extends javax.swing.JFrame {
 
     public void preencherFormulario(Administrador a) {
         edtNome.setText(a.getNome());
-        edtId.setText(a.getIdAdm() + "");
+        edtId.setText(a.getIdUsuario() + "");
         edtLogin.setText(a.getLogin());
         edtSenha.setText(a.getSenha());
         edtPermission.setText(a.getPermission() + "");
@@ -262,7 +262,7 @@ public class FrCadAdm extends javax.swing.JFrame {
             this.limparCampos();
             this.habilitarCampos(true);
             this.preencherFormulario(admEditando);
-            this.idAdmEditando = admEditando.getIdAdm();
+            this.idAdministradorEditando = admEditando.getIdUsuario();
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -276,18 +276,18 @@ public class FrCadAdm extends javax.swing.JFrame {
             int response = JOptionPane.showConfirmDialog(null,
                     "Deseja exlcuir o Adm  \n("
                     + admExcluido.getNome() + ", "
-                    + admExcluido.getIdAdm() + ") ?",
+                    + admExcluido.getIdUsuario() + ") ?",
                     "Confirmar exclusão",
                     JOptionPane.OK_CANCEL_OPTION,
                     JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.OK_OPTION) {
 
                 try {
-                    admController.excluirAdm(admExcluido);
+                    administradorController.excluirAdministrador(admExcluido);
 
-                    admController.atualizarTabela(grdAdms);
+                    administradorController.atualizarTabela(grdAdms);
                     JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
-                } catch (AdmException ex) {
+                } catch (AdministradorException ex) {
                     JOptionPane.showMessageDialog(this, ex.getMessage());
                 }
             }
@@ -296,26 +296,26 @@ public class FrCadAdm extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         try {
-            if (idAdmEditando > 0) {
-                admController.atualizarAdm(idAdmEditando, edtNome.getText(), edtLogin.getText(), edtSenha.getText(), Integer.parseInt(edtPermission.getText()));
+            if (idAdministradorEditando > 0) {
+                administradorController.atualizarAdministrador(idAdministradorEditando, edtNome.getText(), edtLogin.getText(), edtSenha.getText(), Integer.parseInt(edtPermission.getText()));
             } else {
-                admController.cadastrarAdm(Integer.parseInt(edtId.getText()), edtNome.getText(), edtLogin.getText(), edtSenha.getText(), Integer.parseInt(edtPermission.getText()));
+                administradorController.cadastrarAdministrador(Long.parseLong(edtId.getText()), edtNome.getText(), edtLogin.getText(), edtSenha.getText(), Integer.parseInt(edtPermission.getText()));
             }
             
-            this.idAdmEditando = -1;
+            this.idAdministradorEditando = -1L;
 
-            admController.atualizarTabela(grdAdms);
+            administradorController.atualizarTabela(grdAdms);
 
             this.habilitarCampos(false);
             this.limparCampos();
-        } catch (AdmException e) {
+        } catch (AdministradorException e) {
             System.err.println(e.getMessage());
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.idAdmEditando = -1;
+        this.idAdministradorEditando = -1L;
         this.limparCampos();
         this.habilitarCampos(false);
     }//GEN-LAST:event_btnCancelarActionPerformed

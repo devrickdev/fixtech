@@ -12,7 +12,7 @@ import com.mycompany.fixtech.model.exceptions.AtendenteException;
  * @author henry
  */
 public class ValidateAtendente {
-    public Atendente validaCamposEntrada(int idAtendente, String nome, String login, String senha, int permission){
+    public Atendente validaCamposEntrada(Long idUsuario, String nome, String login, String senha, int permission){
         Atendente atendente = new Atendente();
         if (nome.isEmpty())
             throw new AtendenteException("Error - Campo vazio: 'nome'.");

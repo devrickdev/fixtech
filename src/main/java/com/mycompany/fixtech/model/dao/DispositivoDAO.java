@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author henry
  */
-public class DispositivoDAO implements IDao {
+public class DispositivoDAO implements IDao<Dispositivo> {
 
     private EntityManager entityManager;
     
@@ -26,7 +26,7 @@ public class DispositivoDAO implements IDao {
     }
 
     @Override
-    public void save(Object obj) {
+    public void save(Dispositivo obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
  
         this.entityManager.getTransaction().begin();       
@@ -36,7 +36,8 @@ public class DispositivoDAO implements IDao {
         this.entityManager.close();
     }
     
-    public void update(Object obj) {
+    @Override
+    public void update(Dispositivo obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         
         this.entityManager.getTransaction().begin();       
@@ -47,12 +48,13 @@ public class DispositivoDAO implements IDao {
     }
     
 
-    public boolean delete(Object obj) {
+    @Override
+    public boolean delete(Dispositivo obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        Dispositivo dispositivo = (Dispositivo) obj;
+        Dispositivo dispositivo = obj;
         this.entityManager.getTransaction().begin();
-        qry = this.entityManager.createQuery("DELETE FROM Dispositivo WHERE id=:id ");
-        qry.setParameter("id", dispositivo.getIdDispositivo());
+        qry = this.entityManager.createQuery("DELETE FROM Dispositivo WHERE idDispositivo=:idDispositivo ");
+        qry.setParameter("idDispositivo", dispositivo.getIdDispositivo());
         qry.executeUpdate(); 
         this.entityManager.getTransaction().commit();
         
@@ -61,15 +63,16 @@ public class DispositivoDAO implements IDao {
     }
 
     @Override
-    public Object find(Object obj) {
+    public Dispositivo find(Dispositivo obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        Dispositivo dispositivo = (Dispositivo) obj;
+        Dispositivo dispositivo = obj;
         Dispositivo f = this.entityManager.find(Dispositivo.class, dispositivo.getIdDispositivo());
         this.entityManager.close();
         return f;
     }
 
-    public List<Object> findAll() {
+    @Override
+    public List<Dispositivo> findAll() {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         
         jpql = " SELECT f "
@@ -80,27 +83,27 @@ public class DispositivoDAO implements IDao {
         List lst = qry.getResultList();
         
         this.entityManager.close();
-        return (List<Object>) lst;
+        return (List<Dispositivo>) lst;
                 
     }
 
-    public Dispositivo findById(int id) { 
+    public Dispositivo findById(Long idDispositivo) { 
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         
         jpql = " SELECT f "
              + " FROM Dispositivo f "
-             + " WHERE f.id like :id ";
+             + " WHERE f.idDispositivo like :idDipositivo ";
         qry = this.entityManager.createQuery(jpql);
-        qry.setParameter("id", id);
+        qry.setParameter("idDispositivo", idDispositivo);
         
-        List lst = qry.getResultList();
+        List<Dispositivo> lst = qry.getResultList();
 
         this.entityManager.close();
         
         if (lst.isEmpty()) {
             return null;
         } else {
-            return (Dispositivo) lst.get(0);
+            return lst.get(0);
         }                
     }    
     

@@ -4,34 +4,57 @@
  */
 package com.mycompany.fixtech.model;
 
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 /**
  *
  * @author henry
  */
+@Entity
+@DiscriminatorValue("Usuario")
 public abstract class Usuario {
-    private String nome;
-    private String login;
-    private String senha;
-    private int permission;
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    protected Long idUsuario;
+    protected int permission;
+    protected String nome;
+    protected String login;
+    protected String senha;
 
-    public Usuario() {
-        this.nome ="";
-        this.login="";
-        this.senha = "";
-        this.permission = 0;
+    public Usuario() {}
+
+    public Usuario(Long idUsuario, String nome, String login, String senha, int permission) {
+        this.idUsuario = idUsuario;
+        this.nome = nome;
+        this.login = login;
+        this.senha = senha;
+        this.permission = permission;
     }
-    
-    public void autenticar(){}
 
     @Override
     public String toString() {
-        String txt = "Nome: " + this.nome +"\n"
+        String txt = "IdUsuario: " + this.idUsuario +"\n"
+        +"Nome: "+ this.nome + "\n"
         +"Login: "+ this.login + "\n"
         +"Senha: "+ this.senha +"\n"
         +"Permission: "+ this.permission +"\n";
         return txt;
     }   
+    
+    public void autenticar(){}
+    
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
 
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+    
     public int getPermission() {
         return permission;
     }

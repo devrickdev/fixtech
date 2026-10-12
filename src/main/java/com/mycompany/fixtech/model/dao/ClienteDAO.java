@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author henry
  */
-public class ClienteDAO implements IDao {
+public class ClienteDAO implements IDao<Cliente> {
 
     private EntityManager entityManager;
     
@@ -26,7 +26,7 @@ public class ClienteDAO implements IDao {
     }
 
     @Override
-    public void save(Object obj) {
+    public void save(Cliente obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         
         this.entityManager.getTransaction().begin();       
@@ -36,7 +36,8 @@ public class ClienteDAO implements IDao {
         this.entityManager.close();
     }
     
-    public void update(Object obj) {
+    @Override
+    public void update(Cliente obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         
         this.entityManager.getTransaction().begin();       
@@ -47,12 +48,13 @@ public class ClienteDAO implements IDao {
     }
     
 
-    public boolean delete(Object obj) {
+    @Override
+    public boolean delete(Cliente obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager(); 
-        Cliente cliente = (Cliente) obj;
+        Cliente cliente = obj;
         this.entityManager.getTransaction().begin();
-        qry = this.entityManager.createQuery("DELETE FROM Cliente WHERE id=:id ");
-        qry.setParameter("id", cliente.getIdCliente());
+        qry = this.entityManager.createQuery("DELETE FROM Cliente WHERE idUsuario=:idUsuario ");
+        qry.setParameter("idUsuario", cliente.getIdUsuario());
         qry.executeUpdate();
         this.entityManager.getTransaction().commit();
         
@@ -61,15 +63,16 @@ public class ClienteDAO implements IDao {
     }
 
     @Override
-    public Object find(Object obj) {
+    public Cliente find(Cliente obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        Cliente cliente = (Cliente) obj;
-        Cliente f = this.entityManager.find(Cliente.class, cliente.getIdCliente());
+        Cliente cliente = obj;
+        Cliente f = this.entityManager.find(Cliente.class, cliente.getIdUsuario());
         this.entityManager.close();
         return f;
     }
 
-    public List<Object> findAll() {
+    @Override
+    public List<Cliente> findAll() {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         
         jpql = " SELECT f "
@@ -80,27 +83,27 @@ public class ClienteDAO implements IDao {
         List lst = qry.getResultList();
         
         this.entityManager.close();
-        return (List<Object>) lst;
+        return (List<Cliente>) lst;
                 
     }
 
-    public Cliente findById(int id) { 
+    public Cliente findById(Long idUsuario) { 
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         
         jpql = " SELECT f "
              + " FROM Cliente f "
-             + " WHERE f.id like :id ";
+             + " WHERE f.idUsuario like :idUsuario ";
         qry = this.entityManager.createQuery(jpql);
-        qry.setParameter("id", id);
+        qry.setParameter("idUsuario", idUsuario);
         
-        List lst = qry.getResultList();
+        List<Cliente> lst = qry.getResultList();
 
         this.entityManager.close();
         
         if (lst.isEmpty()) {
             return null;
         } else {
-            return (Cliente) lst.get(0);
+            return lst.get(0);
         }                
     }    
 }

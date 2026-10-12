@@ -8,6 +8,7 @@ import com.mycompany.fixtech.controller.AtendimentoController;
 import com.mycompany.fixtech.model.Atendimento;
 import com.mycompany.fixtech.model.Feedback;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,10 +22,9 @@ public class DlgEscolhaAtendimento extends javax.swing.JDialog {
     public DlgEscolhaAtendimento(java.awt.Frame parent, boolean modal, Atendimento atendimento) {
         super(parent, modal);
         initComponents();
-        this.atendimentoEscolhido = new Atendimento();
         this.feedback = feedback;
+        this.atendimentoEscolhido = null;
         this.atendimentoController = new AtendimentoController();
-        this.atendimentoController.buscarAtendimento(atendimentoEscolhido.getIdAtendimento());
         atendimentoController.atualizarTabela(grdListagem);
     }
     
@@ -43,7 +43,7 @@ public class DlgEscolhaAtendimento extends javax.swing.JDialog {
         btnConfirmar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         grdAtendimentoEscolhido = new javax.swing.JTable();
-        edtBusca = new javax.swing.JTextField();
+        edtId = new javax.swing.JTextField();
         lblBusca = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -106,7 +106,7 @@ public class DlgEscolhaAtendimento extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblBusca)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(edtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(edtId, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnBuscar))
                             .addComponent(jScrollPane1))
@@ -127,7 +127,7 @@ public class DlgEscolhaAtendimento extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(edtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(edtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblBusca)
                         .addComponent(btnBuscar))
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -145,16 +145,26 @@ public class DlgEscolhaAtendimento extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        int idEscolhido = Integer.parseInt(edtId.getText());
-        if (idEscolhido != 0) {
+        try {
+            if (edtId.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Digite um ID para buscar.");
+                return;
+            }
+            
+            Long idEscolhido = Long.parseLong(edtId.getText());
             atendimentoEscolhido = this.atendimentoController.buscarAtendimento(idEscolhido);
 
+            DefaultTableModel modeloSelecionado = (DefaultTableModel) grdAtendimentoEscolhido.getModel();
+            modeloSelecionado.setRowCount(0); // Limpa a tabela de selecionado
+
             if (atendimentoEscolhido == null) {
-                JOptionPane.showMessageDialog(this, "Não existe este Id.");
-                grdAtendimentoEscolhido.setText("");
+                JOptionPane.showMessageDialog(this, "Não existe atendimento com este ID.");
             } else {
-                grdAtendimentoEscolhido.setText(atendimentoEscolhido.toString());
+                // Adiciona os dados do atendimento na tabela de selecionados
+                modeloSelecionado.addRow(new Object[]{atendimentoEscolhido.getIdAtendimento(), atendimentoEscolhido.getDescricao()});
             }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "O ID deve ser um número válido.");
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -177,7 +187,7 @@ public class DlgEscolhaAtendimento extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnConfirmar;
-    private javax.swing.JTextField edtBusca;
+    private javax.swing.JTextField edtId;
     private javax.swing.JTable grdAtendimentoEscolhido;
     private javax.swing.JTable grdListagem;
     private javax.swing.JLabel jLabel1;

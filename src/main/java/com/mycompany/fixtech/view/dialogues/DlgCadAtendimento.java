@@ -15,12 +15,12 @@ import javax.swing.JOptionPane;
  */
 public class DlgCadAtendimento extends javax.swing.JDialog {
     AtendimentoController atendimentoController;
-    int idAtendimentoEditando;
+    Long idAtendimentoEditando;
     
     public DlgCadAtendimento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         atendimentoController = new AtendimentoController();
-        idAtendimentoEditando = -1;
+        idAtendimentoEditando = -1L;
         initComponents();
         this.habilitarCampos(false);
         this.limparCampos();
@@ -331,7 +331,7 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
             int response = JOptionPane.showConfirmDialog(null,
                     "Deseja exlcuir o Atendimento  \n("
                     + atendimentoExcluido.getIdAtendimento() + ", "
-                    + atendimentoExcluido.getClienteNome() + ") ?",
+                    + atendimentoExcluido.getClienteNome()+ ") ?",
                     "Confirmar exclusão",
                     JOptionPane.OK_CANCEL_OPTION,
                     JOptionPane.QUESTION_MESSAGE);
@@ -372,10 +372,10 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
             if (idAtendimentoEditando > 0) {
                 atendimentoController.atualizarAtendimento(idAtendimentoEditando, edtDescricao.getText(), edtStatus.getText(), edtNomeCliente.getText(), edtNomeAtendente.getText(), edtNomeDispositivo.getText());
             } else {
-                atendimentoController.cadastrarAtendimento(Integer.parseInt(edtId.getText()), edtDescricao.getText(), edtStatus.getText(), edtNomeCliente.getText(), edtNomeAtendente.getText(), edtNomeDispositivo.getText());
+                atendimentoController.cadastrarAtendimento(Long.parseLong(edtId.getText()), edtDescricao.getText(), edtStatus.getText(), edtNomeCliente.getText(), edtNomeAtendente.getText(), edtNomeDispositivo.getText());
             }
       
-            this.idAtendimentoEditando = -1;
+            this.idAtendimentoEditando = -1L;
 
             atendimentoController.atualizarTabela(grdAtendimentos);
 
@@ -388,7 +388,7 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.idAtendimentoEditando = -1;
+        this.idAtendimentoEditando = -1L;
         this.limparCampos();
         this.habilitarCampos(false);
     }//GEN-LAST:event_btnCancelarActionPerformed

@@ -12,7 +12,7 @@ import com.mycompany.fixtech.model.exceptions.DispositivoException;
  * @author henry
  */
 public class ValidateDispositivo {
-    public Dispositivo validaCamposEntrada(int idDispositivo, String nome, String tipo, String marca, String modelo){
+    public Dispositivo validaCamposEntrada(Long idDispositivo, String nome, String tipo, String marca, String modelo){
         Dispositivo dispositivo = new Dispositivo();
         if (marca.isEmpty())
             throw new DispositivoException("Error - Campo vazio: 'marca'.");

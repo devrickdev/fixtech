@@ -13,7 +13,7 @@ import com.mycompany.fixtech.model.exceptions.FeedbackException;
  * @author henry
  */
 public class ValidateFeedback {
-    public Feedback validaCamposEntrada(int idFeedback, int atendimentoId, int nota, String comentario){
+    public Feedback validaCamposEntrada(Long idFeedback, Long atendimentoId, int nota, String comentario){
         Feedback feedback = new Feedback();
         if (comentario.isEmpty())
             throw new FeedbackException("Error - Campo vazio: 'comentario'.");

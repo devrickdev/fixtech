@@ -8,8 +8,8 @@ package com.mycompany.fixtech.model.exceptions;
  *
  * @author henry
  */
-public class AdmException extends RuntimeException {
-    public AdmException(String msg) {
+public class AdministradorException extends RuntimeException {
+    public AdministradorException(String msg) {
         super(msg);
     }
 }

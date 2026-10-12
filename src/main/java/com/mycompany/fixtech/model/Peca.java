@@ -4,23 +4,33 @@
  */
 package com.mycompany.fixtech.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 /**
  *
  * @author henry
  */
+@Entity
 public class Peca {
-    private int idPeca;
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long idPeca;
     private String nome;
     private int quantidade;
     private double valorUnidade;
 
-    public Peca() {
-        this.idPeca = 0;
-        this.nome = "";
-        this.quantidade = 0;
-        this.valorUnidade = 0.0;
-    }
+    public Peca() {}
 
+    public Peca(Long idPeca, String nome, int quantidade, double valorUnidade) {
+        this.idPeca = idPeca;
+        this.nome = nome;
+        this.quantidade = quantidade;
+        this.valorUnidade = valorUnidade;
+    }
+    
     @Override
     public String toString() {
         String txt = "idPeca: " + this.idPeca +"\n"
@@ -30,11 +40,11 @@ public class Peca {
         return txt;
     }   
 
-    public int getIdPeca() {
+    public Long getIdPeca() {
         return idPeca;
     }
 
-    public void setIdPeca(int idPeca) {
+    public void setIdPeca(Long idPeca) {
         this.idPeca = idPeca;
     }
 

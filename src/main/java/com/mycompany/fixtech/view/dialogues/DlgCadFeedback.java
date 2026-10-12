@@ -15,12 +15,12 @@ import javax.swing.JOptionPane;
  */
 public class DlgCadFeedback extends javax.swing.JDialog {
     FeedbackController feedbackController;
-    int idFeedbackEditando;
+    Long idFeedbackEditando;
     
     public DlgCadFeedback(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         feedbackController = new FeedbackController();
-        idFeedbackEditando = -1;
+        idFeedbackEditando = -1L;
         initComponents();
         this.habilitarCampos(false);
         this.limparCampos();
@@ -295,7 +295,7 @@ public class DlgCadFeedback extends javax.swing.JDialog {
             int response = JOptionPane.showConfirmDialog(null,
                     "Deseja exlcuir o Feedback  \n("
                     + feedbackExcluido.getIdFeedback() + ", "
-                    + feedbackExcluido.getAtendimentoId() + ") ?",
+                    + feedbackExcluido.getAtendimentoId()+ ") ?",
                     "Confirmar exclusão",
                     JOptionPane.OK_CANCEL_OPTION,
                     JOptionPane.QUESTION_MESSAGE);
@@ -316,12 +316,12 @@ public class DlgCadFeedback extends javax.swing.JDialog {
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         try {
             if (idFeedbackEditando > 0) {
-                feedbackController.atualizarFeedback(idFeedbackEditando, Integer.parseInt(edtNota.getText()), Integer.parseInt(edtIdAtendimento.getText()) , edtComentario.getText());
+                feedbackController.atualizarFeedback(idFeedbackEditando, Long.parseLong(edtIdAtendimento.getText()) , Integer.parseInt(edtNota.getText()), edtComentario.getText());
             } else {
-                feedbackController.cadastrarFeedback(Integer.parseInt(edtId.getText()), Integer.parseInt(edtNota.getText()), Integer.parseInt(edtIdAtendimento.getText()) , edtComentario.getText());
+                feedbackController.cadastrarFeedback(Long.parseLong(edtId.getText()), Long.parseLong(edtIdAtendimento.getText()) ,Integer.parseInt(edtNota.getText()), edtComentario.getText());
             }
       
-            this.idFeedbackEditando = -1;
+            this.idFeedbackEditando = -1L;
 
             feedbackController.atualizarTabela(grdFeedbacks);
 
@@ -334,7 +334,7 @@ public class DlgCadFeedback extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.idFeedbackEditando = -1;
+        this.idFeedbackEditando = -1L;
         this.limparCampos();
         this.habilitarCampos(false);
     }//GEN-LAST:event_btnCancelarActionPerformed

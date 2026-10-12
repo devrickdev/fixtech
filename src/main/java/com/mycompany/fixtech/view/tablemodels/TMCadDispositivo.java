@@ -13,14 +13,14 @@ import javax.swing.table.AbstractTableModel;
  * @author henry
  */
 public class TMCadDispositivo extends AbstractTableModel {
-    private List<Object> lst;
+    private List<Dispositivo> lst;
     
     private final int COL_ID = 0;
     private final int COL_TIPO = 1;
     private final int COL_MARCA = 2;
     private final int COL_MODELO = 3;
   
-    public TMCadDispositivo(List<Object> lista) {
+    public TMCadDispositivo(List<Dispositivo> lista) {
         this.lst = lista;
     }
     
@@ -35,12 +35,12 @@ public class TMCadDispositivo extends AbstractTableModel {
     }
     
     public Dispositivo getObjetoDispositivo(int row){
-       return (Dispositivo) this.lst.get(row);
+       return this.lst.get(row);
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Dispositivo a = (Dispositivo) this.lst.get(rowIndex);
+        Dispositivo a = this.lst.get(rowIndex);
          if(columnIndex == COL_ID){
             return a.getIdDispositivo();
         }else if(columnIndex == COL_TIPO){
