@@ -17,6 +17,14 @@ public class ValidateAtendente {
         if (nome.isEmpty())
             throw new AtendenteException("Error - Campo vazio: 'nome'.");
         atendente.setNome(nome);
+        
+        if (login.isEmpty())
+            throw new AtendenteException("Error - Campo vazio: 'login'.");
+        atendente.setLogin(login);
+        
+        if (senha.isEmpty())
+            throw new AtendenteException("Error - Campo vazio: 'senha'.");
+        atendente.setSenha(senha);
                 
         return atendente;
     }

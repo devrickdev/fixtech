@@ -140,38 +140,32 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="edtLogin" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                              <Component id="lblLogin" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblSenha" min="-2" max="-2" attributes="0"/>
-                              <Component id="edtSenha" min="-2" pref="200" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="edtPermission" min="-2" pref="110" max="-2" attributes="0"/>
-                              <Component id="lblPermission" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="-2" pref="477" max="-2" attributes="0"/>
+                          <Component id="lblNome" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="edtNome" alignment="0" min="-2" pref="800" max="-2" attributes="0"/>
-                              <Component id="lblNome" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblId" min="-2" max="-2" attributes="0"/>
-                              <Component id="edtId" min="-2" pref="150" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="edtLogin" min="-2" pref="301" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="edtSenha" min="-2" pref="276" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="edtNome" min="-2" pref="800" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="32" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="209" max="-2" attributes="0"/>
+                  <Component id="lblLogin" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="lblSenha" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="220" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -179,26 +173,18 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblId" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="lblNome" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="edtNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="edtId" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="edtNome" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblLogin" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblSenha" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblPermission" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblSenha" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="edtLogin" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="edtSenha" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="edtPermission" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -211,24 +197,14 @@
             <Property name="text" type="java.lang.String" value="Senha"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblId">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="ID"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="lblLogin">
           <Properties>
             <Property name="text" type="java.lang.String" value="Login"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="edtId">
-        </Component>
         <Component class="javax.swing.JTextField" name="edtSenha">
         </Component>
         <Component class="javax.swing.JTextField" name="edtNome">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Nome"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblNome">
           <Properties>
@@ -236,13 +212,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="edtLogin">
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblPermission">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Permission"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="edtPermission">
         </Component>
       </SubComponents>
     </Container>

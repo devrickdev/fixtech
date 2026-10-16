@@ -14,11 +14,12 @@ import jakarta.persistence.Entity;
 @Entity
 @DiscriminatorValue("Atendente")
 public class Atendente extends Usuario {
+    public final int permission = 2;
     
     public Atendente() {}
 
-    public Atendente(Long idUsuario, String nome, String login, String senha, int permission) {
-        super(idUsuario, nome, login, senha, permission);
+    public Atendente(Long idUsuario, String nome, String login, String senha) {
+        super(idUsuario, nome, login, senha);
     }
     
     @Override
@@ -33,4 +34,8 @@ public class Atendente extends Usuario {
     public void registrarAtendimento(){}
     
     public void consultarHistorico(){}
+    
+    public int getPermission(){
+        return permission;
+    }
 }

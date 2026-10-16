@@ -23,9 +23,9 @@ public class ClienteController {
         repositorio = new ClienteDAO();
     }
 
-    public void cadastrarCliente(Long idUsuario, String nome, String login, String senha, int permission) {
+    public void cadastrarCliente(Long idUsuario, String nome, String login, String senha, String telefone, int permission) {
         ValidateCliente valid = new ValidateCliente();
-        Cliente novoCliente = valid.validaCamposEntrada(idUsuario, nome, login, senha, permission);
+        Cliente novoCliente = valid.validaCamposEntrada(idUsuario, nome, login, senha, telefone, permission);
 
         if (repositorio.findById(idUsuario) == null) {
             repositorio.save(novoCliente);
@@ -34,10 +34,10 @@ public class ClienteController {
         }
     }
 
-    public void atualizarCliente(Long idCliente,String nome, String login, String senha, int permission) {
+    public void atualizarCliente(Long idUsuario, String nome, String login, String senha, String telefone, int permission) {
         ValidateCliente valid = new ValidateCliente();
-        Cliente novoCliente = valid.validaCamposEntrada(idCliente, nome, login, senha, permission);
-        novoCliente.setIdUsuario(idCliente);
+        Cliente novoCliente = valid.validaCamposEntrada(idUsuario, nome, login, senha, telefone, permission);
+        novoCliente.setIdUsuario(idUsuario);
         
         repositorio.update(novoCliente);
     }

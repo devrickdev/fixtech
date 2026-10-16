@@ -13,12 +13,20 @@ import com.mycompany.fixtech.model.exceptions.AdministradorException;
  */
 public class ValidateAdministrador {
     public Administrador validaCamposEntrada(Long idUsuario, String nome, String login, String senha, int permission){
-        Administrador adm = new Administrador();
+        Administrador administrador = new Administrador();
         if (nome.isEmpty())
             throw new AdministradorException("Error - Campo vazio: 'nome'.");
-        adm.setNome(nome);
+        administrador.setNome(nome);
+        
+        if (login.isEmpty())
+            throw new AdministradorException("Error - Campo vazio: 'login'.");
+        administrador.setLogin(login);
+        
+        if (senha.isEmpty())
+            throw new AdministradorException("Error - Campo vazio: 'senha'.");
+        administrador.setSenha(senha);
                 
-        return adm;
+        return administrador;
     }
     
 }

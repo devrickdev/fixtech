@@ -13,12 +13,12 @@ import javax.swing.table.AbstractTableModel;
  * @author henry
  */
 public class TMCadFeedback extends AbstractTableModel {
-    private List<Feedback> lst;
+    private final List<Feedback> lst;
     
-    private final int COL_ID = 0;
-    private final int COL_ATENDIMENTO = 1;
-    private final int COL_NOTA = 2;
-    private final int COL_COMENTARIO = 3;
+    private static final int COL_ID = 0;
+    private static final int COL_ATENDIMENTO = 1;
+    private static final int COL_NOTA = 2;
+    private static final int COL_COMENTARIO = 3;
   
     public TMCadFeedback(List<Feedback> lista) {
         this.lst = lista;
@@ -44,7 +44,7 @@ public class TMCadFeedback extends AbstractTableModel {
          if(columnIndex == COL_ID){
             return a.getIdFeedback();
         }else if(columnIndex == COL_ATENDIMENTO){
-            return a.getAtendimentoId();
+            return a.getAtendimento().getIdAtendimento();
         }else if(columnIndex == COL_NOTA){
             return a.getNota();
         }else if(columnIndex == COL_COMENTARIO){

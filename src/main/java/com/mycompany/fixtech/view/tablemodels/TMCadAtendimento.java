@@ -15,12 +15,12 @@ import javax.swing.table.AbstractTableModel;
 public class TMCadAtendimento extends AbstractTableModel {
     private final List<Atendimento> lst;
     
-    private final int COL_ID = 0;
-    private final int COL_CLIENTE = 1;
-    private final int COL_ATENDENTE = 2;
-    private final int COL_DISPOSITIVO = 4;
-    private final int COL_STATUS = 5;
-    private final int COL_DESCRICAO = 6;
+    private static final int COL_ID = 0;
+    private static final int COL_CLIENTE = 1;
+    private static final int COL_ATENDENTE = 2;
+    private static final int COL_DISPOSITIVO = 4;
+    private static final int COL_STATUS = 5;
+    private static final int COL_DESCRICAO = 6;
     
     public TMCadAtendimento(List<Atendimento> lista) {
         this.lst = lista;
@@ -46,11 +46,11 @@ public class TMCadAtendimento extends AbstractTableModel {
          if(columnIndex == COL_ID){
             return a.getIdAtendimento();
         }else if(columnIndex == COL_CLIENTE){
-            return a.getClienteNome();
+            return a.getCliente().getNome();
         }else if(columnIndex == COL_ATENDENTE){
-            return a.getAtendenteNome();
+            return a.getAtendente().getNome();
         }else if(columnIndex == COL_DISPOSITIVO){
-            return a.getDispositivoNome();
+            return a.getDispositivo().getNome();
         }else if(columnIndex == COL_STATUS){
             return a.getStatus();
         }else if(columnIndex == COL_DESCRICAO){

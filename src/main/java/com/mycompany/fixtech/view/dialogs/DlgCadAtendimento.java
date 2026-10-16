@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package com.mycompany.fixtech.view.dialogues;
+package com.mycompany.fixtech.view.dialogs;
 
 import com.mycompany.fixtech.controller.AtendimentoController;
 import com.mycompany.fixtech.model.Atendimento;
@@ -34,7 +34,6 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
     }
 
     public void limparCampos() {
-        edtId.setText("");
         edtDescricao.setText("");
         edtStatus.setText("");
         edtNomeCliente.setText("");
@@ -43,11 +42,10 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
     }
     
     public void preencherFormulario(Atendimento a) {
-        edtId.setText(a.getIdAtendimento() + "");
         edtDescricao.setText(a.getDescricao());
-        edtNomeCliente.setText(a.getClienteNome());
-        edtNomeAtendente.setText(a.getAtendenteNome());
-        edtNomeDispositivo.setText(a.getDispositivoNome());
+        edtNomeCliente.setText(a.getCliente().getNome());
+        edtNomeAtendente.setText(a.getAtendente().getNome());
+        edtNomeDispositivo.setText(a.getDispositivo().getNome());
     }
     
     private Object getObjetoSelecionadoNaGrid() {
@@ -82,22 +80,16 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         panFormulario = new javax.swing.JPanel();
-        edtId = new javax.swing.JTextField();
-        lblId = new javax.swing.JLabel();
         lblDescricao = new javax.swing.JLabel();
         edtDescricao = new javax.swing.JTextField();
         lblStatus = new javax.swing.JLabel();
         edtStatus = new javax.swing.JTextField();
         edtNomeCliente = new javax.swing.JTextField();
-        edtNomeAtendente = new javax.swing.JTextField();
         edtNomeDispositivo = new javax.swing.JTextField();
-        lblNomeCliente = new javax.swing.JLabel();
-        lblNomeATendente = new javax.swing.JLabel();
-        lblNomeDispositivo = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        edtNomeAtendente = new javax.swing.JTextField();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -180,74 +172,9 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/service.png"))); // NOI18N
         jLabel1.setText("CADASTRO DE ATENDIMENTO");
 
-        lblId.setText("ID");
-
         lblDescricao.setText("Descrição");
 
         lblStatus.setText("Status");
-
-        edtNomeAtendente.addActionListener(this::edtNomeAtendenteActionPerformed);
-
-        lblNomeCliente.setText("NomeCliente");
-
-        lblNomeATendente.setText("NomeAtendente");
-
-        lblNomeDispositivo.setText("NomeDispositivo");
-
-        javax.swing.GroupLayout panFormularioLayout = new javax.swing.GroupLayout(panFormulario);
-        panFormulario.setLayout(panFormularioLayout);
-        panFormularioLayout.setHorizontalGroup(
-            panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panFormularioLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panFormularioLayout.createSequentialGroup()
-                        .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(edtId, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblDescricao)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(edtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(edtStatus))
-                    .addGroup(panFormularioLayout.createSequentialGroup()
-                        .addComponent(lblNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(edtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblNomeATendente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(edtNomeAtendente, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblNomeDispositivo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(edtNomeDispositivo)))
-                .addContainerGap())
-        );
-        panFormularioLayout.setVerticalGroup(
-            panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panFormularioLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(edtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblId)
-                    .addComponent(lblDescricao)
-                    .addComponent(edtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblStatus)
-                    .addComponent(edtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(edtNomeAtendente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNomeCliente)
-                    .addComponent(lblNomeATendente)
-                    .addComponent(lblNomeDispositivo)
-                    .addComponent(edtNomeDispositivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
-        );
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user-login.png"))); // NOI18N
         jButton1.setText("Adicionar Cliente");
@@ -259,28 +186,58 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
         jButton6.setText("Adicionar Dispositivo");
         jButton6.addActionListener(this::jButton6ActionPerformed);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(244, 244, 244)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton6)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        edtNomeAtendente.addActionListener(this::edtNomeAtendenteActionPerformed);
+
+        javax.swing.GroupLayout panFormularioLayout = new javax.swing.GroupLayout(panFormulario);
+        panFormulario.setLayout(panFormularioLayout);
+        panFormularioLayout.setHorizontalGroup(
+            panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panFormularioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3)
-                    .addComponent(jButton6))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(edtNomeCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+                    .addComponent(edtNomeDispositivo, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(edtNomeAtendente))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblDescricao)
+                    .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(edtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+                    .addComponent(edtStatus))
+                .addContainerGap())
+        );
+        panFormularioLayout.setVerticalGroup(
+            panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panFormularioLayout.createSequentialGroup()
+                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panFormularioLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblDescricao)
+                            .addComponent(edtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3)
+                            .addComponent(edtNomeAtendente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(edtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panFormularioLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblStatus)
+                            .addComponent(edtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton6)
+                    .addComponent(edtNomeDispositivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 7, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -292,10 +249,11 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addContainerGap(920, Short.MAX_VALUE))
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane1)
-            .addComponent(panFormulario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(panFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(76, 76, 76))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -304,13 +262,11 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
                 .addComponent(panFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -331,7 +287,7 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
             int response = JOptionPane.showConfirmDialog(null,
                     "Deseja exlcuir o Atendimento  \n("
                     + atendimentoExcluido.getIdAtendimento() + ", "
-                    + atendimentoExcluido.getClienteNome()+ ") ?",
+                    + atendimentoExcluido.getCliente().getNome()+ ") ?",
                     "Confirmar exclusão",
                     JOptionPane.OK_CANCEL_OPTION,
                     JOptionPane.QUESTION_MESSAGE);
@@ -368,11 +324,12 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-         try {
+        Atendimento atendimentoSalvando = new Atendimento(); 
+        try {
             if (idAtendimentoEditando > 0) {
                 atendimentoController.atualizarAtendimento(idAtendimentoEditando, edtDescricao.getText(), edtStatus.getText(), edtNomeCliente.getText(), edtNomeAtendente.getText(), edtNomeDispositivo.getText());
             } else {
-                atendimentoController.cadastrarAtendimento(Long.parseLong(edtId.getText()), edtDescricao.getText(), edtStatus.getText(), edtNomeCliente.getText(), edtNomeAtendente.getText(), edtNomeDispositivo.getText());
+                atendimentoController.cadastrarAtendimento(atendimentoSalvando.getIdAtendimento(), edtDescricao.getText(), edtStatus.getText(), edtNomeCliente.getText(), edtNomeAtendente.getText(), edtNomeDispositivo.getText());
             }
       
             this.idAtendimentoEditando = -1L;
@@ -404,7 +361,6 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
     private javax.swing.JToggleButton btnNovo;
     private javax.swing.JToggleButton btnSalvar;
     private javax.swing.JTextField edtDescricao;
-    private javax.swing.JTextField edtId;
     private javax.swing.JTextField edtNomeAtendente;
     private javax.swing.JTextField edtNomeCliente;
     private javax.swing.JTextField edtNomeDispositivo;
@@ -419,13 +375,8 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblDescricao;
-    private javax.swing.JLabel lblId;
-    private javax.swing.JLabel lblNomeATendente;
-    private javax.swing.JLabel lblNomeCliente;
-    private javax.swing.JLabel lblNomeDispositivo;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JPanel panFormulario;
     // End of variables declaration//GEN-END:variables

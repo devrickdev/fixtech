@@ -21,7 +21,6 @@ public class DatabaseJPA {
         if (INSTANCE == null) {
             INSTANCE = new DatabaseJPA();
         }
-
         return INSTANCE;
     }
 

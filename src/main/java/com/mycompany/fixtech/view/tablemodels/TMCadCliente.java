@@ -13,14 +13,13 @@ import javax.swing.table.AbstractTableModel;
  * @author henry
  */
 public class TMCadCliente extends AbstractTableModel{
-    private List<Cliente> lst;
+    private final List<Cliente> lst;
     
-    private final int COL_ID = 0;
-    private final int COL_NOME = 1;
-    private final int COL_LOGIN = 2;
-    private final int COL_SENHA = 3;
-    private final int COL_TELEFONE = 4;
-    private final int COL_ENDERECO = 5;
+    private static final int COL_ID = 0;
+    private static final int COL_NOME = 1;
+    private static final int COL_LOGIN = 2;
+    private static final int COL_SENHA = 3;
+    private static final int COL_TELEFONE = 4;
   
     public TMCadCliente(List<Cliente> lista) {
         this.lst = lista;
@@ -33,7 +32,7 @@ public class TMCadCliente extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 6;
+        return 5;
     }
     
     public Cliente getObjetoCliente(int row){
@@ -53,9 +52,7 @@ public class TMCadCliente extends AbstractTableModel{
         }else if(columnIndex == COL_SENHA){
             return a.getSenha();
         }else if(columnIndex == COL_TELEFONE){
-            return a.getSenha();
-        }else if(columnIndex == COL_ENDERECO){
-            return a.getSenha();
+            return a.getTelefone();
         }
         return "-";
     }
@@ -72,9 +69,7 @@ public class TMCadCliente extends AbstractTableModel{
         }else if(columnIndex == COL_SENHA){
             return "Senha";
         }else if(columnIndex == COL_TELEFONE){
-            return "Senha";
-        }else if(columnIndex == COL_ENDERECO){
-            return "Senha";
+            return "Telefone";
         }
         return "";
     }

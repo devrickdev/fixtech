@@ -51,18 +51,6 @@ public class Atendimento {
         return txt;
     }
     
-    public String getClienteNome(){
-        return cliente.getNome();
-    }
-    
-    public String getAtendenteNome(){
-        return atendente.getNome();
-    }
-    
-    public String getDispositivoNome(){
-        return dispositivo.getNome();
-    }
-    
     public Long getIdAtendimento() {
         return idAtendimento;
     }

@@ -23,7 +23,7 @@ public class FeedbackController {
         repositorio = new FeedbackDAO();
     }
 
-    public void cadastrarFeedback(Long idFeedback, Long atendimentoId, int nota, String comentario) {
+    public void cadastrarFeedback(Long idFeedback, String atendimentoId, String nota, String comentario) {
         ValidateFeedback valid = new ValidateFeedback();
         Feedback novoFeedback = valid.validaCamposEntrada(idFeedback, atendimentoId, nota, comentario);
 
@@ -34,7 +34,7 @@ public class FeedbackController {
         }
     }
 
-    public void atualizarFeedback(Long idFeedback, Long atendimentoId, int nota, String comentario) {
+    public void atualizarFeedback(Long idFeedback, String atendimentoId, String nota, String comentario) {
         ValidateFeedback valid = new ValidateFeedback();
         Feedback novoFeedback = valid.validaCamposEntrada(idFeedback,atendimentoId, nota, comentario);
         novoFeedback.setIdFeedback(idFeedback);

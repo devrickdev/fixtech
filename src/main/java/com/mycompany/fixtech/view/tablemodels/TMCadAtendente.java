@@ -13,12 +13,12 @@ import javax.swing.table.AbstractTableModel;
  * @author henry
  */
 public class TMCadAtendente extends AbstractTableModel {
-    private List<Atendente> lst;
+    private final List<Atendente> lst;
     
-    private final int COL_ID = 0;
-    private final int COL_NOME = 1;
-    private final int COL_LOGIN = 2;
-    private final int COL_SENHA = 3;
+    private static final int COL_ID = 0;
+    private static final int COL_NOME = 1;
+    private static final int COL_LOGIN = 2;
+    private static final int COL_SENHA = 3;
   
     public TMCadAtendente(List<Atendente> lista) {
         this.lst = lista;
@@ -65,6 +65,6 @@ public class TMCadAtendente extends AbstractTableModel {
         }else if(columnIndex == COL_SENHA){
             return "Senha";
         }
-        return "";
+        return "-";
     }
 }

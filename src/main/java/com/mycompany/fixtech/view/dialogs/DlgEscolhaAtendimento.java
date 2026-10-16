@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package com.mycompany.fixtech.view.dialogues;
+package com.mycompany.fixtech.view.dialogs;
 
 import com.mycompany.fixtech.controller.AtendimentoController;
 import com.mycompany.fixtech.model.Atendimento;

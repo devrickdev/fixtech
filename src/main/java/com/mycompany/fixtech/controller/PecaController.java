@@ -24,7 +24,7 @@ public class PecaController {
         repositorio = new PecaDAO();
     }
 
-    public void cadastrarPeca(Long idPeca, String nome, int quantidade, double valorUnidade) {
+    public void cadastrarPeca(Long idPeca, String nome, String quantidade, String valorUnidade) {
         ValidatePeca valid = new ValidatePeca();
         Peca novoPeca = valid.validaCamposEntrada(idPeca, nome, quantidade, valorUnidade);
 
@@ -35,7 +35,7 @@ public class PecaController {
         }
     }
 
-    public void atualizarPeca(Long idPeca, String nome, int quantidade, double valorUnidade) {
+    public void atualizarPeca(Long idPeca, String nome, String quantidade, String valorUnidade) {
         ValidatePeca valid = new ValidatePeca();
         Peca novoPeca = valid.validaCamposEntrada(idPeca, nome, quantidade, valorUnidade);
         novoPeca.setIdPeca(idPeca);

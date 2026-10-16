@@ -9,30 +9,31 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 
 /**
  *
  * @author henry
  */
 @Entity
-@DiscriminatorValue("Usuario")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorValue("tipo")
 public abstract class Usuario {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     protected Long idUsuario;
-    protected int permission;
     protected String nome;
     protected String login;
     protected String senha;
 
     public Usuario() {}
 
-    public Usuario(Long idUsuario, String nome, String login, String senha, int permission) {
+    public Usuario(Long idUsuario, String nome, String login, String senha) {
         this.idUsuario = idUsuario;
         this.nome = nome;
         this.login = login;
         this.senha = senha;
-        this.permission = permission;
     }
 
     @Override
@@ -40,8 +41,7 @@ public abstract class Usuario {
         String txt = "IdUsuario: " + this.idUsuario +"\n"
         +"Nome: "+ this.nome + "\n"
         +"Login: "+ this.login + "\n"
-        +"Senha: "+ this.senha +"\n"
-        +"Permission: "+ this.permission +"\n";
+        +"Senha: "+ this.senha +"\n";
         return txt;
     }   
     
@@ -53,14 +53,6 @@ public abstract class Usuario {
 
     public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
-    }
-    
-    public int getPermission() {
-        return permission;
-    }
-
-    public void setPermission(int permission) {
-        this.permission = permission;
     }
     
     public String getNome() {

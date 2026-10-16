@@ -14,11 +14,12 @@ import jakarta.persistence.Entity;
 @Entity
 @DiscriminatorValue("Administrador")
 public class Administrador extends Usuario{
+    public final int permission = 1;
     
     public Administrador() {}
 
-    public Administrador(Long idUsuario, String nome, String login, String senha, int permission) {
-        super(idUsuario, nome, login, senha, permission);
+    public Administrador(Long idUsuario, String nome, String login, String senha) {
+        super(idUsuario, nome, login, senha);
     }
     
     @Override
@@ -31,5 +32,9 @@ public class Administrador extends Usuario{
     }
     
     public void gerarRelatorio(){}
+    
+    public int getPermission(){
+        return permission;
+    }
 
 }

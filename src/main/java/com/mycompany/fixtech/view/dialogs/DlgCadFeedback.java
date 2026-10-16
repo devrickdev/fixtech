@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package com.mycompany.fixtech.view.dialogues;
+package com.mycompany.fixtech.view.dialogs;
 
 import com.mycompany.fixtech.controller.FeedbackController;
 import com.mycompany.fixtech.model.Feedback;
@@ -34,17 +34,15 @@ public class DlgCadFeedback extends javax.swing.JDialog {
     }
 
     public void limparCampos() {
-        edtId.setText("");
         edtNota.setText("");
         edtComentario.setText("");
         edtIdAtendimento.setText("");
     }
     
     public void preencherFormulario(Feedback a) {
-        edtId.setText(a.getIdFeedback() + "");
         edtNota.setText(a.getNota() + "");
         edtComentario.setText(a.getComentario());
-        edtIdAtendimento.setText(a.getAtendimentoId() + "");
+        edtIdAtendimento.setText(a.getAtendimento().getIdAtendimento() + "");
     }
     
     private Object getObjetoSelecionadoNaGrid() {
@@ -76,8 +74,6 @@ public class DlgCadFeedback extends javax.swing.JDialog {
         panClasses = new javax.swing.JPanel();
         btnEscolherAtendimento = new javax.swing.JButton();
         panFormulario = new javax.swing.JPanel();
-        lblId = new javax.swing.JLabel();
-        edtId = new javax.swing.JTextField();
         lblNota = new javax.swing.JLabel();
         edtNota = new javax.swing.JTextField();
         lblComentario = new javax.swing.JLabel();
@@ -164,8 +160,6 @@ public class DlgCadFeedback extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        lblId.setText("ID");
-
         lblNota.setText("Nota");
 
         lblComentario.setText("Comentário");
@@ -184,10 +178,7 @@ public class DlgCadFeedback extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(edtIdAtendimento))
                     .addGroup(panFormularioLayout.createSequentialGroup()
-                        .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(edtId, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(329, 329, 329)
                         .addComponent(lblNota, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(edtNota, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -202,8 +193,6 @@ public class DlgCadFeedback extends javax.swing.JDialog {
             .addGroup(panFormularioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblId)
-                    .addComponent(edtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNota)
                     .addComponent(edtNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblComentario)
@@ -295,7 +284,7 @@ public class DlgCadFeedback extends javax.swing.JDialog {
             int response = JOptionPane.showConfirmDialog(null,
                     "Deseja exlcuir o Feedback  \n("
                     + feedbackExcluido.getIdFeedback() + ", "
-                    + feedbackExcluido.getAtendimentoId()+ ") ?",
+                    + feedbackExcluido.getAtendimento().getIdAtendimento()+ ") ?",
                     "Confirmar exclusão",
                     JOptionPane.OK_CANCEL_OPTION,
                     JOptionPane.QUESTION_MESSAGE);
@@ -314,11 +303,12 @@ public class DlgCadFeedback extends javax.swing.JDialog {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        Feedback feedbackSalvando = new Feedback();
         try {
             if (idFeedbackEditando > 0) {
-                feedbackController.atualizarFeedback(idFeedbackEditando, Long.parseLong(edtIdAtendimento.getText()) , Integer.parseInt(edtNota.getText()), edtComentario.getText());
+                feedbackController.atualizarFeedback(idFeedbackEditando, edtIdAtendimento.getText(), edtNota.getText(), edtComentario.getText());
             } else {
-                feedbackController.cadastrarFeedback(Long.parseLong(edtId.getText()), Long.parseLong(edtIdAtendimento.getText()) ,Integer.parseInt(edtNota.getText()), edtComentario.getText());
+                feedbackController.cadastrarFeedback(feedbackSalvando.getIdFeedback(), edtIdAtendimento.getText(), edtNota.getText(), edtComentario.getText());
             }
       
             this.idFeedbackEditando = -1L;
@@ -347,14 +337,12 @@ public class DlgCadFeedback extends javax.swing.JDialog {
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JTextField edtComentario;
-    private javax.swing.JTextField edtId;
     private javax.swing.JTextField edtIdAtendimento;
     private javax.swing.JTextField edtNota;
     private javax.swing.JTable grdFeedbacks;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblComentario;
     private javax.swing.JLabel lblFeedbacks;
-    private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblIdAtendimento;
     private javax.swing.JLabel lblNota;
     private javax.swing.JLabel lblTitle;

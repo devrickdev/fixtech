@@ -45,10 +45,6 @@ public class Feedback {
         return txt;
     }
 
-    public Long getAtendimentoId(){
-        return getAtendimento().getIdAtendimento();
-    }
-    
     public Long getIdFeedback() {
         return idFeedback;
     }

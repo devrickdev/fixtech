@@ -14,15 +14,14 @@ import jakarta.persistence.Entity;
 @Entity
 @DiscriminatorValue("Cliente")
 public class Cliente extends Usuario{
+    public final int permission = 3;
     private String telefone;
-    private String endereco;
 
     public Cliente() {}
 
-    public Cliente(String telefone, String endereco, Long idUsuario, String nome, String login, String senha, int permission) {
-        super(idUsuario, nome, login, senha, permission);
+    public Cliente(String telefone, Long idUsuario, String nome, String login, String senha) {
+        super(idUsuario, nome, login, senha);
         this.telefone = telefone;
-        this.endereco = endereco;
     }
 
     @Override
@@ -30,8 +29,7 @@ public class Cliente extends Usuario{
         String txt
                 = "---------- Cliente -----------\n";
         txt += super.toString();
-        txt += "Telefone: " + this.telefone + "\n";
-        txt += "Endereco: " + this.endereco + "\n"
+        txt += "Telefone: " + this.telefone + "\n"
                 + "-------------------------------------\n";
         return txt;
     }
@@ -48,12 +46,7 @@ public class Cliente extends Usuario{
         this.telefone = telefone;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public int getPermission(){
+        return permission;
     }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-    
 }

@@ -36,18 +36,14 @@ public class FrCadAdministrador extends javax.swing.JFrame {
 
     public void limparCampos() {
         edtNome.setText("");
-        edtId.setText("");
         edtLogin.setText("");
         edtSenha.setText("");
-        edtPermission.setText("");
     }
 
     public void preencherFormulario(Administrador a) {
         edtNome.setText(a.getNome());
-        edtId.setText(a.getIdUsuario() + "");
         edtLogin.setText(a.getLogin());
         edtSenha.setText(a.getSenha());
-        edtPermission.setText(a.getPermission() + "");
     }
     
     private Object getObjetoSelecionadoNaGrid() {
@@ -77,15 +73,11 @@ public class FrCadAdministrador extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         panFormulario = new javax.swing.JPanel();
         lblSenha = new javax.swing.JLabel();
-        lblId = new javax.swing.JLabel();
         lblLogin = new javax.swing.JLabel();
-        edtId = new javax.swing.JTextField();
         edtSenha = new javax.swing.JTextField();
         edtNome = new javax.swing.JTextField();
         lblNome = new javax.swing.JLabel();
         edtLogin = new javax.swing.JTextField();
-        lblPermission = new javax.swing.JLabel();
-        edtPermission = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         grdAdms = new javax.swing.JTable();
         lblAdms = new javax.swing.JLabel();
@@ -131,66 +123,50 @@ public class FrCadAdministrador extends javax.swing.JFrame {
 
         lblSenha.setText("Senha");
 
-        lblId.setText("ID");
-
         lblLogin.setText("Login");
 
-        edtNome.setText("Nome");
-
         lblNome.setText("Nome");
-
-        lblPermission.setText("Permission");
 
         javax.swing.GroupLayout panFormularioLayout = new javax.swing.GroupLayout(panFormulario);
         panFormulario.setLayout(panFormularioLayout);
         panFormularioLayout.setHorizontalGroup(
             panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panFormularioLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panFormularioLayout.createSequentialGroup()
-                        .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(edtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblLogin))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSenha)
-                            .addComponent(edtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32)
-                        .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(edtPermission, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPermission)))
+                        .addGap(477, 477, 477)
+                        .addComponent(lblNome))
                     .addGroup(panFormularioLayout.createSequentialGroup()
-                        .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblNome))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblId)
-                            .addComponent(edtId, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(32, Short.MAX_VALUE))
+                        .addGap(93, 93, 93)
+                        .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(panFormularioLayout.createSequentialGroup()
+                                .addComponent(edtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(edtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panFormularioLayout.createSequentialGroup()
+                .addGap(209, 209, 209)
+                .addComponent(lblLogin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblSenha)
+                .addGap(220, 220, 220))
         );
         panFormularioLayout.setVerticalGroup(
             panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panFormularioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNome)
-                    .addComponent(lblId))
+                .addComponent(lblNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLogin)
-                    .addComponent(lblSenha)
-                    .addComponent(lblPermission))
+                    .addComponent(lblSenha))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(edtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edtPermission, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(edtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -295,11 +271,12 @@ public class FrCadAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        Administrador administradorSalvando = new Administrador();
         try {
             if (idAdministradorEditando > 0) {
-                administradorController.atualizarAdministrador(idAdministradorEditando, edtNome.getText(), edtLogin.getText(), edtSenha.getText(), Integer.parseInt(edtPermission.getText()));
+                administradorController.atualizarAdministrador(idAdministradorEditando, edtNome.getText(), edtLogin.getText(), edtSenha.getText(), administradorSalvando.getPermission());
             } else {
-                administradorController.cadastrarAdministrador(Long.parseLong(edtId.getText()), edtNome.getText(), edtLogin.getText(), edtSenha.getText(), Integer.parseInt(edtPermission.getText()));
+                administradorController.cadastrarAdministrador(administradorSalvando.getIdUsuario(), edtNome.getText(), edtLogin.getText(), edtSenha.getText(), administradorSalvando.getPermission());
             }
             
             this.idAdministradorEditando = -1L;
@@ -326,19 +303,15 @@ public class FrCadAdministrador extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JTextField edtId;
     private javax.swing.JTextField edtLogin;
     private javax.swing.JTextField edtNome;
-    private javax.swing.JTextField edtPermission;
     private javax.swing.JTextField edtSenha;
     private javax.swing.JTable grdAdms;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblAdms;
-    private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblNome;
-    private javax.swing.JLabel lblPermission;
     private javax.swing.JLabel lblSenha;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JPanel panBotoes;

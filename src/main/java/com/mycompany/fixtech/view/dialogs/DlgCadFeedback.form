@@ -210,10 +210,7 @@
                           <Component id="edtIdAtendimento" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="lblId" min="-2" pref="26" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="edtId" min="-2" pref="279" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="329" max="-2" attributes="0"/>
                           <Component id="lblNota" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -232,8 +229,6 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblId" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="edtId" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblNota" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="edtNota" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblComentario" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -250,13 +245,6 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="lblId">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="ID"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="edtId">
-        </Component>
         <Component class="javax.swing.JLabel" name="lblNota">
           <Properties>
             <Property name="text" type="java.lang.String" value="Nota"/>

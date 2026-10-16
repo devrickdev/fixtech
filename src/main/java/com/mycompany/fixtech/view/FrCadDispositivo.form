@@ -149,17 +149,8 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="edtNome" alignment="0" min="-2" pref="800" max="-2" attributes="0"/>
-                              <Component id="lblNome" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="edtId" min="-2" pref="150" max="-2" attributes="0"/>
-                              <Component id="lblId" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="edtNome" alignment="0" min="-2" pref="800" max="-2" attributes="0"/>
+                      <Component id="lblNome" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="edtTipo" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
@@ -177,7 +168,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="32" max="32767" attributes="0"/>
+                  <EmptySpace pref="194" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -185,15 +176,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblId" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="lblNome" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="edtNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="edtId" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="edtNome" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblTipo" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -233,14 +218,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="edtMarca">
         </Component>
-        <Component class="javax.swing.JLabel" name="lblId">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="ID"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JTextField" name="edtModelo">
-        </Component>
-        <Component class="javax.swing.JTextField" name="edtId">
         </Component>
         <Component class="javax.swing.JLabel" name="lblNome">
           <Properties>

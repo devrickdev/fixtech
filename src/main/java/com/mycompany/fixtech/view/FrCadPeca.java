@@ -36,14 +36,12 @@ public class FrCadPeca extends javax.swing.JFrame {
 
     public void limparCampos() {
         edtNome.setText("");
-        edtId.setText("");
         edtQuantidade.setText("");
         edtValorUnidade.setText("");
     }
 
     public void preencherFormulario(Peca a) {
         edtNome.setText(a.getNome());
-        edtId.setText(a.getIdPeca() + "");
         edtQuantidade.setText(a.getQuantidade() + "");
         edtValorUnidade.setText(a.getValorUnidade() + "");
     }
@@ -75,10 +73,8 @@ public class FrCadPeca extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         panFormulario = new javax.swing.JPanel();
         lblNome = new javax.swing.JLabel();
-        lblId = new javax.swing.JLabel();
         edtValorUnidade = new javax.swing.JTextField();
         edtNome = new javax.swing.JTextField();
-        edtId = new javax.swing.JTextField();
         edtQuantidade = new javax.swing.JTextField();
         lblQuantidade = new javax.swing.JLabel();
         lblValorUnidade = new javax.swing.JLabel();
@@ -127,16 +123,6 @@ public class FrCadPeca extends javax.swing.JFrame {
 
         lblNome.setText("Nome");
 
-        lblId.setText("ID");
-
-        edtValorUnidade.setText("ValorUnidade");
-
-        edtNome.setText("Nome");
-
-        edtId.setText("ID");
-
-        edtQuantidade.setText("Quantidade");
-
         lblQuantidade.setText("Quantidade");
 
         lblValorUnidade.setText("ValorUnidade");
@@ -148,14 +134,9 @@ public class FrCadPeca extends javax.swing.JFrame {
             .addGroup(panFormularioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panFormularioLayout.createSequentialGroup()
-                        .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNome)
-                            .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(edtId, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblId)))
+                    .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblNome)
+                        .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panFormularioLayout.createSequentialGroup()
                         .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(edtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -164,19 +145,15 @@ public class FrCadPeca extends javax.swing.JFrame {
                         .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblValorUnidade)
                             .addComponent(edtValorUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(194, Short.MAX_VALUE))
         );
         panFormularioLayout.setVerticalGroup(
             panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panFormularioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNome)
-                    .addComponent(lblId))
+                .addComponent(lblNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblValorUnidade)
@@ -286,11 +263,12 @@ public class FrCadPeca extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-       try {
+       Peca pecaSalvando = new Peca();
+        try {
             if (idPecaEditando > 0) {
-                pecaController.atualizarPeca(idPecaEditando, edtNome.getText(), Integer.parseInt(edtQuantidade.getText()), Double.parseDouble(edtValorUnidade.getText()));
+                pecaController.atualizarPeca(idPecaEditando, edtNome.getText(), edtQuantidade.getText(), edtValorUnidade.getText());
             } else {
-                pecaController.cadastrarPeca(Long.parseLong(edtId.getText()), edtNome.getText(), Integer.parseInt(edtQuantidade.getText()), Double.parseDouble(edtValorUnidade.getText()));
+                pecaController.cadastrarPeca(pecaSalvando.getIdPeca(), edtNome.getText(), edtQuantidade.getText(), edtValorUnidade.getText());
             }
             
             this.idPecaEditando = -1L;
@@ -317,14 +295,12 @@ public class FrCadPeca extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JTextField edtId;
     private javax.swing.JTextField edtNome;
     private javax.swing.JTextField edtQuantidade;
     private javax.swing.JTextField edtValorUnidade;
     private javax.swing.JTable grdPecas;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblPecas;
     private javax.swing.JLabel lblQuantidade;

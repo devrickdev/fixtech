@@ -93,7 +93,7 @@ public class AtendenteDAO implements IDao<Atendente> {
         
         jpql = " SELECT f "
              + " FROM Atendente f "
-             + " WHERE f.idUsuario like :idUsuario ";
+             + " WHERE f.idUsuario =:idUsuario ";
         qry = this.entityManager.createQuery(jpql);
         qry.setParameter("idUsuario", idUsuario);
         

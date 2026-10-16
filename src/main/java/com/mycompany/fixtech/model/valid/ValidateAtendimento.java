@@ -16,6 +16,22 @@ public class ValidateAtendimento {
         if (descricao.isEmpty())
             throw new AtendimentoException("Error - Campo vazio: 'descricao'.");
         atendimento.setDescricao(descricao);
+        
+        if (clienteNome.isEmpty())
+            throw new AtendimentoException("Error - Campo vazio: 'clienteNome'.");
+        atendimento.getCliente().setNome(clienteNome);
+        
+        if (atendenteNome.isEmpty())
+            throw new AtendimentoException("Error - Campo vazio: 'atendenteNome'.");
+        atendimento.getAtendente().setNome(atendenteNome);
+        
+        if (dispositivoNome.isEmpty())
+            throw new AtendimentoException("Error - Campo vazio: 'dispositivoNome'.");
+        atendimento.getDispositivo().setNome(dispositivoNome);
+        
+        if (status.isEmpty())
+            throw new AtendimentoException("Error - Campo vazio: 'status'.");
+        atendimento.setStatus(status);
                 
         return atendimento;
     }

@@ -13,12 +13,12 @@ import javax.swing.table.AbstractTableModel;
  * @author henry
  */
 public class TMCadDispositivo extends AbstractTableModel {
-    private List<Dispositivo> lst;
+    private final List<Dispositivo> lst;
     
-    private final int COL_ID = 0;
-    private final int COL_TIPO = 1;
-    private final int COL_MARCA = 2;
-    private final int COL_MODELO = 3;
+    private static final int COL_ID = 0;
+    private static final int COL_TIPO = 1;
+    private static final int COL_MARCA = 2;
+    private static final int COL_MODELO = 3;
   
     public TMCadDispositivo(List<Dispositivo> lista) {
         this.lst = lista;

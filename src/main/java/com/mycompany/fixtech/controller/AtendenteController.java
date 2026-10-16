@@ -43,7 +43,7 @@ public class AtendenteController {
     }
 
     public Atendente buscarAtendente(Long idUsuario) {
-        return (Atendente) this.repositorio.findById(idUsuario);
+        return this.repositorio.findById(idUsuario);
     }
 
     public void atualizarTabela(JTable grd) {
