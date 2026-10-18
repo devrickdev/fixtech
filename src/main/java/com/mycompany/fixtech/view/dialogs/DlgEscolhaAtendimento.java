@@ -19,7 +19,7 @@ public class DlgEscolhaAtendimento extends javax.swing.JDialog {
     public Atendimento atendimentoEscolhido;
     private AtendimentoController atendimentoController;
     
-    public DlgEscolhaAtendimento(java.awt.Frame parent, boolean modal, Atendimento atendimento) {
+    public DlgEscolhaAtendimento(java.awt.Frame parent, boolean modal, Feedback feedback) {
         super(parent, modal);
         initComponents();
         this.feedback = feedback;
@@ -41,12 +41,12 @@ public class DlgEscolhaAtendimento extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         grdListagem = new javax.swing.JTable();
         btnConfirmar = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        grdAtendimentoEscolhido = new javax.swing.JTable();
         edtId = new javax.swing.JTextField();
         lblBusca = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        areaSelecionado = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -72,19 +72,6 @@ public class DlgEscolhaAtendimento extends javax.swing.JDialog {
         btnConfirmar.setText("Confirmar");
         btnConfirmar.addActionListener(this::btnConfirmarActionPerformed);
 
-        grdAtendimentoEscolhido.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane2.setViewportView(grdAtendimentoEscolhido);
-
         lblBusca.setText("Busca:");
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/confirma.png"))); // NOI18N
@@ -93,6 +80,10 @@ public class DlgEscolhaAtendimento extends javax.swing.JDialog {
 
         jLabel3.setText("Selecionado");
 
+        areaSelecionado.setColumns(20);
+        areaSelecionado.setRows(5);
+        jScrollPane3.setViewportView(areaSelecionado);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,7 +91,7 @@ public class DlgEscolhaAtendimento extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 988, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 827, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -111,12 +102,11 @@ public class DlgEscolhaAtendimento extends javax.swing.JDialog {
                                 .addComponent(btnBuscar))
                             .addComponent(jScrollPane1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                            .addComponent(btnConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -132,9 +122,9 @@ public class DlgEscolhaAtendimento extends javax.swing.JDialog {
                         .addComponent(btnBuscar))
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnConfirmar))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -145,26 +135,17 @@ public class DlgEscolhaAtendimento extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        try {
-            if (edtId.getText().trim().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Digite um ID para buscar.");
-                return;
-            }
-            
-            Long idEscolhido = Long.parseLong(edtId.getText());
-            atendimentoEscolhido = this.atendimentoController.buscarAtendimento(idEscolhido);
-
-            DefaultTableModel modeloSelecionado = (DefaultTableModel) grdAtendimentoEscolhido.getModel();
-            modeloSelecionado.setRowCount(0); // Limpa a tabela de selecionado
+        String idEscolhido = edtId.getText();
+        if (!idEscolhido.isEmpty()) {
+            Long idEscolhidoLong = Long.parseLong(idEscolhido);
+            atendimentoEscolhido = this.atendimentoController.buscarAtendimento(idEscolhidoLong);
 
             if (atendimentoEscolhido == null) {
-                JOptionPane.showMessageDialog(this, "Não existe atendimento com este ID.");
+                JOptionPane.showMessageDialog(this, "Não existe este Id.");
+                areaSelecionado.setText("");
             } else {
-                // Adiciona os dados do atendimento na tabela de selecionados
-                modeloSelecionado.addRow(new Object[]{atendimentoEscolhido.getIdAtendimento(), atendimentoEscolhido.getDescricao()});
+                areaSelecionado.setText(atendimentoEscolhido.toString());
             }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "O ID deve ser um número válido.");
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -185,15 +166,15 @@ public class DlgEscolhaAtendimento extends javax.swing.JDialog {
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea areaSelecionado;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JTextField edtId;
-    private javax.swing.JTable grdAtendimentoEscolhido;
     private javax.swing.JTable grdListagem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblBusca;
     // End of variables declaration//GEN-END:variables
 }

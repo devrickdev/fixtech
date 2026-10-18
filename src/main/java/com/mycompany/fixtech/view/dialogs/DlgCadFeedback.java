@@ -7,6 +7,7 @@ package com.mycompany.fixtech.view.dialogs;
 import com.mycompany.fixtech.controller.FeedbackController;
 import com.mycompany.fixtech.model.Feedback;
 import com.mycompany.fixtech.model.exceptions.FeedbackException;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,6 +17,7 @@ import javax.swing.JOptionPane;
 public class DlgCadFeedback extends javax.swing.JDialog {
     FeedbackController feedbackController;
     Long idFeedbackEditando;
+    private Feedback feedback;
     
     public DlgCadFeedback(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -36,13 +38,11 @@ public class DlgCadFeedback extends javax.swing.JDialog {
     public void limparCampos() {
         edtNota.setText("");
         edtComentario.setText("");
-        edtIdAtendimento.setText("");
     }
     
     public void preencherFormulario(Feedback a) {
         edtNota.setText(a.getNota() + "");
         edtComentario.setText(a.getComentario());
-        edtIdAtendimento.setText(a.getAtendimento().getIdAtendimento() + "");
     }
     
     private Object getObjetoSelecionadoNaGrid() {
@@ -71,15 +71,13 @@ public class DlgCadFeedback extends javax.swing.JDialog {
         btnExcluir = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        panClasses = new javax.swing.JPanel();
-        btnEscolherAtendimento = new javax.swing.JButton();
         panFormulario = new javax.swing.JPanel();
         lblNota = new javax.swing.JLabel();
         edtNota = new javax.swing.JTextField();
         lblComentario = new javax.swing.JLabel();
         edtComentario = new javax.swing.JTextField();
-        lblIdAtendimento = new javax.swing.JLabel();
-        edtIdAtendimento = new javax.swing.JTextField();
+        btnEscolherAtendimento = new javax.swing.JButton();
+        edtDescricaoAtendimento = new javax.swing.JTextField();
         lblFeedbacks = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         grdFeedbacks = new javax.swing.JTable();
@@ -115,7 +113,7 @@ public class DlgCadFeedback extends javax.swing.JDialog {
         panbotoesLayout.setHorizontalGroup(
             panbotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panbotoesLayout.createSequentialGroup()
-                .addGap(251, 251, 251)
+                .addGap(178, 178, 178)
                 .addComponent(btnNovo)
                 .addGap(4, 4, 4)
                 .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -140,68 +138,49 @@ public class DlgCadFeedback extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btnEscolherAtendimento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/service.png"))); // NOI18N
-        btnEscolherAtendimento.setText("EscolherAtendimento");
-
-        javax.swing.GroupLayout panClassesLayout = new javax.swing.GroupLayout(panClasses);
-        panClasses.setLayout(panClassesLayout);
-        panClassesLayout.setHorizontalGroup(
-            panClassesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panClassesLayout.createSequentialGroup()
-                .addGap(384, 384, 384)
-                .addComponent(btnEscolherAtendimento)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        panClassesLayout.setVerticalGroup(
-            panClassesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panClassesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnEscolherAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 27, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
         lblNota.setText("Nota");
 
-        lblComentario.setText("Comentário");
+        lblComentario.setText("Comentario");
 
-        lblIdAtendimento.setText("IdAtendimento");
+        btnEscolherAtendimento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/service.png"))); // NOI18N
+        btnEscolherAtendimento.setText("EscolherAtendimento");
+        btnEscolherAtendimento.addActionListener(this::btnEscolherAtendimentoActionPerformed);
 
         javax.swing.GroupLayout panFormularioLayout = new javax.swing.GroupLayout(panFormulario);
         panFormulario.setLayout(panFormularioLayout);
         panFormularioLayout.setHorizontalGroup(
             panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panFormularioLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(21, 21, 21)
                 .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panFormularioLayout.createSequentialGroup()
-                        .addComponent(lblIdAtendimento)
+                        .addComponent(lblComentario)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(edtIdAtendimento))
+                        .addComponent(edtComentario, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panFormularioLayout.createSequentialGroup()
-                        .addGap(329, 329, 329)
-                        .addComponent(lblNota, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(edtNota, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblComentario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(edtComentario, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                        .addComponent(btnEscolherAtendimento)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(edtDescricaoAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblNota, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(edtNota, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panFormularioLayout.setVerticalGroup(
             panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panFormularioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNota)
+                    .addComponent(btnEscolherAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edtDescricaoAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(edtNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNota))
+                .addGap(18, 18, 18)
+                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblComentario)
                     .addComponent(edtComentario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblIdAtendimento)
-                    .addComponent(edtIdAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         lblFeedbacks.setText("Feedbacks");
@@ -225,16 +204,13 @@ public class DlgCadFeedback extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panbotoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(panClasses, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panFormulario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblFeedbacks)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(lblFeedbacks)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,13 +219,11 @@ public class DlgCadFeedback extends javax.swing.JDialog {
                 .addGap(2, 2, 2)
                 .addComponent(panbotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panClasses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
                 .addComponent(panFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblFeedbacks)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -306,9 +280,9 @@ public class DlgCadFeedback extends javax.swing.JDialog {
         Feedback feedbackSalvando = new Feedback();
         try {
             if (idFeedbackEditando > 0) {
-                feedbackController.atualizarFeedback(idFeedbackEditando, edtIdAtendimento.getText(), edtNota.getText(), edtComentario.getText());
+                feedbackController.atualizarFeedback(idFeedbackEditando, edtDescricaoAtendimento.getText(), edtNota.getText(), edtComentario.getText());
             } else {
-                feedbackController.cadastrarFeedback(feedbackSalvando.getIdFeedback(), edtIdAtendimento.getText(), edtNota.getText(), edtComentario.getText());
+                feedbackController.cadastrarFeedback(feedbackSalvando.getIdFeedback(),edtDescricaoAtendimento.getText(), edtNota.getText(), edtComentario.getText());
             }
       
             this.idFeedbackEditando = -1L;
@@ -329,6 +303,15 @@ public class DlgCadFeedback extends javax.swing.JDialog {
         this.habilitarCampos(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnEscolherAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEscolherAtendimentoActionPerformed
+        DlgEscolhaAtendimento telaAddAtendimento = new DlgEscolhaAtendimento(new JFrame(), true, feedback);
+        telaAddAtendimento.setVisible(true);
+        
+        //System.out.println("Ola mundo.");
+        edtDescricaoAtendimento.setText(feedback.getAtendimento().getDescricao());
+        feedbackController.atualizarTabela(grdFeedbacks);
+    }//GEN-LAST:event_btnEscolherAtendimentoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEditar;
@@ -337,16 +320,14 @@ public class DlgCadFeedback extends javax.swing.JDialog {
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JTextField edtComentario;
-    private javax.swing.JTextField edtIdAtendimento;
+    private javax.swing.JTextField edtDescricaoAtendimento;
     private javax.swing.JTextField edtNota;
     private javax.swing.JTable grdFeedbacks;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblComentario;
     private javax.swing.JLabel lblFeedbacks;
-    private javax.swing.JLabel lblIdAtendimento;
     private javax.swing.JLabel lblNota;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JPanel panClasses;
     private javax.swing.JPanel panFormulario;
     private javax.swing.JPanel panbotoes;
     // End of variables declaration//GEN-END:variables

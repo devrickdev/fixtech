@@ -38,15 +38,14 @@ public class FrCadDispositivo extends javax.swing.JFrame {
     public void limparCampos() {
         edtNome.setText("");
         edtTipo.setText("");
+        edtNome.setText("");
         edtMarca.setText("");
-        edtModelo.setText("");
     }
 
     public void preencherFormulario(Dispositivo a) {
         edtTipo.setText(a.getTipo());
-        edtTipo.setText(a.getTipo());
+        edtNome.setText(a.getNome());
         edtMarca.setText(a.getMarca());
-        edtModelo.setText(a.getModelo());
     }
     
     private Object getObjetoSelecionadoNaGrid() {
@@ -76,13 +75,11 @@ public class FrCadDispositivo extends javax.swing.JFrame {
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         panFormulario = new javax.swing.JPanel();
-        lblModelo = new javax.swing.JLabel();
         lblTipo = new javax.swing.JLabel();
         edtNome = new javax.swing.JTextField();
         edtTipo = new javax.swing.JTextField();
         lblMarca = new javax.swing.JLabel();
         edtMarca = new javax.swing.JTextField();
-        edtModelo = new javax.swing.JTextField();
         lblNome = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         grdDispositivos = new javax.swing.JTable();
@@ -129,8 +126,6 @@ public class FrCadDispositivo extends javax.swing.JFrame {
         btnCancelar.addActionListener(this::btnCancelarActionPerformed);
         panBotoes.add(btnCancelar);
 
-        lblModelo.setText("Modelo");
-
         lblTipo.setText("Tipo");
 
         lblMarca.setText("Marca");
@@ -145,9 +140,8 @@ public class FrCadDispositivo extends javax.swing.JFrame {
             .addGroup(panFormularioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblNome))
+                    .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNome)
                     .addGroup(panFormularioLayout.createSequentialGroup()
                         .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(edtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -155,11 +149,7 @@ public class FrCadDispositivo extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(edtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblMarca))
-                        .addGap(12, 12, 12)
-                        .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblModelo)
-                            .addComponent(edtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(lblMarca))))
                 .addContainerGap(194, Short.MAX_VALUE))
         );
         panFormularioLayout.setVerticalGroup(
@@ -172,13 +162,11 @@ public class FrCadDispositivo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTipo)
-                    .addComponent(lblMarca)
-                    .addComponent(lblModelo))
+                    .addComponent(lblMarca))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(edtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(edtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -286,9 +274,9 @@ public class FrCadDispositivo extends javax.swing.JFrame {
         Dispositivo dispositivoSalvando = new Dispositivo();
         try {
             if (idDispositivoEditando > 0) {
-                dispositivoController.atualizarDispositivo(idDispositivoEditando, edtNome.getText(), edtTipo.getText(), edtMarca.getText(),edtModelo.getText());
+                dispositivoController.atualizarDispositivo(idDispositivoEditando, edtNome.getText(), edtTipo.getText(), edtMarca.getText());
             } else {
-                dispositivoController.cadastrarDispositivo (dispositivoSalvando.getIdDispositivo(), edtNome.getText(), edtTipo.getText(), edtMarca.getText(), edtModelo.getText());
+                dispositivoController.cadastrarDispositivo (dispositivoSalvando.getIdDispositivo(), edtNome.getText(), edtTipo.getText(), edtMarca.getText());
             }
             
             this.idDispositivoEditando = -1L;
@@ -316,7 +304,6 @@ public class FrCadDispositivo extends javax.swing.JFrame {
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JTextField edtMarca;
-    private javax.swing.JTextField edtModelo;
     private javax.swing.JTextField edtNome;
     private javax.swing.JTextField edtTipo;
     private javax.swing.JTable grdDispositivos;
@@ -325,7 +312,6 @@ public class FrCadDispositivo extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblDispositivos;
     private javax.swing.JLabel lblMarca;
-    private javax.swing.JLabel lblModelo;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblTipo;
     private javax.swing.JLabel lblTitle;

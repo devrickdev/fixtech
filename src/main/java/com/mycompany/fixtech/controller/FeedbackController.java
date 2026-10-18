@@ -23,9 +23,9 @@ public class FeedbackController {
         repositorio = new FeedbackDAO();
     }
 
-    public void cadastrarFeedback(Long idFeedback, String atendimentoId, String nota, String comentario) {
+    public void cadastrarFeedback(Long idFeedback, String atendimentoDescricao, String nota, String comentario) {
         ValidateFeedback valid = new ValidateFeedback();
-        Feedback novoFeedback = valid.validaCamposEntrada(idFeedback, atendimentoId, nota, comentario);
+        Feedback novoFeedback = valid.validaCamposEntrada(idFeedback, atendimentoDescricao, nota, comentario);
 
         if (repositorio.findById(idFeedback) == null) {
             repositorio.save(novoFeedback);
@@ -34,9 +34,9 @@ public class FeedbackController {
         }
     }
 
-    public void atualizarFeedback(Long idFeedback, String atendimentoId, String nota, String comentario) {
+    public void atualizarFeedback(Long idFeedback, String atendimentoDescricao, String nota, String comentario) {
         ValidateFeedback valid = new ValidateFeedback();
-        Feedback novoFeedback = valid.validaCamposEntrada(idFeedback,atendimentoId, nota, comentario);
+        Feedback novoFeedback = valid.validaCamposEntrada(idFeedback,atendimentoDescricao, nota, comentario);
         novoFeedback.setIdFeedback(idFeedback);
         
         repositorio.update(novoFeedback);

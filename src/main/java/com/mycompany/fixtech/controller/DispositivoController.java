@@ -23,9 +23,9 @@ public class DispositivoController {
         repositorio = new DispositivoDAO();
     }
 
-    public void cadastrarDispositivo(Long idDispositivo, String nome, String tipo, String marca, String modelo) {
+    public void cadastrarDispositivo(Long idDispositivo, String nome, String tipo, String marca) {
         ValidateDispositivo valid = new ValidateDispositivo();
-        Dispositivo novoDispositivo = valid.validaCamposEntrada(idDispositivo, nome, tipo, marca, modelo);
+        Dispositivo novoDispositivo = valid.validaCamposEntrada(idDispositivo, nome, tipo, marca);
 
         if (repositorio.findById(idDispositivo) == null) {
             repositorio.save(novoDispositivo);
@@ -34,9 +34,9 @@ public class DispositivoController {
         }
     }
 
-    public void atualizarDispositivo(Long idDispositivo,String nome, String tipo, String marca, String modelo) {
+    public void atualizarDispositivo(Long idDispositivo,String nome, String tipo, String marca) {
         ValidateDispositivo valid = new ValidateDispositivo();
-        Dispositivo novoDispositivo = valid.validaCamposEntrada(idDispositivo, nome, tipo, marca, modelo);
+        Dispositivo novoDispositivo = valid.validaCamposEntrada(idDispositivo, nome, tipo, marca);
         novoDispositivo.setIdDispositivo(idDispositivo);
         
         repositorio.update(novoDispositivo);

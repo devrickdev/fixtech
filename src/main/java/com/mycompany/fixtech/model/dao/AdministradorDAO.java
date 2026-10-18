@@ -90,7 +90,7 @@ public class AdministradorDAO implements IDao<Administrador> {
 
         jpql = " SELECT f "
                 + " FROM Administrador f "
-                + " WHERE f.idUsuario like :idUsuario ";
+                + " WHERE f.idUsuario =:idUsuario ";
         qry = this.entityManager.createQuery(jpql);
         qry.setParameter("idUsuario", idUsuario);
 

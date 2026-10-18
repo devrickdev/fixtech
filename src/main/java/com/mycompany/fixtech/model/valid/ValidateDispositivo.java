@@ -12,11 +12,11 @@ import com.mycompany.fixtech.model.exceptions.DispositivoException;
  * @author henry
  */
 public class ValidateDispositivo {
-    public Dispositivo validaCamposEntrada(Long idDispositivo, String nome, String tipo, String marca, String modelo){
+    public Dispositivo validaCamposEntrada(Long idDispositivo, String nome, String tipo, String marca){
         Dispositivo dispositivo = new Dispositivo();
         if (nome.isEmpty())
             throw new DispositivoException("Error - Campo vazio: 'nome'.");
-        dispositivo.setMarca(nome);
+        dispositivo.setNome(nome);
         
         if (tipo.isEmpty())
             throw new DispositivoException("Error - Campo vazio: 'tipo'.");
@@ -26,10 +26,6 @@ public class ValidateDispositivo {
             throw new DispositivoException("Error - Campo vazio: 'marca'.");
         dispositivo.setMarca(marca);
         
-        if (modelo.isEmpty())
-            throw new DispositivoException("Error - Campo vazio: 'modelo'.");
-        dispositivo.setModelo(modelo);
-                
         return dispositivo;
     }
 }

@@ -8,7 +8,6 @@ import com.mycompany.fixtech.controller.AtendenteController;
 import com.mycompany.fixtech.model.Atendente;
 import com.mycompany.fixtech.model.Atendimento;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -28,6 +27,15 @@ public class DlgEscolhaAtendente extends javax.swing.JDialog {
         atendenteController.atualizarTabela(grdListagem);
     }
     
+    private Object getObjetoSelecionadoNaGrid() {
+        int rowCliked = grdListagem.getSelectedRow();
+        Object obj = null;
+        if (rowCliked >= 0) {
+            obj = grdListagem.getModel().getValueAt(rowCliked, -1);
+        }
+        return obj;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,10 +51,10 @@ public class DlgEscolhaAtendente extends javax.swing.JDialog {
         lblBusca = new javax.swing.JLabel();
         edtId = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        grdAtendenteEscolhido = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         btnConfirmar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        areaSelecionado = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -74,25 +82,15 @@ public class DlgEscolhaAtendente extends javax.swing.JDialog {
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(this::btnBuscarActionPerformed);
 
-        grdAtendenteEscolhido.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane2.setViewportView(grdAtendenteEscolhido);
-        grdAtendenteEscolhido.getAccessibleContext().setAccessibleName("Selecionado");
-
         jLabel3.setText("Selecionado");
 
         btnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/confirma.png"))); // NOI18N
         btnConfirmar.setText("Confirmar");
         btnConfirmar.addActionListener(this::btnConfirmarActionPerformed);
+
+        areaSelecionado.setColumns(20);
+        areaSelecionado.setRows(5);
+        jScrollPane2.setViewportView(areaSelecionado);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -109,19 +107,19 @@ public class DlgEscolhaAtendente extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBuscar))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
-                    .addComponent(btnConfirmar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,39 +129,30 @@ public class DlgEscolhaAtendente extends javax.swing.JDialog {
                         .addComponent(lblBusca))
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnConfirmar))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(7, 7, 7))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        try {
-            if (edtId.getText().trim().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Digite um ID para buscar.");
-                return;
-            }
-            
-            Long idEscolhido = Long.parseLong(edtId.getText());
-            atendenteEscolhido = this.atendenteController.buscarAtendente(idEscolhido);
-
-            DefaultTableModel modeloSelecionado = (DefaultTableModel) grdAtendenteEscolhido.getModel();
-            modeloSelecionado.setRowCount(0); // Limpa a tabela de selecionado
+        String idEscolhido = edtId.getText();
+        if (!idEscolhido.isEmpty()) {
+            Long idEscolhidoLong = Long.parseLong(idEscolhido);
+            atendenteEscolhido = this.atendenteController.buscarAtendente(idEscolhidoLong);
 
             if (atendenteEscolhido == null) {
-                JOptionPane.showMessageDialog(this, "Não existe atendente com este ID.");
+                JOptionPane.showMessageDialog(this, "Não existe este Id.");
+                areaSelecionado.setText("");
             } else {
-                // Adiciona os dados do atendente na tabela de selecionados
-                modeloSelecionado.addRow(new Object[]{atendenteEscolhido.getIdUsuario(), atendenteEscolhido.getNome()});
+                areaSelecionado.setText(atendenteEscolhido.toString());
             }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "O ID deve ser um número válido.");
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -184,10 +173,10 @@ public class DlgEscolhaAtendente extends javax.swing.JDialog {
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea areaSelecionado;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JTextField edtId;
-    private javax.swing.JTable grdAtendenteEscolhido;
     private javax.swing.JTable grdListagem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

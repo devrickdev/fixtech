@@ -92,7 +92,7 @@ public class DispositivoDAO implements IDao<Dispositivo> {
         
         jpql = " SELECT f "
              + " FROM Dispositivo f "
-             + " WHERE f.idDispositivo like :idDipositivo ";
+             + " WHERE f.idDispositivo =:idDispositivo ";
         qry = this.entityManager.createQuery(jpql);
         qry.setParameter("idDispositivo", idDispositivo);
         

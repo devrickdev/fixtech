@@ -92,7 +92,7 @@ public class FeedbackDAO implements IDao<Feedback> {
         
         jpql = " SELECT f "
              + " FROM Feedback f "
-             + " WHERE f.idFeedback like :idFeedback ";
+             + " WHERE f.idFeedback =:idFeedback ";
         qry = this.entityManager.createQuery(jpql);
         qry.setParameter("idFeedback", idFeedback);
         

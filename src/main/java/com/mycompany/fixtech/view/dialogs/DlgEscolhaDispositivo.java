@@ -8,7 +8,6 @@ import com.mycompany.fixtech.controller.DispositivoController;
 import com.mycompany.fixtech.model.Atendimento;
 import com.mycompany.fixtech.model.Dispositivo;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -27,7 +26,16 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
         this.dispositivoController = new DispositivoController();
         dispositivoController.atualizarTabela(grdListagem);
     }
-
+    
+    private Object getObjetoSelecionadoNaGrid() {
+        int rowCliked = grdListagem.getSelectedRow();
+        Object obj = null;
+        if (rowCliked >= 0) {
+            obj = grdListagem.getModel().getValueAt(rowCliked, -1);
+        }
+        return obj;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,8 +54,8 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
         grdListagem = new javax.swing.JTable();
         lblBusca = new javax.swing.JLabel();
         btnConfirrmar = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        grdDispositivoEscolhido = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        areaSelecionado = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -81,18 +89,9 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
         btnConfirrmar.setText("Confirmar");
         btnConfirrmar.addActionListener(this::btnConfirrmarActionPerformed);
 
-        grdDispositivoEscolhido.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane2.setViewportView(grdDispositivoEscolhido);
+        areaSelecionado.setColumns(20);
+        areaSelecionado.setRows(5);
+        jScrollPane3.setViewportView(areaSelecionado);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -116,7 +115,7 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(btnConfirrmar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -136,7 +135,7 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
+                        .addComponent(jScrollPane3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnConfirrmar))))
         );
@@ -147,9 +146,8 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,26 +163,17 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        try {
-            if (edtId.getText().trim().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Digite um ID para buscar.");
-                return;
-            }
-            
-            Long idEscolhido = Long.parseLong(edtId.getText());
-            dispositivoEscolhido = this.dispositivoController.buscarDispositivo(idEscolhido);
-
-            DefaultTableModel modeloSelecionado = (DefaultTableModel) grdDispositivoEscolhido.getModel();
-            modeloSelecionado.setRowCount(0); // Limpa a tabela de selecionado
+        String idEscolhido = edtId.getText();
+        if (!idEscolhido.isEmpty()) {
+            Long idEscolhidoLong = Long.parseLong(idEscolhido);
+            dispositivoEscolhido = this.dispositivoController.buscarDispositivo(idEscolhidoLong);
 
             if (dispositivoEscolhido == null) {
-                JOptionPane.showMessageDialog(this, "Não existe dispositivo com este ID.");
+                JOptionPane.showMessageDialog(this, "Não existe este Id.");
+                areaSelecionado.setText("");
             } else {
-                // Adiciona os dados do dispositivo na tabela de selecionados
-                modeloSelecionado.addRow(new Object[]{dispositivoEscolhido.getIdDispositivo(), dispositivoEscolhido.getNome()});
+                areaSelecionado.setText(dispositivoEscolhido.toString());
             }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "O ID deve ser um número válido.");
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -205,16 +194,16 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
     }//GEN-LAST:event_btnConfirrmarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea areaSelecionado;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnConfirrmar;
     private javax.swing.JTextField edtId;
-    private javax.swing.JTable grdDispositivoEscolhido;
     private javax.swing.JTable grdListagem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblBusca;
     // End of variables declaration//GEN-END:variables
 }

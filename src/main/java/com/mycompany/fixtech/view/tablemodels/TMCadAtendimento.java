@@ -18,9 +18,9 @@ public class TMCadAtendimento extends AbstractTableModel {
     private static final int COL_ID = 0;
     private static final int COL_CLIENTE = 1;
     private static final int COL_ATENDENTE = 2;
-    private static final int COL_DISPOSITIVO = 4;
-    private static final int COL_STATUS = 5;
-    private static final int COL_DESCRICAO = 6;
+    private static final int COL_DISPOSITIVO = 3;
+    private static final int COL_STATUS = 4;
+    private static final int COL_DESCRICAO = 5;
     
     public TMCadAtendimento(List<Atendimento> lista) {
         this.lst = lista;
@@ -33,7 +33,7 @@ public class TMCadAtendimento extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 7;
+        return 6;
     }
     
     public Atendimento getObjetoAtendimento(int row){

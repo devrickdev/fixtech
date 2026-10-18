@@ -20,6 +20,7 @@ import jakarta.persistence.InheritanceType;
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorValue("tipo")
 public abstract class Usuario {
+    public final int permission = 0;
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     protected Long idUsuario;
@@ -44,8 +45,10 @@ public abstract class Usuario {
         +"Senha: "+ this.senha +"\n";
         return txt;
     }   
-    
-    public void autenticar(){}
+
+    public int getPermission() {
+        return permission;
+    }
     
     public Long getIdUsuario() {
         return idUsuario;

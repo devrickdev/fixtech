@@ -21,16 +21,14 @@ public class Dispositivo {
     private String nome;
     private String tipo;
     private String marca;
-    private String modelo;
 
     public Dispositivo() {}
 
-    public Dispositivo(Long idDispositivo, String nome, String tipo, String marca, String modelo) {
+    public Dispositivo(Long idDispositivo, String nome, String tipo, String marca) {
         this.idDispositivo = idDispositivo;
         this.nome = nome;
         this.tipo = tipo;
         this.marca = marca;
-        this.modelo = modelo;
     }
     
     @Override
@@ -38,8 +36,7 @@ public class Dispositivo {
         String txt = "IdDispositivo: " + this.idDispositivo +"\n"
         +"Nome: "+ this.nome + "\n"
         +"Tipo: "+ this.tipo + "\n"
-        +"Marca: "+ this.marca + "\n"
-        +"Modelo: "+ this.modelo + "\n";
+        +"Marca: "+ this.marca + "\n";
         return txt;
     }   
 
@@ -74,13 +71,4 @@ public class Dispositivo {
     public void setMarca(String marca) {
         this.marca = marca;
     }
-
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-
 }

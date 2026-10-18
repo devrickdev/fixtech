@@ -17,8 +17,9 @@ public class TMCadDispositivo extends AbstractTableModel {
     
     private static final int COL_ID = 0;
     private static final int COL_TIPO = 1;
-    private static final int COL_MARCA = 2;
-    private static final int COL_MODELO = 3;
+    private static final int COL_NOME = 2;
+    private static final int COL_MARCA = 3;
+    
   
     public TMCadDispositivo(List<Dispositivo> lista) {
         this.lst = lista;
@@ -45,10 +46,10 @@ public class TMCadDispositivo extends AbstractTableModel {
             return a.getIdDispositivo();
         }else if(columnIndex == COL_TIPO){
             return a.getTipo();
+        }else if(columnIndex == COL_NOME){
+            return a.getNome();
         }else if(columnIndex == COL_MARCA){
             return a.getMarca();
-        }else if(columnIndex == COL_MODELO){
-            return a.getModelo();
         }
         return "-";
     }
@@ -58,10 +59,10 @@ public class TMCadDispositivo extends AbstractTableModel {
             return "Id";
         }else if(columnIndex == COL_TIPO){
             return "Tipo";
+        }else if(columnIndex == COL_NOME){
+            return "Nome";
         }else if(columnIndex == COL_MARCA){
             return "Marca";
-        }else if(columnIndex == COL_MODELO){
-            return "Modelo";
         }
         return "";
     }

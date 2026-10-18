@@ -161,11 +161,6 @@
                               <Component id="edtMarca" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                               <Component id="lblMarca" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblModelo" min="-2" max="-2" attributes="0"/>
-                              <Component id="edtModelo" min="-2" pref="200" max="-2" attributes="0"/>
-                          </Group>
                       </Group>
                   </Group>
                   <EmptySpace pref="194" max="32767" attributes="0"/>
@@ -183,13 +178,11 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblTipo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblMarca" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblModelo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="edtTipo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="edtMarca" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="edtModelo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -197,11 +190,6 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="lblModelo">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Modelo"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="lblTipo">
           <Properties>
             <Property name="text" type="java.lang.String" value="Tipo"/>
@@ -217,8 +205,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="edtMarca">
-        </Component>
-        <Component class="javax.swing.JTextField" name="edtModelo">
         </Component>
         <Component class="javax.swing.JLabel" name="lblNome">
           <Properties>
