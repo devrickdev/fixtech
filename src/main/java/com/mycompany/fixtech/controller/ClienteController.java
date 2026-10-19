@@ -45,7 +45,11 @@ public class ClienteController {
     public Cliente buscarCliente(Long idCliente) {
         return (Cliente) this.repositorio.findById(idCliente);
     }
-
+    
+    public Cliente buscarLoginSenha(String login, String senha){
+        return (Cliente) this.repositorio.findByLoginSenha(login, senha);
+    }
+    
     public void atualizarTabela(JTable grd) {
         List<Cliente> lst = repositorio.findAll();
         

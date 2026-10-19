@@ -6,6 +6,7 @@ package com.mycompany.fixtech.model.dao;
 
 import com.mycompany.fixtech.factory.DatabaseJPA;
 import com.mycompany.fixtech.model.Administrador;
+import com.mycompany.fixtech.model.exceptions.LoginException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import java.util.List;
@@ -84,7 +85,7 @@ public class AdministradorDAO implements IDao<Administrador> {
         return lst;
 
     }
-
+    
     public Administrador findById(Long idUsuario) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
 
@@ -104,4 +105,21 @@ public class AdministradorDAO implements IDao<Administrador> {
             return lst.get(0);
         }
     }
+    
+    public Administrador findByLoginSenha(String login, String senha) {
+    this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+
+    jpql = "SELECT a FROM Administrador a WHERE a.login = :login AND a.senha = :senha";
+    qry = this.entityManager.createQuery(jpql);
+    
+    qry.setParameter("login", login);
+    qry.setParameter("senha", senha);
+
+    try {
+        return (Administrador) qry.getSingleResult();
+    } catch (LoginException e) {
+        return null;
+    }
+}
+    
 }

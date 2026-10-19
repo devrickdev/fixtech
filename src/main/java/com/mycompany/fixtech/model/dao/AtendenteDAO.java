@@ -6,6 +6,7 @@ package com.mycompany.fixtech.model.dao;
 
 import com.mycompany.fixtech.factory.DatabaseJPA;
 import com.mycompany.fixtech.model.Atendente;
+import com.mycompany.fixtech.model.exceptions.LoginException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import java.util.List;
@@ -107,5 +108,21 @@ public class AtendenteDAO implements IDao<Atendente> {
             return lst.get(0);
         }                
     }    
+    
+    public Atendente findByLoginSenha(String login, String senha) {
+    this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+
+    jpql = "SELECT a FROM Atendente a WHERE a.login = :login AND a.senha = :senha";
+    qry = this.entityManager.createQuery(jpql);
+    
+    qry.setParameter("login", login);
+    qry.setParameter("senha", senha);
+
+    try {
+        return (Atendente) qry.getSingleResult();
+    } catch (LoginException e) {
+        return null;
+    }
+}
     
 }

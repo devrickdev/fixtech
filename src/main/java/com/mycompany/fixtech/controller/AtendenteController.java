@@ -45,7 +45,11 @@ public class AtendenteController {
     public Atendente buscarAtendente(Long idUsuario) {
         return this.repositorio.findById(idUsuario);
     }
-
+    
+    public Atendente buscarLoginSenha(String login, String senha){
+        return (Atendente) this.repositorio.findByLoginSenha(login, senha);
+    }
+    
     public void atualizarTabela(JTable grd) {
         List<Atendente> lst = repositorio.findAll();
         

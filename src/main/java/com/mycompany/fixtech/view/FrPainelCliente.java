@@ -4,17 +4,17 @@
  */
 package com.mycompany.fixtech.view;
 
+import com.mycompany.fixtech.model.Feedback;
+import com.mycompany.fixtech.view.dialogs.DlgCadFeedback;
+import javax.swing.JFrame;
+
 /**
  *
  * @author henry
  */
 public class FrPainelCliente extends javax.swing.JFrame {
+    Feedback feedback = new Feedback();
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrPainelCliente.class.getName());
-
-    /**
-     * Creates new form FrPainelCliente
-     */
     public FrPainelCliente() {
         initComponents();
     }
@@ -31,12 +31,13 @@ public class FrPainelCliente extends javax.swing.JFrame {
         jFrame1 = new javax.swing.JFrame();
         jFrame2 = new javax.swing.JFrame();
         jPanel4 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnRegFeedback = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        btnRegHistorico = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        btnLogout = new javax.swing.JToggleButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -62,7 +63,8 @@ public class FrPainelCliente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Registrar Feedback");
+        btnRegFeedback.setText("Registrar Feedback");
+        btnRegFeedback.addActionListener(this::btnRegFeedbackActionPerformed);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/feedback.png"))); // NOI18N
         jLabel3.setText("Feedback");
@@ -75,7 +77,7 @@ public class FrPainelCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRegFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -84,11 +86,12 @@ public class FrPainelCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(btnRegFeedback)
                 .addContainerGap())
         );
 
-        jButton2.setText("Consultar Histórico");
+        btnRegHistorico.setText("Consultar Histórico");
+        btnRegHistorico.addActionListener(this::btnRegHistoricoActionPerformed);
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logs.png"))); // NOI18N
         jLabel7.setText("Histórico");
@@ -101,7 +104,7 @@ public class FrPainelCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRegHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -110,7 +113,7 @@ public class FrPainelCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(btnRegHistorico)
                 .addContainerGap())
         );
 
@@ -118,6 +121,9 @@ public class FrPainelCliente extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/clientes.png"))); // NOI18N
         jLabel1.setText("CLIENTE");
+
+        btnLogout.setText("Logout");
+        btnLogout.addActionListener(this::btnLogoutActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,25 +136,48 @@ public class FrPainelCliente extends javax.swing.JFrame {
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(145, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnLogout)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(150, 150, 150)
+                .addGap(43, 43, 43)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(61, 61, 61)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 196, Short.MAX_VALUE)
+                .addComponent(btnLogout)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnRegFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegFeedbackActionPerformed
+        DlgCadFeedback cadFeedback = new DlgCadFeedback(new JFrame(),true);
+        cadFeedback.setVisible(true);
+    }//GEN-LAST:event_btnRegFeedbackActionPerformed
+
+    private void btnRegHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegHistoricoActionPerformed
+        FrPainelHistorico painelHistorico = new FrPainelHistorico();
+        painelHistorico.setVisible(true);
+    }//GEN-LAST:event_btnRegHistoricoActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        this.dispose();
+        FrHome homepage = new FrHome();
+        homepage.setVisible(true);
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JToggleButton btnLogout;
+    private javax.swing.JButton btnRegFeedback;
+    private javax.swing.JButton btnRegHistorico;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
     private javax.swing.JLabel jLabel1;

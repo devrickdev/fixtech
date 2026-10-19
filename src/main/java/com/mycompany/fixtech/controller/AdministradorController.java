@@ -45,7 +45,11 @@ public class AdministradorController {
     public Administrador buscarAdministrador(Long idUsuario) {
         return (Administrador) this.repositorio.findById(idUsuario);
     }
-
+    
+    public Administrador buscarLoginSenha(String login, String senha){
+        return (Administrador) this.repositorio.findByLoginSenha(login, senha);
+    }
+    
     public void atualizarTabela(JTable grd) {
         List<Administrador> lst = repositorio.findAll();
         
