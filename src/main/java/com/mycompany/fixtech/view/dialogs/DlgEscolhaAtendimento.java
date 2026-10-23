@@ -7,6 +7,7 @@ package com.mycompany.fixtech.view.dialogs;
 import com.mycompany.fixtech.controller.AtendimentoController;
 import com.mycompany.fixtech.model.Atendimento;
 import com.mycompany.fixtech.model.Feedback;
+import com.mycompany.fixtech.view.tablemodels.TMCadAtendimento;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,6 +29,16 @@ public class DlgEscolhaAtendimento extends javax.swing.JDialog {
         atendimentoController.atualizarTabela(grdListagem);
     }
     
+    public Atendimento getObjetoSelecionadoNaGrid() {
+        int linhaSelecionada = grdListagem.getSelectedRow();
+        if (linhaSelecionada >= 0) {
+            TMCadAtendimento tmCadAtendimento = (TMCadAtendimento) grdListagem.getModel();
+            Atendimento atendimento = tmCadAtendimento.getObjetoAtendimento(linhaSelecionada);
+            return atendimento;
+        }
+        return null;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,12 +52,10 @@ public class DlgEscolhaAtendimento extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         grdListagem = new javax.swing.JTable();
         btnConfirmar = new javax.swing.JButton();
-        edtId = new javax.swing.JTextField();
-        lblBusca = new javax.swing.JLabel();
-        btnBuscar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         areaSelecionado = new javax.swing.JTextArea();
+        btnSelecionar = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -72,17 +81,15 @@ public class DlgEscolhaAtendimento extends javax.swing.JDialog {
         btnConfirmar.setText("Confirmar");
         btnConfirmar.addActionListener(this::btnConfirmarActionPerformed);
 
-        lblBusca.setText("Busca:");
-
-        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/confirma.png"))); // NOI18N
-        btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(this::btnBuscarActionPerformed);
-
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Selecionado");
 
         areaSelecionado.setColumns(20);
         areaSelecionado.setRows(5);
         jScrollPane3.setViewportView(areaSelecionado);
+
+        btnSelecionar.setText("Selecionar");
+        btnSelecionar.addActionListener(this::btnSelecionarActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,36 +98,28 @@ public class DlgEscolhaAtendimento extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 827, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblBusca)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(edtId, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnBuscar))
-                            .addComponent(jScrollPane1))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+                            .addComponent(btnSelecionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
-                            .addComponent(btnConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(edtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblBusca)
-                        .addComponent(btnBuscar))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(btnSelecionar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -132,25 +131,12 @@ public class DlgEscolhaAtendimento extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        String idEscolhido = edtId.getText();
-        if (!idEscolhido.isEmpty()) {
-            Long idEscolhidoLong = Long.parseLong(idEscolhido);
-            atendimentoEscolhido = this.atendimentoController.buscarAtendimento(idEscolhidoLong);
-
-            if (atendimentoEscolhido == null) {
-                JOptionPane.showMessageDialog(this, "Não existe este Id.");
-                areaSelecionado.setText("");
-            } else {
-                areaSelecionado.setText(atendimentoEscolhido.toString());
-            }
-        }
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-       if (atendimentoEscolhido == null) {
+       atendimentoEscolhido = this.getObjetoSelecionadoNaGrid();
+        if (atendimentoEscolhido == null) {
             int response = JOptionPane.showConfirmDialog(null,
                     "Nenhum atendimento foi escolhido. Deseja continuar?",
                     "Confirm",
@@ -165,16 +151,23 @@ public class DlgEscolhaAtendimento extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
+    private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
+        atendimentoEscolhido = this.getObjetoSelecionadoNaGrid();
+        if (atendimentoEscolhido == null) {
+            areaSelecionado.setText("");
+        } else {
+            areaSelecionado.setText(atendimentoEscolhido.toString());
+        }
+    }//GEN-LAST:event_btnSelecionarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaSelecionado;
-    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnConfirmar;
-    private javax.swing.JTextField edtId;
+    private javax.swing.JToggleButton btnSelecionar;
     private javax.swing.JTable grdListagem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lblBusca;
     // End of variables declaration//GEN-END:variables
 }

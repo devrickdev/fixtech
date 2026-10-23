@@ -54,7 +54,7 @@ public class TMCadAtendimento extends AbstractTableModel {
         }else if(columnIndex == COL_STATUS){
             return a.getStatus();
         }else if(columnIndex == COL_DESCRICAO){
-            return a.getStatus();
+            return a.getDescricao();
         }
         return "-";
     }

@@ -17,7 +17,7 @@ public class TMCadPeca extends AbstractTableModel {
     
     private static final int COL_ID = 0;
     private static final int COL_NOME = 1;
-    private static final int COL_QUANTIDADE = 2;
+    private static final int COL_ESTOQUE = 2;
     private static final int COL_VALORUNIDADE = 3;
   
     public TMCadPeca(List<Peca> lista) {
@@ -45,8 +45,8 @@ public class TMCadPeca extends AbstractTableModel {
             return a.getIdPeca();
         }else if(columnIndex == COL_NOME){
             return a.getNome();
-        }else if(columnIndex == COL_QUANTIDADE){
-            return a.getQuantidade();
+        }else if(columnIndex == COL_ESTOQUE){
+            return a.getEstoque();
         }else if(columnIndex == COL_VALORUNIDADE){
             return a.getValorUnidade();
         }
@@ -58,8 +58,8 @@ public class TMCadPeca extends AbstractTableModel {
             return "Id";
         }else if(columnIndex == COL_NOME){
             return "Nome";
-        }else if(columnIndex == COL_QUANTIDADE){
-            return "Quantidade";
+        }else if(columnIndex == COL_ESTOQUE){
+            return "Estoque";
         }else if(columnIndex == COL_VALORUNIDADE){
             return "ValorUnidade";
         }

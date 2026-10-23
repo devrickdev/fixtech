@@ -12,18 +12,19 @@ import com.mycompany.fixtech.model.exceptions.PecaException;
  * @author henry
  */
 public class ValidatePeca {
-    public Peca validaCamposEntrada(Long idPeca, String nome, String quantidade, String valorUnidade){
+    public Peca validaCamposEntrada(Long idPeca, String nome, String estoque, String valorUnidade){
         Peca peca = new Peca();
         if (nome.isEmpty())
             throw new PecaException("Error - Campo vazio: 'nome'.");
         peca.setNome(nome);
         
-        int quantidadeInt = 0;
-        if (quantidade.isEmpty())
-            throw new PecaException("Error - Campo vazio: 'quantidade'.");
+        int estoqueInt = 0;
+        if (estoque.isEmpty())
+            throw new PecaException("Error - Campo vazio: 'estoque'.");
+       
+        estoqueInt = Integer.parseInt(estoque);
+        peca.setEstoque(estoqueInt); 
         
-        quantidadeInt = Integer.parseInt(quantidade);
-        peca.setQuantidade(quantidadeInt); 
         
         Double valorUnidadeDouble = 0.0;
         if (valorUnidade.isEmpty())

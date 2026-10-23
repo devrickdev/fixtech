@@ -47,7 +47,7 @@ public class AdministradorController {
     }
     
     public Administrador buscarLoginSenha(String login, String senha){
-        return (Administrador) this.repositorio.findByLoginSenha(login, senha);
+        return this.repositorio.findByLoginSenha(login, senha);
     }
     
     public void atualizarTabela(JTable grd) {

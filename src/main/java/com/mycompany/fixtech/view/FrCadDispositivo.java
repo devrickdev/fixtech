@@ -7,6 +7,7 @@ package com.mycompany.fixtech.view;
 import com.mycompany.fixtech.controller.DispositivoController;
 import com.mycompany.fixtech.model.Dispositivo;
 import com.mycompany.fixtech.model.exceptions.DispositivoException;
+import com.mycompany.fixtech.view.tablemodels.TMCadDispositivo;
 import javax.swing.JOptionPane;
 
 /**
@@ -48,13 +49,14 @@ public class FrCadDispositivo extends javax.swing.JFrame {
         edtMarca.setText(a.getMarca());
     }
     
-    private Object getObjetoSelecionadoNaGrid() {
-        int rowCliked = grdDispositivos.getSelectedRow();
-        Object obj = null;
-        if (rowCliked >= 0) {
-            obj = grdDispositivos.getModel().getValueAt(rowCliked, -1);
+    public Dispositivo getObjetoSelecionadoNaGrid() {
+        int linhaSelecionada = grdDispositivos.getSelectedRow();
+        if (linhaSelecionada >= 0) {
+            TMCadDispositivo tmCadDispositivo = (TMCadDispositivo) grdDispositivos.getModel();
+            Dispositivo dispositivo = tmCadDispositivo.getObjetoDispositivo(linhaSelecionada);
+            return dispositivo;
         }
-        return obj;
+        return null;
     }
 
     /**
@@ -85,6 +87,7 @@ public class FrCadDispositivo extends javax.swing.JFrame {
         grdDispositivos = new javax.swing.JTable();
         lblDispositivos = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
+        btnVoltar = new javax.swing.JToggleButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -162,17 +165,14 @@ public class FrCadDispositivo extends javax.swing.JFrame {
                 .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNome)
                     .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panFormularioLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(edtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTipo)))
-                    .addGroup(panFormularioLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(edtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblMarca))))
+                    .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(edtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblTipo))
+                    .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(edtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblMarca)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -196,21 +196,27 @@ public class FrCadDispositivo extends javax.swing.JFrame {
         lblTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/devices.png"))); // NOI18N
         lblTitle.setText("CADASTRAR DISPOSITIVO");
 
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(this::btnVoltarActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
             .addComponent(lblTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblDispositivos)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
             .addComponent(panFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(lblDispositivos)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,11 +229,14 @@ public class FrCadDispositivo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDispositivos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnVoltar)
+                .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
@@ -236,7 +245,7 @@ public class FrCadDispositivo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        Dispositivo dispositivoEditando = (Dispositivo) this.getObjetoSelecionadoNaGrid();
+        Dispositivo dispositivoEditando = this.getObjetoSelecionadoNaGrid();
 
         if (dispositivoEditando == null)
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
@@ -249,7 +258,7 @@ public class FrCadDispositivo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        Dispositivo dispositivoExcluido = (Dispositivo) this.getObjetoSelecionadoNaGrid();
+        Dispositivo dispositivoExcluido = this.getObjetoSelecionadoNaGrid();
 
         if (dispositivoExcluido == null)
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
@@ -303,12 +312,19 @@ public class FrCadDispositivo extends javax.swing.JFrame {
         this.habilitarCampos(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+       this.dispose();
+       FrPainelAtendente painelAtendente = new FrPainelAtendente();
+       painelAtendente.setVisible(true);
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JToggleButton btnVoltar;
     private javax.swing.JTextField edtMarca;
     private javax.swing.JTextField edtNome;
     private javax.swing.JTextField edtTipo;

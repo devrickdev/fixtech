@@ -6,9 +6,8 @@ package com.mycompany.fixtech.model.dao;
 
 import com.mycompany.fixtech.factory.DatabaseJPA;
 import com.mycompany.fixtech.model.Cliente;
-import com.mycompany.fixtech.model.exceptions.LoginException;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import java.util.List;
 
 /**
@@ -19,7 +18,7 @@ public class ClienteDAO implements IDao<Cliente> {
 
     private EntityManager entityManager;
     
-    private Query qry;
+    private TypedQuery<Cliente> qry;
     private String jpql;
 
     public ClienteDAO() {
@@ -54,7 +53,7 @@ public class ClienteDAO implements IDao<Cliente> {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager(); 
         Cliente cliente = obj;
         this.entityManager.getTransaction().begin();
-        qry = this.entityManager.createQuery("DELETE FROM Cliente WHERE idUsuario=:idUsuario ");
+        qry = (TypedQuery<Cliente>) this.entityManager.createQuery("DELETE FROM Cliente WHERE idUsuario=:idUsuario ");
         qry.setParameter("idUsuario", cliente.getIdUsuario());
         qry.executeUpdate();
         this.entityManager.getTransaction().commit();
@@ -79,7 +78,7 @@ public class ClienteDAO implements IDao<Cliente> {
         jpql = " SELECT f "
              + " FROM Cliente f ";
 
-        qry = this.entityManager.createQuery(jpql);
+        qry = (TypedQuery<Cliente>) this.entityManager.createQuery(jpql);
         
         List lst = qry.getResultList();
         
@@ -94,7 +93,7 @@ public class ClienteDAO implements IDao<Cliente> {
         jpql = " SELECT f "
              + " FROM Cliente f "
              + " WHERE f.idUsuario =:idUsuario ";
-        qry = this.entityManager.createQuery(jpql);
+        qry = (TypedQuery<Cliente>) this.entityManager.createQuery(jpql);
         qry.setParameter("idUsuario", idUsuario);
         
         List<Cliente> lst = qry.getResultList();
@@ -112,16 +111,18 @@ public class ClienteDAO implements IDao<Cliente> {
     this.entityManager = DatabaseJPA.getInstance().getEntityManager();
 
     jpql = "SELECT a FROM Cliente a WHERE a.login = :login AND a.senha = :senha";
-    qry = this.entityManager.createQuery(jpql);
+    qry = this.entityManager.createQuery(jpql, Cliente.class);
     
     qry.setParameter("login", login);
     qry.setParameter("senha", senha);
 
-    try {
-        return (Cliente) qry.getSingleResult();
-    } catch (LoginException e) {
-        return null;
+    List<Cliente> resultados = qry.getResultList();
+
+    if (resultados == null || resultados.isEmpty()) {
+        return null; 
     }
-}
+
+    return resultados.get(0);
+    }
     
 }

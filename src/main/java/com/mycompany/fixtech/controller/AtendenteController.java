@@ -47,7 +47,7 @@ public class AtendenteController {
     }
     
     public Atendente buscarLoginSenha(String login, String senha){
-        return (Atendente) this.repositorio.findByLoginSenha(login, senha);
+        return this.repositorio.findByLoginSenha(login, senha);
     }
     
     public void atualizarTabela(JTable grd) {

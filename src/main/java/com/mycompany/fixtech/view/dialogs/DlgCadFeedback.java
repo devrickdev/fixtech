@@ -7,6 +7,7 @@ package com.mycompany.fixtech.view.dialogs;
 import com.mycompany.fixtech.controller.FeedbackController;
 import com.mycompany.fixtech.model.Feedback;
 import com.mycompany.fixtech.model.exceptions.FeedbackException;
+import com.mycompany.fixtech.view.tablemodels.TMCadFeedback;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -19,11 +20,14 @@ public class DlgCadFeedback extends javax.swing.JDialog {
     Long idFeedbackEditando;
     private Feedback feedback;
     
-    public DlgCadFeedback(java.awt.Frame parent, boolean modal) {
+    public DlgCadFeedback(java.awt.Frame parent, boolean modal, Feedback feedback) {
         super(parent, modal);
         feedbackController = new FeedbackController();
+        this.feedback = new Feedback();
         idFeedbackEditando = -1L;
         initComponents();
+        btnEditar.setEnabled(false);
+        btnExcluir.setEnabled(false);
         this.habilitarCampos(false);
         this.limparCampos();
         feedbackController.atualizarTabela(grdFeedbacks);
@@ -38,22 +42,24 @@ public class DlgCadFeedback extends javax.swing.JDialog {
     public void limparCampos() {
         edtNota.setText("");
         edtComentario.setText("");
+        edtDescricaoAtendimento.setText("");
     }
     
     public void preencherFormulario(Feedback a) {
         edtNota.setText(a.getNota() + "");
         edtComentario.setText(a.getComentario());
+        edtDescricaoAtendimento.setText(a.getAtendimento().getDescricao() + "");
     }
     
-    private Object getObjetoSelecionadoNaGrid() {
-        int rowCliked = grdFeedbacks.getSelectedRow();
-        Object obj = null;
-        if (rowCliked >= 0) {
-            obj = grdFeedbacks.getModel().getValueAt(rowCliked, -1);
+    public Feedback getObjetoSelecionadoNaGrid() {
+        int linhaSelecionada = grdFeedbacks.getSelectedRow();
+        if (linhaSelecionada >= 0) {
+            TMCadFeedback tmCadFeedback = (TMCadFeedback) grdFeedbacks.getModel();
+            Feedback feedback = tmCadFeedback.getObjetoFeedback(linhaSelecionada);
+            return feedback;
         }
-        return obj;
+        return null;
     }
-    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -81,6 +87,7 @@ public class DlgCadFeedback extends javax.swing.JDialog {
         lblFeedbacks = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         grdFeedbacks = new javax.swing.JTable();
+        btnVoltar = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -154,18 +161,18 @@ public class DlgCadFeedback extends javax.swing.JDialog {
                 .addGap(21, 21, 21)
                 .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panFormularioLayout.createSequentialGroup()
-                        .addComponent(lblComentario)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(edtComentario, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panFormularioLayout.createSequentialGroup()
                         .addComponent(btnEscolherAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(edtDescricaoAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(edtDescricaoAtendimento))
+                    .addGroup(panFormularioLayout.createSequentialGroup()
+                        .addComponent(lblComentario)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(edtComentario, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblNota, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(edtNota, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
         panFormularioLayout.setVerticalGroup(
             panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,13 +180,13 @@ public class DlgCadFeedback extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEscolherAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edtDescricaoAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edtNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNota))
+                    .addComponent(edtDescricaoAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblComentario)
-                    .addComponent(edtComentario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(edtComentario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edtNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNota))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -198,6 +205,9 @@ public class DlgCadFeedback extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(grdFeedbacks);
 
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(this::btnVoltarActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -205,16 +215,22 @@ public class DlgCadFeedback extends javax.swing.JDialog {
             .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panbotoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(lblFeedbacks))
-                        .addComponent(panFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jScrollPane1))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(lblFeedbacks))
+                                .addComponent(panFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,20 +243,24 @@ public class DlgCadFeedback extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblFeedbacks)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnVoltar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        this.feedback = new Feedback();
         this.habilitarCampos(true);
         this.limparCampos();
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        Feedback feedbackEditando = (Feedback) this.getObjetoSelecionadoNaGrid();
+        Feedback feedbackEditando = this.getObjetoSelecionadoNaGrid();
 
         if (feedbackEditando == null)
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
@@ -253,7 +273,7 @@ public class DlgCadFeedback extends javax.swing.JDialog {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        Feedback feedbackExcluido = (Feedback) this.getObjetoSelecionadoNaGrid();
+        Feedback feedbackExcluido = this.getObjetoSelecionadoNaGrid();
 
         if (feedbackExcluido == null)
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
@@ -281,12 +301,11 @@ public class DlgCadFeedback extends javax.swing.JDialog {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        Feedback feedbackSalvando = new Feedback();
         try {
             if (idFeedbackEditando > 0) {
-                feedbackController.atualizarFeedback(idFeedbackEditando, edtDescricaoAtendimento.getText(), edtNota.getText(), edtComentario.getText());
+                feedbackController.atualizarFeedback(idFeedbackEditando, feedback.getAtendimento(), edtNota.getText(), edtComentario.getText());
             } else {
-                feedbackController.cadastrarFeedback(feedbackSalvando.getIdFeedback(),edtDescricaoAtendimento.getText(), edtNota.getText(), edtComentario.getText());
+                feedbackController.cadastrarFeedback(feedback.getIdFeedback(), feedback.getAtendimento(), edtNota.getText(), edtComentario.getText());
             }
       
             this.idFeedbackEditando = -1L;
@@ -311,10 +330,13 @@ public class DlgCadFeedback extends javax.swing.JDialog {
         DlgEscolhaAtendimento telaAddAtendimento = new DlgEscolhaAtendimento(new JFrame(), true, feedback);
         telaAddAtendimento.setVisible(true);
         
-        //System.out.println("Ola mundo.");
+        feedback.setAtendimento(telaAddAtendimento.atendimentoEscolhido);
         edtDescricaoAtendimento.setText(feedback.getAtendimento().getDescricao());
-        feedbackController.atualizarTabela(grdFeedbacks);
     }//GEN-LAST:event_btnEscolherAtendimentoActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -323,6 +345,7 @@ public class DlgCadFeedback extends javax.swing.JDialog {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JToggleButton btnVoltar;
     private javax.swing.JTextField edtComentario;
     private javax.swing.JTextField edtDescricaoAtendimento;
     private javax.swing.JTextField edtNota;

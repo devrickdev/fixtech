@@ -47,7 +47,7 @@ public class ClienteController {
     }
     
     public Cliente buscarLoginSenha(String login, String senha){
-        return (Cliente) this.repositorio.findByLoginSenha(login, senha);
+        return this.repositorio.findByLoginSenha(login, senha);
     }
     
     public void atualizarTabela(JTable grd) {

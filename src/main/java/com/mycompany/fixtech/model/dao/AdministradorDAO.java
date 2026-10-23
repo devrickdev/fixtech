@@ -6,9 +6,8 @@ package com.mycompany.fixtech.model.dao;
 
 import com.mycompany.fixtech.factory.DatabaseJPA;
 import com.mycompany.fixtech.model.Administrador;
-import com.mycompany.fixtech.model.exceptions.LoginException;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import java.util.List;
 
 /**
@@ -19,7 +18,7 @@ public class AdministradorDAO implements IDao<Administrador> {
 
     private EntityManager entityManager;
 
-    private Query qry;
+    private TypedQuery<Administrador> qry;
     private String jpql;
 
     public AdministradorDAO() {
@@ -52,7 +51,7 @@ public class AdministradorDAO implements IDao<Administrador> {
     public boolean delete(Administrador obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
-        qry = this.entityManager.createQuery("DELETE FROM Administrador WHERE idUsuario=:idUsuario ");
+        qry = (TypedQuery<Administrador>) this.entityManager.createQuery("DELETE FROM Administrador WHERE idUsuario=:idUsuario ");
         qry.setParameter("idUsuario", obj.getIdUsuario());
         qry.executeUpdate();
         this.entityManager.getTransaction().commit();
@@ -77,7 +76,7 @@ public class AdministradorDAO implements IDao<Administrador> {
         jpql = " SELECT f "
                 + " FROM Administrador f ";
 
-        qry = this.entityManager.createQuery(jpql);
+        qry = (TypedQuery<Administrador>) this.entityManager.createQuery(jpql);
 
         List<Administrador> lst = qry.getResultList();
 
@@ -92,7 +91,7 @@ public class AdministradorDAO implements IDao<Administrador> {
         jpql = " SELECT f "
                 + " FROM Administrador f "
                 + " WHERE f.idUsuario =:idUsuario ";
-        qry = this.entityManager.createQuery(jpql);
+        qry = (TypedQuery<Administrador>) this.entityManager.createQuery(jpql);
         qry.setParameter("idUsuario", idUsuario);
 
         List<Administrador> lst = qry.getResultList();
@@ -110,16 +109,18 @@ public class AdministradorDAO implements IDao<Administrador> {
     this.entityManager = DatabaseJPA.getInstance().getEntityManager();
 
     jpql = "SELECT a FROM Administrador a WHERE a.login = :login AND a.senha = :senha";
-    qry = this.entityManager.createQuery(jpql);
+    qry = this.entityManager.createQuery(jpql, Administrador.class);
     
     qry.setParameter("login", login);
     qry.setParameter("senha", senha);
 
-    try {
-        return (Administrador) qry.getSingleResult();
-    } catch (LoginException e) {
-        return null;
+    List<Administrador> resultados = qry.getResultList();
+
+    if (resultados == null || resultados.isEmpty()) {
+        return null; 
     }
-}
+
+    return resultados.get(0);
+    }
     
 }

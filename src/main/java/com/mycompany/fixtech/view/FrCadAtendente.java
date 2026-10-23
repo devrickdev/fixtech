@@ -7,6 +7,7 @@ package com.mycompany.fixtech.view;
 import com.mycompany.fixtech.controller.AtendenteController;
 import com.mycompany.fixtech.model.Atendente;
 import com.mycompany.fixtech.model.exceptions.AtendenteException;
+import com.mycompany.fixtech.view.tablemodels.TMCadAtendente;
 import javax.swing.JOptionPane;
 
 /**
@@ -44,13 +45,14 @@ public class FrCadAtendente extends javax.swing.JFrame {
         edtSenha.setText(a.getSenha());
     }
     
-    private Object getObjetoSelecionadoNaGrid() {
-        int rowCliked = grdAtendentes.getSelectedRow();
-        Object obj = null;
-        if (rowCliked >= 0) {
-            obj = grdAtendentes.getModel().getValueAt(rowCliked, -1);
+    public Atendente getObjetoSelecionadoNaGrid() {
+        int linhaSelecionada = grdAtendentes.getSelectedRow();
+        if (linhaSelecionada >= 0) {
+            TMCadAtendente tmCadAtendente = (TMCadAtendente) grdAtendentes.getModel();
+            Atendente atendente = tmCadAtendente.getObjetoAtendente(linhaSelecionada);
+            return atendente;
         }
-        return obj;
+        return null;
     }
 
     /**
@@ -80,6 +82,7 @@ public class FrCadAtendente extends javax.swing.JFrame {
         grdAtendentes = new javax.swing.JTable();
         lblAtendentes = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
+        btnVoltar = new javax.swing.JToggleButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -181,6 +184,9 @@ public class FrCadAtendente extends javax.swing.JFrame {
         lblTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/atd.png"))); // NOI18N
         lblTitle.setText("CADASTRAR ATENDENTE");
 
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(this::btnVoltarActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -194,7 +200,10 @@ public class FrCadAtendente extends javax.swing.JFrame {
                     .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblAtendentes)
-                        .addGap(0, 711, Short.MAX_VALUE)))
+                        .addGap(0, 711, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -208,11 +217,14 @@ public class FrCadAtendente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAtendentes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnVoltar)
+                .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
@@ -221,21 +233,19 @@ public class FrCadAtendente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        Atendente atendenteEditando = (Atendente) this.getObjetoSelecionadoNaGrid();
-
+        Atendente atendenteEditando = this.getObjetoSelecionadoNaGrid();
         if (atendenteEditando == null)
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         else {
             this.limparCampos();
             this.habilitarCampos(true);
-            this.preencherFormulario(atendenteEditando);
+            this.preencherFormulario((Atendente) atendenteEditando);
             this.idAtendenteEditando = atendenteEditando.getIdUsuario();
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        Atendente atendenteExcluido = (Atendente) this.getObjetoSelecionadoNaGrid();
-
+        Atendente atendenteExcluido = this.getObjetoSelecionadoNaGrid();
         if (atendenteExcluido == null)
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         else {
@@ -288,6 +298,12 @@ public class FrCadAtendente extends javax.swing.JFrame {
         this.habilitarCampos(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+       this.dispose();
+       FrPainelAdm painelAdm = new FrPainelAdm();
+       painelAdm.setVisible(true);
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -295,6 +311,7 @@ public class FrCadAtendente extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JToggleButton btnVoltar;
     private javax.swing.JTextField edtLogin;
     private javax.swing.JTextField edtNome;
     private javax.swing.JTextField edtSenha;

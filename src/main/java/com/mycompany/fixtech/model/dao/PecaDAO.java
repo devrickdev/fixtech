@@ -92,7 +92,7 @@ public class PecaDAO implements IDao<Peca> {
         
         jpql = " SELECT f "
              + " FROM Peca f "
-             + " WHERE f.idPeca like :idPeca ";
+             + " WHERE f.idPeca =:idPeca ";
         qry = this.entityManager.createQuery(jpql);
         qry.setParameter("idPeca", idPeca);
         

@@ -7,6 +7,7 @@ package com.mycompany.fixtech.view;
 import com.mycompany.fixtech.controller.AdministradorController;
 import com.mycompany.fixtech.model.Administrador;
 import com.mycompany.fixtech.model.exceptions.AdministradorException;
+import com.mycompany.fixtech.view.tablemodels.TMCadAdministrador;
 import javax.swing.JOptionPane;
 /**
  *
@@ -46,13 +47,14 @@ public class FrCadAdministrador extends javax.swing.JFrame {
         edtSenha.setText(a.getSenha());
     }
     
-    private Object getObjetoSelecionadoNaGrid() {
-        int rowCliked = grdAdms.getSelectedRow();
-        Object obj = null;
-        if (rowCliked >= 0) {
-            obj = grdAdms.getModel().getValueAt(rowCliked, -1);
+    public Administrador getObjetoSelecionadoNaGrid() {
+        int linhaSelecionada = grdAdms.getSelectedRow();
+        if (linhaSelecionada >= 0) {
+            TMCadAdministrador tmCadAdm = (TMCadAdministrador) grdAdms.getModel();
+            Administrador atendente = tmCadAdm.getObjetoAdm(linhaSelecionada);
+            return atendente;
         }
-        return obj;
+        return null;
     }
 
     /**
@@ -82,6 +84,7 @@ public class FrCadAdministrador extends javax.swing.JFrame {
         grdAdms = new javax.swing.JTable();
         lblAdms = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
+        btnVoltar = new javax.swing.JToggleButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -156,11 +159,12 @@ public class FrCadAdministrador extends javax.swing.JFrame {
                     .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNome))
                 .addGap(30, 30, 30)
-                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(edtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(edtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblLogin)
-                    .addComponent(lblSenha))
+                    .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(edtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblLogin)
+                        .addComponent(lblSenha)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -184,6 +188,9 @@ public class FrCadAdministrador extends javax.swing.JFrame {
         lblTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/adm.png"))); // NOI18N
         lblTitle.setText("CADASTRAR ADMINISTRADOR");
 
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(this::btnVoltarActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -191,15 +198,18 @@ public class FrCadAdministrador extends javax.swing.JFrame {
             .addComponent(panBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE)
             .addComponent(lblTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panFormulario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane2)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(lblAdms)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -213,11 +223,14 @@ public class FrCadAdministrador extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAdms)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnVoltar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
@@ -226,7 +239,7 @@ public class FrCadAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        Administrador admEditando = (Administrador) this.getObjetoSelecionadoNaGrid();
+        Administrador admEditando = this.getObjetoSelecionadoNaGrid();
 
         if (admEditando == null)
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
@@ -239,7 +252,7 @@ public class FrCadAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        Administrador admExcluido = (Administrador) this.getObjetoSelecionadoNaGrid();
+        Administrador admExcluido = this.getObjetoSelecionadoNaGrid();
 
         if (admExcluido == null)
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
@@ -293,12 +306,19 @@ public class FrCadAdministrador extends javax.swing.JFrame {
         this.habilitarCampos(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+       this.dispose();
+       FrPainelAdm painelAdm = new FrPainelAdm();
+       painelAdm.setVisible(true);
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JToggleButton btnVoltar;
     private javax.swing.JTextField edtLogin;
     private javax.swing.JTextField edtNome;
     private javax.swing.JTextField edtSenha;

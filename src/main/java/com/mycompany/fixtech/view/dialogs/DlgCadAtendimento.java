@@ -7,6 +7,7 @@ package com.mycompany.fixtech.view.dialogs;
 import com.mycompany.fixtech.controller.AtendimentoController;
 import com.mycompany.fixtech.model.Atendimento;
 import com.mycompany.fixtech.model.exceptions.AtendimentoException;
+import com.mycompany.fixtech.view.tablemodels.TMCadAtendimento;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -15,10 +16,11 @@ import javax.swing.JOptionPane;
  * @author henry
  */
 public class DlgCadAtendimento extends javax.swing.JDialog {
+
     AtendimentoController atendimentoController;
     Long idAtendimentoEditando;
     private Atendimento atendimento;
-    
+
     public DlgCadAtendimento(java.awt.Frame parent, boolean modal, Atendimento atendimento) {
         super(parent, modal);
         atendimentoController = new AtendimentoController();
@@ -27,9 +29,9 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
         initComponents();
         this.habilitarCampos(false);
         this.limparCampos();
-        atendimentoController.atualizarTabela(grdAtendimentos);   
+        atendimentoController.atualizarTabela(grdAtendimentos);
     }
-    
+
     public void habilitarCampos(boolean flag) {
         for (int i = 0; i < panFormulario.getComponents().length; i++) {
             panFormulario.getComponent(i).setEnabled(flag);
@@ -40,24 +42,26 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
         edtDescricao.setText("");
         edtStatus.setText("");
         edtNomeCliente.setText("");
-        edtNomeCliente.setText("");
+        edtNomeAtendente.setText("");
         edtNomeDispositivo.setText("");
     }
-    
+
     public void preencherFormulario(Atendimento a) {
         edtDescricao.setText(a.getDescricao());
+        edtStatus.setText(a.getStatus());
         edtNomeCliente.setText(a.getCliente().getNome());
-        edtNomeAtendente.setText(a.getAtendente().getNome());
-        edtNomeDispositivo.setText(a.getDispositivo().getNome());
+        edtNomeAtendente.setText(a.getAtendente().getNome() + "");
+        edtNomeDispositivo.setText(a.getDispositivo().getNome() + "");
     }
-    
-    private Object getObjetoSelecionadoNaGrid() {
-        int rowCliked = grdAtendimentos.getSelectedRow();
-        Object obj = null;
-        if (rowCliked >= 0) {
-            obj = grdAtendimentos.getModel().getValueAt(rowCliked, -1);
+
+    public Atendimento getObjetoSelecionadoNaGrid() {
+        int linhaSelecionada = grdAtendimentos.getSelectedRow();
+        if (linhaSelecionada >= 0) {
+            TMCadAtendimento tmCadAtendimento = (TMCadAtendimento) grdAtendimentos.getModel();
+            Atendimento atendimento = tmCadAtendimento.getObjetoAtendimento(linhaSelecionada);
+            return atendimento;
         }
-        return obj;
+        return null;
     }
 
     /**
@@ -93,6 +97,7 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
         btnAddAtendente = new javax.swing.JButton();
         btnAddDispositivo = new javax.swing.JButton();
         edtNomeAtendente = new javax.swing.JTextField();
+        btnVoltar = new javax.swing.JToggleButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -246,6 +251,9 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(this::btnVoltarActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -259,6 +267,10 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
                     .addComponent(panFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,33 +283,36 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(btnVoltar)
                 .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddDispositivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDispositivoActionPerformed
-        DlgEscolhaDispositivo TelaAddDispositivo = new DlgEscolhaDispositivo(new JFrame(),true, atendimento);
+        DlgEscolhaDispositivo TelaAddDispositivo = new DlgEscolhaDispositivo(new JFrame(), true, atendimento);
         TelaAddDispositivo.setVisible(true);
+
         
-        //System.out.println("Ola mundo.");
+        atendimento.setDispositivo(TelaAddDispositivo.dispositivoEscolhido);
         edtNomeDispositivo.setText(atendimento.getDispositivo().getNome());
-        atendimentoController.atualizarTabela(grdAtendimentos);
     }//GEN-LAST:event_btnAddDispositivoActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        Atendimento atendimentoExcluido = (Atendimento) this.getObjetoSelecionadoNaGrid();
+        Atendimento atendimentoExcluido = this.getObjetoSelecionadoNaGrid();
 
-        if (atendimentoExcluido == null)
+        if (atendimentoExcluido == null) {
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
-        else {
+        } else {
 
             int response = JOptionPane.showConfirmDialog(null,
                     "Deseja exlcuir o Atendimento  \n("
                     + atendimentoExcluido.getIdAtendimento() + ", "
-                    + atendimentoExcluido.getCliente().getNome()+ ") ?",
+                    + atendimentoExcluido.getCliente().getNome() + ") ?",
                     "Confirmar exclusão",
                     JOptionPane.OK_CANCEL_OPTION,
                     JOptionPane.QUESTION_MESSAGE);
@@ -313,11 +328,10 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
                 }
             }
         }
-    }                                          
+    }
 
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        Atendimento atendimentoEditando = (Atendimento) this.getObjetoSelecionadoNaGrid();
-
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {
+        Atendimento atendimentoEditando = this.getObjetoSelecionadoNaGrid();
         if (atendimentoEditando == null)
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         else {
@@ -329,19 +343,19 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        this.atendimento = new Atendimento();
         this.habilitarCampos(true);
         this.limparCampos();
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        Atendimento atendimentoSalvando = new Atendimento(); 
         try {
             if (idAtendimentoEditando > 0) {
-                atendimentoController.atualizarAtendimento(idAtendimentoEditando, edtDescricao.getText(), edtStatus.getText(), edtNomeCliente.getText(), edtNomeAtendente.getText(), edtNomeDispositivo.getText());
+                atendimentoController.atualizarAtendimento(idAtendimentoEditando, atendimento.getDispositivo(), atendimento.getCliente(), atendimento.getAtendente(), edtStatus.getText(), edtDescricao.getText());
             } else {
-                atendimentoController.cadastrarAtendimento(atendimentoSalvando.getIdAtendimento(), edtDescricao.getText(), edtStatus.getText(), edtNomeCliente.getText(), edtNomeAtendente.getText(), edtNomeDispositivo.getText());
+                atendimentoController.cadastrarAtendimento(atendimento.getIdAtendimento(), atendimento.getDispositivo(), atendimento.getCliente(), atendimento.getAtendente(), edtStatus.getText(), edtDescricao.getText());
             }
-      
+
             this.idAtendimentoEditando = -1L;
 
             atendimentoController.atualizarTabela(grdAtendimentos);
@@ -365,22 +379,26 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
     }//GEN-LAST:event_edtNomeAtendenteActionPerformed
 
     private void btnAddClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddClienteActionPerformed
-        DlgEscolhaCliente TelaAddCliente = new DlgEscolhaCliente(new JFrame(),true, atendimento);
+        DlgEscolhaCliente TelaAddCliente = new DlgEscolhaCliente(new JFrame(), true, atendimento);
         TelaAddCliente.setVisible(true);
+
         
-        //System.out.println("Ola mundo.");
+        atendimento.setCliente(TelaAddCliente.clienteEscolhido);
         edtNomeCliente.setText(atendimento.getCliente().getNome());
-        atendimentoController.atualizarTabela(grdAtendimentos);
     }//GEN-LAST:event_btnAddClienteActionPerformed
 
     private void btnAddAtendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAtendenteActionPerformed
-        DlgEscolhaAtendente TelaAddAtendente = new DlgEscolhaAtendente(new JFrame(),true, atendimento );
+        DlgEscolhaAtendente TelaAddAtendente = new DlgEscolhaAtendente(new JFrame(), true, atendimento);
         TelaAddAtendente.setVisible(true);
+
         
-        //System.out.println("Ola mundo.");
+        atendimento.setAtendente(TelaAddAtendente.atendenteEscolhido);
         edtNomeAtendente.setText(atendimento.getAtendente().getNome());
-        atendimentoController.atualizarTabela(grdAtendimentos);
     }//GEN-LAST:event_btnAddAtendenteActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddAtendente;
@@ -391,6 +409,7 @@ public class DlgCadAtendimento extends javax.swing.JDialog {
     private javax.swing.JToggleButton btnExcluir;
     private javax.swing.JToggleButton btnNovo;
     private javax.swing.JToggleButton btnSalvar;
+    private javax.swing.JToggleButton btnVoltar;
     private javax.swing.JTextField edtDescricao;
     private javax.swing.JTextField edtNomeAtendente;
     private javax.swing.JTextField edtNomeCliente;

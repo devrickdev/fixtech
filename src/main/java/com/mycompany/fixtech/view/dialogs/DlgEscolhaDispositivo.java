@@ -7,6 +7,7 @@ package com.mycompany.fixtech.view.dialogs;
 import com.mycompany.fixtech.controller.DispositivoController;
 import com.mycompany.fixtech.model.Atendimento;
 import com.mycompany.fixtech.model.Dispositivo;
+import com.mycompany.fixtech.view.tablemodels.TMCadDispositivo;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,13 +28,14 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
         dispositivoController.atualizarTabela(grdListagem);
     }
     
-    private Object getObjetoSelecionadoNaGrid() {
-        int rowCliked = grdListagem.getSelectedRow();
-        Object obj = null;
-        if (rowCliked >= 0) {
-            obj = grdListagem.getModel().getValueAt(rowCliked, -1);
+    public Dispositivo getObjetoSelecionadoNaGrid() {
+        int linhaSelecionada = grdListagem.getSelectedRow();
+        if (linhaSelecionada >= 0) {
+            TMCadDispositivo tmCadDispositivo = (TMCadDispositivo) grdListagem.getModel();
+            Dispositivo dispositivo = tmCadDispositivo.getObjetoDispositivo(linhaSelecionada);
+            return dispositivo;
         }
-        return obj;
+        return null;
     }
     
     /**
@@ -47,15 +49,13 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
 
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        edtId = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         grdListagem = new javax.swing.JTable();
-        lblBusca = new javax.swing.JLabel();
         btnConfirrmar = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         areaSelecionado = new javax.swing.JTextArea();
+        btnSelecionar = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -64,11 +64,8 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/devices.png"))); // NOI18N
         jLabel1.setText("ESCOLHA UM DISPOSITIVO");
 
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Selecionado");
-
-        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa.png"))); // NOI18N
-        btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(this::btnBuscarActionPerformed);
 
         grdListagem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -83,8 +80,6 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(grdListagem);
 
-        lblBusca.setText("ID");
-
         btnConfirrmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/confirma.png"))); // NOI18N
         btnConfirrmar.setText("Confirmar");
         btnConfirrmar.addActionListener(this::btnConfirrmarActionPerformed);
@@ -93,6 +88,9 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
         areaSelecionado.setRows(5);
         jScrollPane3.setViewportView(areaSelecionado);
 
+        btnSelecionar.setText("Selecionar");
+        btnSelecionar.addActionListener(this::btnSelecionarActionPerformed);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -100,44 +98,29 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblBusca)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(edtId)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBuscar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                    .addComponent(btnSelecionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnConfirrmar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnConfirrmar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(edtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblBusca))
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addComponent(jLabel3))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSelecionar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnConfirrmar))))
+                        .addComponent(btnConfirrmar))
+                    .addComponent(jScrollPane1)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -160,24 +143,11 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        String idEscolhido = edtId.getText();
-        if (!idEscolhido.isEmpty()) {
-            Long idEscolhidoLong = Long.parseLong(idEscolhido);
-            dispositivoEscolhido = this.dispositivoController.buscarDispositivo(idEscolhidoLong);
-
-            if (dispositivoEscolhido == null) {
-                JOptionPane.showMessageDialog(this, "Não existe este Id.");
-                areaSelecionado.setText("");
-            } else {
-                areaSelecionado.setText(dispositivoEscolhido.toString());
-            }
-        }
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
     private void btnConfirrmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirrmarActionPerformed
+        dispositivoEscolhido = this.getObjetoSelecionadoNaGrid();
         if (dispositivoEscolhido == null) {
             int response = JOptionPane.showConfirmDialog(null,
                     "Nenhum dispositivo foi escolhido. Deseja continuar?",
@@ -193,17 +163,24 @@ public class DlgEscolhaDispositivo extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnConfirrmarActionPerformed
 
+    private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
+        dispositivoEscolhido = this.getObjetoSelecionadoNaGrid();
+        if (dispositivoEscolhido == null) {
+            areaSelecionado.setText("");
+        } else {
+            areaSelecionado.setText(dispositivoEscolhido.toString());
+        }
+    }//GEN-LAST:event_btnSelecionarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaSelecionado;
-    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnConfirrmar;
-    private javax.swing.JTextField edtId;
+    private javax.swing.JToggleButton btnSelecionar;
     private javax.swing.JTable grdListagem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lblBusca;
     // End of variables declaration//GEN-END:variables
 }

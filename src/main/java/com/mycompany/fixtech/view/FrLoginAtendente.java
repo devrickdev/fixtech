@@ -116,18 +116,25 @@ public class FrLoginAtendente extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        String login = edtLogin.getText();
-        String senha = edtSenha.getText();
-        Atendente resultado = atendenteController.buscarLoginSenha(login,senha);
-        if(resultado == null){
-            JOptionPane.showMessageDialog(this, "Usuario ou Senha Incorreto!");
+        String login = edtLogin.getText(), senha = edtSenha.getText();
+        if(login.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Erro! Campo Usuario Vazio!");
+        }else if(senha.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Erro! Campo Senha Vazio!");
         }else{
-            FrPainelAdm painelAdm = new FrPainelAdm();
-            painelAdm.setVisible(true);
-        }
+            Atendente resultado = atendenteController.buscarLoginSenha(login,senha);
+            if(resultado == null){
+            JOptionPane.showMessageDialog(this, "Usuario ou Senha Incorretos!");
+            }else{
+                this.dispose();
+                FrPainelAtendente painelAtendente = new FrPainelAtendente();
+                painelAtendente.setVisible(true);
+            }
+        }    
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed

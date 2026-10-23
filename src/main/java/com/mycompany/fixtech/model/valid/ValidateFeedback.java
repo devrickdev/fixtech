@@ -4,6 +4,7 @@
  */
 package com.mycompany.fixtech.model.valid;
 
+import com.mycompany.fixtech.model.Atendimento;
 import com.mycompany.fixtech.model.Feedback;
 import com.mycompany.fixtech.model.exceptions.FeedbackException;
 
@@ -12,15 +13,13 @@ import com.mycompany.fixtech.model.exceptions.FeedbackException;
  * @author henry
  */
 public class ValidateFeedback {
-    public Feedback validaCamposEntrada(Long idFeedback, String atendimentoDescricao, String nota, String comentario){
+    public Feedback validaCamposEntrada(Long idFeedback, Atendimento atendimento, String nota, String comentario){
         Feedback feedback = new Feedback();
-        if (comentario.isEmpty())
-            throw new FeedbackException("Error - Campo vazio: 'comentario'.");
-        feedback.setComentario(comentario);
         
-        if (atendimentoDescricao.isEmpty())
-            throw new FeedbackException("Error - Campo vazio: 'atendimentoDescricao'.");
-        feedback.getAtendimento().setDescricao(atendimentoDescricao);
+        if (atendimento == null) {
+            throw new FeedbackException("Error - Dispositivo não selecionado");
+        }
+        feedback.setAtendimento(atendimento);
         
         int notaInt = 0;
         if (nota.isEmpty())
@@ -28,7 +27,11 @@ public class ValidateFeedback {
         
         notaInt = Integer.parseInt(nota);
         feedback.setNota(notaInt); 
-                
+        
+        if (comentario.isEmpty())
+            throw new FeedbackException("Error - Campo vazio: 'comentario'.");
+        feedback.setComentario(comentario);
+         
         return feedback;
     }
 }

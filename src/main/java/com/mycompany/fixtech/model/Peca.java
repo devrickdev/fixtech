@@ -18,16 +18,17 @@ public class Peca {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long idPeca;
+    
     private String nome;
-    private int quantidade;
+    private int estoque;
     private double valorUnidade;
 
     public Peca() {}
 
-    public Peca(Long idPeca, String nome, int quantidade, double valorUnidade) {
+    public Peca(Long idPeca, String nome, int estoque, double valorUnidade) {
         this.idPeca = idPeca;
         this.nome = nome;
-        this.quantidade = quantidade;
+        this.estoque = estoque;
         this.valorUnidade = valorUnidade;
     }
     
@@ -35,11 +36,19 @@ public class Peca {
     public String toString() {
         String txt = "idPeca: " + this.idPeca +"\n"
         +"Nome: "+ this.nome + "\n"
-        +"Quantidade: "+ this.quantidade +"\n"
+        +"Estoque: "+ this.estoque + "\n"
         +"ValorUnidade: "+ this.valorUnidade +"\n";
         return txt;
     }   
 
+    public int getEstoque() {
+        return estoque;
+    }
+
+    public void setEstoque(int estoque) {
+        this.estoque = estoque;
+    }
+    
     public Long getIdPeca() {
         return idPeca;
     }
@@ -54,14 +63,6 @@ public class Peca {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
     }
 
     public double getValorUnidade() {

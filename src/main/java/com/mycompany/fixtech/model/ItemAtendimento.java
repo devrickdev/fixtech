@@ -20,10 +20,13 @@ public class ItemAtendimento {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long idItem;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     private Atendimento atendimento; 
+    
     @ManyToOne(fetch = FetchType.LAZY)
-    private Peca peca;               
+    private Peca peca;       
+   
     private int quantidade;          
     private double precoMomento;
     

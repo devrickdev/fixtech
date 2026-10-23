@@ -7,6 +7,7 @@ package com.mycompany.fixtech.view;
 import com.mycompany.fixtech.controller.ClienteController;
 import com.mycompany.fixtech.model.Cliente;
 import com.mycompany.fixtech.model.exceptions.ClienteException;
+import com.mycompany.fixtech.view.tablemodels.TMCadCliente;
 import javax.swing.JOptionPane;
 
 /**
@@ -49,13 +50,14 @@ public class FrCadCliente extends javax.swing.JFrame {
         edtTelefone.setText(a.getTelefone());
     }
     
-    private Object getObjetoSelecionadoNaGrid() {
-        int rowCliked = grdClientes.getSelectedRow();
-        Object obj = null;
-        if (rowCliked >= 0) {
-            obj = grdClientes.getModel().getValueAt(rowCliked, -1);
+    public Cliente getObjetoSelecionadoNaGrid() {
+        int linhaSelecionada = grdClientes.getSelectedRow();
+        if (linhaSelecionada >= 0) {
+            TMCadCliente tmCadCliente = (TMCadCliente) grdClientes.getModel();
+            Cliente cliente = tmCadCliente.getObjetoCliente(linhaSelecionada);
+            return cliente;
         }
-        return obj;
+        return null;
     }
 
     /**
@@ -89,6 +91,7 @@ public class FrCadCliente extends javax.swing.JFrame {
         grdClientes = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
+        btnVoltar = new javax.swing.JToggleButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -212,6 +215,9 @@ public class FrCadCliente extends javax.swing.JFrame {
         lblTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/clientes.png"))); // NOI18N
         lblTitle.setText("CADASTRAR CLIENTE");
 
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(this::btnVoltarActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -225,7 +231,10 @@ public class FrCadCliente extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -239,11 +248,14 @@ public class FrCadCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnVoltar)
+                .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
@@ -252,7 +264,7 @@ public class FrCadCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        Cliente clienteEditando = (Cliente) this.getObjetoSelecionadoNaGrid();
+        Cliente clienteEditando = this.getObjetoSelecionadoNaGrid();
 
         if (clienteEditando == null)
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
@@ -265,7 +277,7 @@ public class FrCadCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        Cliente clienteExcluido = (Cliente) this.getObjetoSelecionadoNaGrid();
+        Cliente clienteExcluido = this.getObjetoSelecionadoNaGrid();
 
         if (clienteExcluido == null)
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
@@ -319,6 +331,12 @@ public class FrCadCliente extends javax.swing.JFrame {
         this.habilitarCampos(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+       this.dispose();
+       FrPainelAtendente painelAtendente = new FrPainelAtendente();
+       painelAtendente.setVisible(true);
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -326,6 +344,7 @@ public class FrCadCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JToggleButton btnVoltar;
     private javax.swing.JTextField edtLogin;
     private javax.swing.JTextField edtNome;
     private javax.swing.JTextField edtSenha;

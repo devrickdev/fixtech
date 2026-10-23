@@ -4,6 +4,7 @@
  */
 package com.mycompany.fixtech.controller;
 
+import com.mycompany.fixtech.model.Atendimento;
 import com.mycompany.fixtech.model.Feedback;
 import com.mycompany.fixtech.model.dao.FeedbackDAO;
 import com.mycompany.fixtech.model.exceptions.FeedbackException;
@@ -23,9 +24,9 @@ public class FeedbackController {
         repositorio = new FeedbackDAO();
     }
 
-    public void cadastrarFeedback(Long idFeedback, String atendimentoDescricao, String nota, String comentario) {
+    public void cadastrarFeedback(Long idFeedback, Atendimento atendimento, String nota, String comentario) {
         ValidateFeedback valid = new ValidateFeedback();
-        Feedback novoFeedback = valid.validaCamposEntrada(idFeedback, atendimentoDescricao, nota, comentario);
+        Feedback novoFeedback = valid.validaCamposEntrada(idFeedback, atendimento, nota, comentario);
 
         if (repositorio.findById(idFeedback) == null) {
             repositorio.save(novoFeedback);
@@ -34,9 +35,9 @@ public class FeedbackController {
         }
     }
 
-    public void atualizarFeedback(Long idFeedback, String atendimentoDescricao, String nota, String comentario) {
+    public void atualizarFeedback(Long idFeedback, Atendimento atendimento, String nota, String comentario) {
         ValidateFeedback valid = new ValidateFeedback();
-        Feedback novoFeedback = valid.validaCamposEntrada(idFeedback,atendimentoDescricao, nota, comentario);
+        Feedback novoFeedback = valid.validaCamposEntrada(idFeedback, atendimento, nota, comentario);
         novoFeedback.setIdFeedback(idFeedback);
         
         repositorio.update(novoFeedback);

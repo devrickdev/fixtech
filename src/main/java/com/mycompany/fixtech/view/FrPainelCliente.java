@@ -156,14 +156,16 @@ public class FrPainelCliente extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegFeedbackActionPerformed
-        DlgCadFeedback cadFeedback = new DlgCadFeedback(new JFrame(),true);
+        DlgCadFeedback cadFeedback = new DlgCadFeedback(new JFrame(),true, feedback);
         cadFeedback.setVisible(true);
     }//GEN-LAST:event_btnRegFeedbackActionPerformed
 
     private void btnRegHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegHistoricoActionPerformed
+        this.dispose();
         FrPainelHistorico painelHistorico = new FrPainelHistorico();
         painelHistorico.setVisible(true);
     }//GEN-LAST:event_btnRegHistoricoActionPerformed

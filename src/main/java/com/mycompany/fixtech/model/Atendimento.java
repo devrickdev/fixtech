@@ -4,12 +4,15 @@
  */
 package com.mycompany.fixtech.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import java.util.List;
 
 /**
  *
@@ -20,26 +23,34 @@ public class Atendimento {
    @Id
    @GeneratedValue(strategy=GenerationType.IDENTITY)
    private Long idAtendimento;
-   @ManyToOne(fetch = FetchType.LAZY)
+   
+   @ManyToOne(fetch = FetchType.EAGER)
    private Cliente cliente;
-   @ManyToOne(fetch = FetchType.LAZY)
+   
+   @ManyToOne(fetch = FetchType.EAGER)
    private Atendente atendente;
-   @ManyToOne(fetch = FetchType.LAZY)
+   
+   @ManyToOne(fetch = FetchType.EAGER)
    private Dispositivo dispositivo;
+   
+   @OneToMany(mappedBy = "atendimento", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+   private List<ItemAtendimento> itens;
+   
    private String status;
    private String descricao;
    
    public Atendimento() {}
-   
-   public Atendimento(Long idAtendimento, Cliente cliente, Atendente atendente, Dispositivo dispositivo, String status, String descricao) {
+
+    public Atendimento(Long idAtendimento, Cliente cliente, Atendente atendente, Dispositivo dispositivo, List<ItemAtendimento> itens, String status, String descricao) {
         this.idAtendimento = idAtendimento;
-        this.cliente = cliente;       
-        this.atendente = atendente;   
+        this.cliente = cliente;
+        this.atendente = atendente;
         this.dispositivo = dispositivo;
+        this.itens = itens;
         this.status = status;
         this.descricao = descricao;
     }
-    
+   
     @Override
     public String toString(){
         String txt = "---- Dados do Atendimento ----\n"
@@ -49,6 +60,14 @@ public class Atendimento {
         txt += atendente.toString();
         txt += dispositivo.toString();
         return txt;
+    }
+
+    public List<ItemAtendimento> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItemAtendimento> itens) {
+        this.itens = itens;
     }
     
     public Long getIdAtendimento() {

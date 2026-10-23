@@ -87,13 +87,11 @@ public class FrLoginCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(151, 151, 151)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -118,6 +116,7 @@ public class FrLoginCliente extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
@@ -127,15 +126,21 @@ public class FrLoginCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        String login = edtLogin.getText();
-        String senha = edtSenha.getText();
-        Cliente resultado = clienteController.buscarLoginSenha(login,senha);
-        if(resultado == null){
-            JOptionPane.showMessageDialog(this, "Usuario ou Senha Incorreto!");
+        String login = edtLogin.getText(), senha = edtSenha.getText();
+        if(login.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Erro! Campo Usuario Vazio!");
+        }else if(senha.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Erro! Campo Senha Vazio!");
         }else{
-            FrPainelAdm painelAdm = new FrPainelAdm();
-            painelAdm.setVisible(true);
-        }
+            Cliente resultado = clienteController.buscarLoginSenha(login,senha);
+            if(resultado == null){
+            JOptionPane.showMessageDialog(this, "Usuario ou Senha Incorretos!");
+            }else{
+                this.dispose();
+                FrPainelCliente painelCliente = new FrPainelCliente();
+                painelCliente.setVisible(true);
+            }
+        }    
     }//GEN-LAST:event_btnLoginActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

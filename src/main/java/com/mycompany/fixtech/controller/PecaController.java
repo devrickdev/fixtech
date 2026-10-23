@@ -4,7 +4,6 @@
  */
 package com.mycompany.fixtech.controller;
 
-import com.mycompany.fixtech.model.Atendimento;
 import com.mycompany.fixtech.model.Peca;
 import com.mycompany.fixtech.model.dao.PecaDAO;
 import com.mycompany.fixtech.model.exceptions.PecaException;
@@ -24,9 +23,9 @@ public class PecaController {
         repositorio = new PecaDAO();
     }
 
-    public void cadastrarPeca(Long idPeca, String nome, String quantidade, String valorUnidade) {
+    public void cadastrarPeca(Long idPeca, String nome, String estoque, String valorUnidade) {
         ValidatePeca valid = new ValidatePeca();
-        Peca novoPeca = valid.validaCamposEntrada(idPeca, nome, quantidade, valorUnidade);
+        Peca novoPeca = valid.validaCamposEntrada(idPeca, nome, estoque, valorUnidade);
 
         if (repositorio.findById(idPeca) == null) {
             repositorio.save(novoPeca);
@@ -35,9 +34,9 @@ public class PecaController {
         }
     }
 
-    public void atualizarPeca(Long idPeca, String nome, String quantidade, String valorUnidade) {
+    public void atualizarPeca(Long idPeca, String nome,String estoque, String valorUnidade) {
         ValidatePeca valid = new ValidatePeca();
-        Peca novoPeca = valid.validaCamposEntrada(idPeca, nome, quantidade, valorUnidade);
+        Peca novoPeca = valid.validaCamposEntrada(idPeca, nome, estoque, valorUnidade);
         novoPeca.setIdPeca(idPeca);
         
         repositorio.update(novoPeca);

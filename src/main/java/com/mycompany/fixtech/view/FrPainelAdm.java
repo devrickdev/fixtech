@@ -26,12 +26,15 @@ public class FrPainelAdm extends javax.swing.JFrame {
         jFrame1 = new javax.swing.JFrame();
         jLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        btnRegPermission = new javax.swing.JButton();
+        btnRegRelatorio = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        btnRegRelatorio = new javax.swing.JButton();
+        btnRegAtendente = new javax.swing.JButton();
         btnLogout = new javax.swing.JToggleButton();
+        jPanel3 = new javax.swing.JPanel();
+        btnRegAdm = new javax.swing.JToggleButton();
+        jLabel1 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -51,11 +54,11 @@ public class FrPainelAdm extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/adm.png"))); // NOI18N
         jLabel4.setText("ADMINISTRADOR");
 
-        btnRegPermission.setText("Gerenciar Permissões");
-        btnRegPermission.addActionListener(this::btnRegPermissionActionPerformed);
+        btnRegRelatorio.setText("Gerar Relatório");
+        btnRegRelatorio.addActionListener(this::btnRegRelatorioActionPerformed);
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/permissoes.png"))); // NOI18N
-        jLabel5.setText("Gerenciar Permissões");
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logs.png"))); // NOI18N
+        jLabel5.setText("Relatório");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -65,7 +68,7 @@ public class FrPainelAdm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(btnRegPermission, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRegRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -74,16 +77,16 @@ public class FrPainelAdm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRegPermission)
+                .addComponent(btnRegRelatorio)
                 .addContainerGap())
         );
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logs.png"))); // NOI18N
-        jLabel3.setText("Gerar Relatório");
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/atd.png"))); // NOI18N
+        jLabel3.setText("Atendente");
 
-        btnRegRelatorio.setText("Gerar Relatório");
-        btnRegRelatorio.setToolTipText("");
-        btnRegRelatorio.addActionListener(this::btnRegRelatorioActionPerformed);
+        btnRegAtendente.setText("Registrar Atendente");
+        btnRegAtendente.setToolTipText("");
+        btnRegAtendente.addActionListener(this::btnRegAtendenteActionPerformed);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -91,23 +94,52 @@ public class FrPainelAdm extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(btnRegRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnRegAtendente, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRegRelatorio)
+                .addComponent(btnRegAtendente)
                 .addContainerGap())
         );
 
         btnLogout.setText("Logout");
         btnLogout.addActionListener(this::btnLogoutActionPerformed);
+
+        btnRegAdm.setText("Registrar Administrador");
+        btnRegAdm.addActionListener(this::btnRegAdmActionPerformed);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/adm.png"))); // NOI18N
+        jLabel1.setText("Administrador");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRegAdm, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRegAdm)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,40 +150,46 @@ public class FrPainelAdm extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnLogout)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(142, 142, 142))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnLogout)
-                        .addContainerGap())))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(142, 142, 142))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addComponent(jLabel4)
-                .addGap(78, 78, 78)
+                .addGap(68, 68, 68)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                 .addComponent(btnLogout)
                 .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnRegAtendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegAtendenteActionPerformed
+        this.dispose();
+        FrCadAtendente cadAtendente = new FrCadAtendente();
+        cadAtendente.setVisible(true);
+    }//GEN-LAST:event_btnRegAtendenteActionPerformed
+
     private void btnRegRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegRelatorioActionPerformed
+        this.dispose();
         FrPainelRelatorio painelRelatorio = new FrPainelRelatorio();
         painelRelatorio.setVisible(true);
     }//GEN-LAST:event_btnRegRelatorioActionPerformed
-
-    private void btnRegPermissionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegPermissionActionPerformed
-        FrCadCliente cadCliente = new FrCadCliente();
-        cadCliente.setVisible(true);
-    }//GEN-LAST:event_btnRegPermissionActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         this.dispose();
@@ -159,15 +197,24 @@ public class FrPainelAdm extends javax.swing.JFrame {
         homepage.setVisible(true);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
+    private void btnRegAdmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegAdmActionPerformed
+        this.dispose();
+        FrCadAdministrador cadAdministrador = new FrCadAdministrador();
+        cadAdministrador.setVisible(true);
+    }//GEN-LAST:event_btnRegAdmActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnLogout;
-    private javax.swing.JButton btnRegPermission;
+    private javax.swing.JToggleButton btnRegAdm;
+    private javax.swing.JButton btnRegAtendente;
     private javax.swing.JButton btnRegRelatorio;
     private javax.swing.JFrame jFrame1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }

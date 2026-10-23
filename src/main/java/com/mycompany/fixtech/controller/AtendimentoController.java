@@ -4,7 +4,10 @@
  */
 package com.mycompany.fixtech.controller;
 
+import com.mycompany.fixtech.model.Atendente;
 import com.mycompany.fixtech.model.Atendimento;
+import com.mycompany.fixtech.model.Cliente;
+import com.mycompany.fixtech.model.Dispositivo;
 import com.mycompany.fixtech.model.dao.AtendimentoDAO;
 import com.mycompany.fixtech.model.exceptions.AtendimentoException;
 import com.mycompany.fixtech.model.valid.ValidateAtendimento;
@@ -24,9 +27,9 @@ public class AtendimentoController {
         repositorio = new AtendimentoDAO();
     }
 
-    public void cadastrarAtendimento(Long idAtendimento, String clienteNome, String atendenteNome, String dispositivoNome, String status, String descricao) {
+    public void cadastrarAtendimento(Long idAtendimento, Dispositivo dispositivo, Cliente cliente, Atendente atendente, String status, String descricao) {
         ValidateAtendimento valid = new ValidateAtendimento();
-        Atendimento novoAtendimento = valid.validaCamposEntrada(idAtendimento, clienteNome, atendenteNome, dispositivoNome, status, descricao);
+        Atendimento novoAtendimento = valid.validaCamposEntrada(idAtendimento, dispositivo, cliente, atendente, status, descricao);
 
         if (repositorio.findById(idAtendimento) == null) {
             repositorio.save(novoAtendimento);
@@ -35,9 +38,9 @@ public class AtendimentoController {
         }
     }
 
-    public void atualizarAtendimento(Long idAtendimento, String clienteNome, String atendenteNome, String dispositivoNome, String status, String descricao) {
+    public void atualizarAtendimento(Long idAtendimento, Dispositivo dispositivo, Cliente cliente, Atendente atendente, String status, String descricao) {
         ValidateAtendimento valid = new ValidateAtendimento();
-        Atendimento novoAtendimento = valid.validaCamposEntrada(idAtendimento, clienteNome, atendenteNome, dispositivoNome, status, descricao);
+        Atendimento novoAtendimento = valid.validaCamposEntrada(idAtendimento, dispositivo, cliente, atendente, status, descricao);
         novoAtendimento.setIdAtendimento(idAtendimento);
 
         repositorio.update(novoAtendimento);
